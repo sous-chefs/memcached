@@ -42,7 +42,7 @@ when "redhat","centos","fedora"
   source "memcached.sysconfig.erb"
   owner "root"
   group "root"
-  mode "0644"
+  mode 00644
   variables(
     :listen => node['memcached']['listen'],
     :user => node['memcached']['user'],
@@ -57,7 +57,7 @@ else
   source "memcached.conf.erb"
   owner "root"
   group "root"
-  mode "0644"
+  mode 00644
   variables(
     :listen => node['memcached']['listen'],
     :user => node['memcached']['user'],
@@ -74,7 +74,7 @@ when "karmic"
     source "memcached.default.erb"
     owner "root"
     group "root"
-    mode "0644"
+    mode 00644
     notifies :restart, resources(:service => "memcached"), :immediately
   end
 end
