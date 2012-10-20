@@ -28,7 +28,7 @@ package "libmemcache-dev" do
   else
     package_name "libmemcache-dev"
   end
-  action :upgrade
+  action :install
 end
 
 service "memcached" do
