@@ -22,7 +22,7 @@ package "memcached" do
 end
 
 package "libmemcache-dev" do
-  case node[:platform]
+  case node['platform']
   when "redhat","centos","fedora"
     package_name "libmemcached-devel"
   else
@@ -36,7 +36,7 @@ service "memcached" do
   supports :status => true, :start => true, :stop => true, :restart => true
 end
 
-case node[:platform]
+case node['platform']
 when "redhat","centos","fedora"
  template "/etc/sysconfig/memcached" do
   source "memcached.sysconfig.erb"
@@ -44,11 +44,11 @@ when "redhat","centos","fedora"
   group "root"
   mode "0644"
   variables(
-    :listen => node[:memcached][:listen],
-    :user => node[:memcached][:user],
-    :port => node[:memcached][:port],
-    :maxconn => node[:memcached][:maxconn],
-    :memory => node[:memcached][:memory]
+    :listen => node['memcached']['listen'],
+    :user => node['memcached']['user'],
+    :port => node['memcached']['port'],
+    :maxconn => node['memcached']['maxconn'],
+    :memory => node['memcached']['memory']
   )
   notifies :restart, resources(:service => "memcached"), :immediately
  end
@@ -59,16 +59,16 @@ else
   group "root"
   mode "0644"
   variables(
-    :listen => node[:memcached][:listen],
-    :user => node[:memcached][:user],
-    :port => node[:memcached][:port],
-    :memory => node[:memcached][:memory]
+    :listen => node['memcached']['listen'],
+    :user => node['memcached']['user'],
+    :port => node['memcached']['port'],
+    :memory => node['memcached']['memory']
   )
   notifies :restart, resources(:service => "memcached"), :immediately
  end
 end
 
-case node[:lsb][:codename]
+case node['lsb']['codename']
 when "karmic"
   template "/etc/default/memcached" do
     source "memcached.default.erb"
