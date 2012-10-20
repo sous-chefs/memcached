@@ -18,7 +18,7 @@
 #
 
 package "memcached" do
-  action :upgrade
+  action :install
 end
 
 package "libmemcache-dev" do
