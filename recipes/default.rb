@@ -43,34 +43,34 @@ end
 
 case node['platform_family']
 when "rhel", "fedora"
- template "/etc/sysconfig/memcached" do
-  source "memcached.sysconfig.erb"
-  owner "root"
-  group "root"
-  mode 00644
-  variables(
-    :listen => node['memcached']['listen'],
-    :user => node['memcached']['user'],
-    :port => node['memcached']['port'],
-    :maxconn => node['memcached']['maxconn'],
-    :memory => node['memcached']['memory']
-  )
-  notifies :restart, resources(:service => "memcached"), :immediately
- end
+  template "/etc/sysconfig/memcached" do
+    source "memcached.sysconfig.erb"
+    owner "root"
+    group "root"
+    mode 00644
+    variables(
+      :listen => node['memcached']['listen'],
+      :user => node['memcached']['user'],
+      :port => node['memcached']['port'],
+      :maxconn => node['memcached']['maxconn'],
+      :memory => node['memcached']['memory']
+    )
+    notifies :restart, resources(:service => "memcached"), :immediately
+  end
 else
- template "/etc/memcached.conf" do
-  source "memcached.conf.erb"
-  owner "root"
-  group "root"
-  mode 00644
-  variables(
-    :listen => node['memcached']['listen'],
-    :user => node['memcached']['user'],
-    :port => node['memcached']['port'],
-    :memory => node['memcached']['memory']
-  )
-  notifies :restart, resources(:service => "memcached"), :immediately
- end
+  template "/etc/memcached.conf" do
+    source "memcached.conf.erb"
+    owner "root"
+    group "root"
+    mode 00644
+    variables(
+      :listen => node['memcached']['listen'],
+      :user => node['memcached']['user'],
+      :port => node['memcached']['port'],
+      :memory => node['memcached']['memory']
+    )
+    notifies :restart, resources(:service => "memcached"), :immediately
+  end
 end
 
 case node['lsb']['codename']
