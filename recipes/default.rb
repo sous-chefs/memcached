@@ -22,8 +22,8 @@ package "memcached" do
 end
 
 package "libmemcache-dev" do
-  case node['platform']
-  when "redhat","centos","fedora"
+  case node['platform_familfy']
+  when "rhel", "fedora"
     package_name "libmemcached-devel"
   else
     package_name "libmemcache-dev"
@@ -36,8 +36,8 @@ service "memcached" do
   supports :status => true, :start => true, :stop => true, :restart => true
 end
 
-case node['platform']
-when "redhat","centos","fedora"
+case node['platform_family']
+when "rhel", "fedora"
  template "/etc/sysconfig/memcached" do
   source "memcached.sysconfig.erb"
   owner "root"
