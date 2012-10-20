@@ -8,7 +8,7 @@ depends           "runit"
 
 recipe "memcached", "Installs and configures memcached"
 
-%w{ ubuntu debian redhat fedora centos }.each do |os|
+%w{ ubuntu debian redhat fedora centos scientific amazon }.each do |os|
   supports os
 end
 
