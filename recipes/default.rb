@@ -22,7 +22,7 @@ package "memcached" do
 end
 
 package "libmemcache-dev" do
-  case node['platform_familfy']
+  case node['platform_family']
   when "rhel", "fedora"
     package_name "libmemcached-devel"
   else
