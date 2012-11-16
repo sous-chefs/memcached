@@ -30,10 +30,10 @@ Attributes
 The following are node attributes passed to the template for the runit
 service.
 
-* `memcached[:memory]` - maximum memory for memcached instances.
-* `memcached[:user]` - user to run memcached as.
-* `memcached[:port]` - port for memcached to listen on.
-* `memcached[:listen]` - IP address for memcached to listen on.
+* `memcached['memory']` - maximum memory for memcached instances.
+* `memcached['user']` - user to run memcached as.
+* `memcached['port']` - port for memcached to listen on.
+* `memcached['listen']` - IP address for memcached to listen on.
 
 Usage
 =====

@@ -24,9 +24,9 @@ define :memcached_instance do
     template_name "memcached"
     cookbook "memcached"
     options({
-      :memory => node[:memcached][:memory],
-      :port => node[:memcached][:port],
-      :user => node[:memcached][:user]}.merge(params)
+      :memory => node['memcached']['memory'],
+      :port => node['memcached']['port'],
+      :user => node['memcached']['user']}.merge(params)
     )
   end
 end

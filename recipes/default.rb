@@ -17,18 +17,23 @@
 # limitations under the License.
 #
 
+# include epel on redhat/centos 5 and below in order to get the memcached packages
+if node['platform_family'] == "rhel" AND node['platform_version'].to_i < 6
+ include_recipe "yum::epel"
+end
+
 package "memcached" do
-  action :upgrade
+  action :install
 end
 
 package "libmemcache-dev" do
-  case node[:platform]
-  when "redhat","centos","fedora"
+  case node['platform_family']
+  when "rhel", "fedora"
     package_name "libmemcached-devel"
   else
     package_name "libmemcache-dev"
   end
-  action :upgrade
+  action :install
 end
 
 service "memcached" do
@@ -36,45 +41,45 @@ service "memcached" do
   supports :status => true, :start => true, :stop => true, :restart => true
 end
 
-case node[:platform]
-when "redhat","centos","fedora"
- template "/etc/sysconfig/memcached" do
-  source "memcached.sysconfig.erb"
-  owner "root"
-  group "root"
-  mode "0644"
-  variables(
-    :listen => node[:memcached][:listen],
-    :user => node[:memcached][:user],
-    :port => node[:memcached][:port],
-    :maxconn => node[:memcached][:maxconn],
-    :memory => node[:memcached][:memory]
-  )
-  notifies :restart, resources(:service => "memcached"), :immediately
- end
+case node['platform_family']
+when "rhel", "fedora"
+  template "/etc/sysconfig/memcached" do
+    source "memcached.sysconfig.erb"
+    owner "root"
+    group "root"
+    mode 00644
+    variables(
+      :listen => node['memcached']['listen'],
+      :user => node['memcached']['user'],
+      :port => node['memcached']['port'],
+      :maxconn => node['memcached']['maxconn'],
+      :memory => node['memcached']['memory']
+    )
+    notifies :restart, resources(:service => "memcached"), :immediately
+  end
 else
- template "/etc/memcached.conf" do
-  source "memcached.conf.erb"
-  owner "root"
-  group "root"
-  mode "0644"
-  variables(
-    :listen => node[:memcached][:listen],
-    :user => node[:memcached][:user],
-    :port => node[:memcached][:port],
-    :memory => node[:memcached][:memory]
-  )
-  notifies :restart, resources(:service => "memcached"), :immediately
- end
+  template "/etc/memcached.conf" do
+    source "memcached.conf.erb"
+    owner "root"
+    group "root"
+    mode 00644
+    variables(
+      :listen => node['memcached']['listen'],
+      :user => node['memcached']['user'],
+      :port => node['memcached']['port'],
+      :memory => node['memcached']['memory']
+    )
+    notifies :restart, resources(:service => "memcached"), :immediately
+  end
 end
 
-case node[:lsb][:codename]
+case node['lsb']['codename']
 when "karmic"
   template "/etc/default/memcached" do
     source "memcached.default.erb"
     owner "root"
     group "root"
-    mode "0644"
+    mode 00644
     notifies :restart, resources(:service => "memcached"), :immediately
   end
 end
