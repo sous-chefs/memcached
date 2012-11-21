@@ -62,6 +62,7 @@ else
     :listen => node[:memcached][:listen],
     :user => node[:memcached][:user],
     :port => node[:memcached][:port],
+    :maxconn => node[:memcached][:maxconn],
     :memory => node[:memcached][:memory]
   )
   notifies :restart, resources(:service => "memcached"), :immediately
