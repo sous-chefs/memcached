@@ -1,3 +1,7 @@
+## v1.1.2:
+
+* [COOK-990] - params insite runit_service isn't the same as outside
+
 ## v1.1.0:
 
 * [COOK-1764] - Add Max Connections to memcached.conf and fix typos
