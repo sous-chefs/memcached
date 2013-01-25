@@ -1,3 +1,10 @@
+## v1.2.0:
+
+* [COOK-1469] - include yum epel recipe on RHEL 5 (introduces yum
+  cookbook dependency)
+* [COOK-2202] - Fix typo in previous ticket/commits
+* [COOK-2266] - pin runit dependency
+
 ## v1.1.2:
 
 * [COOK-990] - params insite runit_service isn't the same as outside
