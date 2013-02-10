@@ -55,7 +55,7 @@ when "rhel", "fedora"
       :maxconn => node['memcached']['maxconn'],
       :memory => node['memcached']['memory']
     )
-    notifies :restart, resources(:service => "memcached"), :immediately
+    notifies :restart, "service[memcached]"
   end
 else
   template "/etc/memcached.conf" do
@@ -70,7 +70,7 @@ else
       :maxconn => node['memcached']['maxconn'],
       :memory => node['memcached']['memory']
     )
-    notifies :restart, resources(:service => "memcached"), :immediately
+    notifies :restart, "service[memcached]"
   end
 end
 
@@ -81,6 +81,6 @@ when "karmic"
     owner "root"
     group "root"
     mode 00644
-    notifies :restart, resources(:service => "memcached"), :immediately
+    notifies :restart, "service[memcached]"
   end
 end

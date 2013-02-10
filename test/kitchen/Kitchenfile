@@ -1,3 +1,4 @@
 cookbook "memcached" do
-  runtimes []
+  configuration "default"
+  configuration "instance"
 end
