@@ -1,3 +1,8 @@
+## v1.3.0
+
+* [COOK-2386] - update `memcached_instance` definition for
+  `runit_service` resource
+
 ## v1.2.0:
 
 * [COOK-1469] - include yum epel recipe on RHEL 5 (introduces yum
