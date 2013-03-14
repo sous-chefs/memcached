@@ -16,6 +16,9 @@ Tested on:
 
 * Ubuntu 10.04, 12.04
 * CentOS 5.8, 6.3
+* SmartOS base64 1.8.1
+  * Note that SMF directly configures memcached with no opportunity to alter settings.
+    If you need custom parameters, use the `memcached_instance` provider instead.
 
 May work on any Debian or Red Hat family distributions with or without
 modification.
