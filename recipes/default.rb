@@ -81,14 +81,3 @@ else
     notifies :restart, "service[memcached]"
   end
 end
-
-case (node['lsb'] && node['lsb']['codename']) || "dummy"
-when "karmic"
-  template "/etc/default/memcached" do
-    source "memcached.default.erb"
-    owner "root"
-    group "root"
-    mode 00644
-    notifies :restart, "service[memcached]"
-  end
-end
