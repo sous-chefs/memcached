@@ -55,14 +55,22 @@ The recipe also reads in whether to start up memcached from a
 /etc/default/memcached "ENABLE_MEMCACHED" setting, which is "yes" by
 default.
 
+Python recipe
+=============
+
+This cookbook provides a python recipe which will install the python
+client library on the supported platforms.
+
 License and Author
 ==================
 
 Author:: Joshua Timberman (<joshua@opscode.com>)
 Author:: Joshua Sierles (<joshua@37signals.com>)
+Author:: Ionuț Arțăriși (<iartarisi@suse.cz>)
 
 Copyright:: 2009-2012, Opscode, Inc
 Copyright:: 2009, 37signals
+Copyright:: 2013, SUSE Linux Products GmbH, Nuernberg, Germany
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: memcached
-# Attributes:: default
+# Recipe:: python
 #
-# Copyright 2009, Opscode, Inc.
+# Copyright 2013, SUSE Linux Products GmbH, Nuernberg, Germany
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,18 +16,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-default['memcached']['memory'] = 64
-default['memcached']['port'] = 11211
-default['memcached']['user'] = "nobody"
-default['memcached']['listen'] = "0.0.0.0"
-default['memcached']['maxconn'] = 1024
-
-case node['platform_family']
-when 'debian', 'ubuntu'
-  default['memcached']['python-package'] = 'python-memcache'
-when 'rhel', 'fedora'
-  default['memcached']['python-package'] = 'python-memcached'
-when 'suse'
-  default['memcached']['python-package'] = 'python-python-memcached'
+package node['memcached']['python-package'] do
+  action :install
 end
