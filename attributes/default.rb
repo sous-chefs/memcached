@@ -19,6 +19,16 @@
 
 default['memcached']['memory'] = 64
 default['memcached']['port'] = 11211
-default['memcached']['user'] = "nobody"
 default['memcached']['listen'] = "0.0.0.0"
 default['memcached']['maxconn'] = 1024
+case node['platform_family']
+when 'suse', 'fedora', 'rhel'
+  default['memcached']['user'] = 'memcached'
+  default['memcached']['group'] = 'memcached'
+when 'debian', 'ubuntu'
+  default['memcached']['user'] = 'memcache'
+  default['memcached']['group'] = 'memcache'
+else
+  default['memcached']['user'] = 'nobody'
+  default['memcached']['user'] = 'nogroup'
+end
