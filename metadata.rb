@@ -10,7 +10,8 @@ depends           "yum"
 
 recipe "memcached", "Installs and configures memcached"
 
-%w{ ubuntu debian redhat fedora centos scientific amazon smartos }.each do |os|
+%w{ ubuntu debian redhat fedora centos
+    scientific amazon smartos suse }.each do |os|
   supports os
 end
 
