@@ -1,4 +1,0 @@
-cookbook "memcached" do
-  configuration "default"
-  configuration "instance"
-end
