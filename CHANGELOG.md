@@ -1,3 +1,14 @@
+## v1.4.0:
+
+### Improvement
+
+- [COOK-2756]: add SUSE support to memcached cookbook
+- [COOK-2791]: Remove the template for Karmic from the memcached cookbook
+
+### Bug
+
+- [COOK-2600]: support memcached on SmartOS
+
 ## v1.3.0
 
 * [COOK-2386] - update `memcached_instance` definition for
