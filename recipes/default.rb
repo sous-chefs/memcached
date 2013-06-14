@@ -45,7 +45,7 @@ package "libmemcache-dev" do
 end
 
 service "memcached" do
-  action :nothing
+  action :enable
   supports :status => true, :start => true, :stop => true, :restart => true
 end
 
