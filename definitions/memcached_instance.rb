@@ -30,6 +30,8 @@ define :memcached_instance do
     options({
       :memory => node['memcached']['memory'],
       :port => node['memcached']['port'],
+      :listen => node['memcached']['listen'],
+      :maxconn => node['memcached']['maxconn'],
       :user => node['memcached']['user']}.merge(opts)
     )
   end
