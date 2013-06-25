@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: memcached
-# Definition:: memcached_instance
+# Cookbook Name:: memcached_test
+# Recipe:: instance
 #
-# Copyright 2009, Opscode, Inc.
+# Copyright 2013, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,20 +17,12 @@
 # limitations under the License.
 #
 
-define :memcached_instance do
-  include_recipe "runit"
-  include_recipe "memcached"
+include_recipe "memcached::default"
 
-  opts = params
+m = resources("service[memcached]")
+m.action :stop
 
-  runit_service "memcached-#{params[:name]}" do
-    run_template_name "memcached"
-    default_logger true
-    cookbook "memcached"
-    options({
-      :memory => node['memcached']['memory'],
-      :port => node['memcached']['port'],
-      :user => node['memcached']['user']}.merge(opts)
-    )
-  end
+memcached_instance "myproj" do
+  port 11212
+  memory 128
 end
