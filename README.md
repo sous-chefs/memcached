@@ -39,6 +39,7 @@ service.
 * `memcached['user']` - user to run memcached as.
 * `memcached['port']` - port for memcached to listen on.
 * `memcached['listen']` - IP address for memcached to listen on.
+  - Defaults to 0.0.0.0, which makes memcached world accessible.
 * `memcached['maxconn']` - maximum number of connections to accept (defaults to 1024)
 * `memcached['max_object_size']` - maximum size of an object to cache (defaults to 1MB)
 
