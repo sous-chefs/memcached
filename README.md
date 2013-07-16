@@ -39,6 +39,7 @@ service.
 * `memcached['user']` - user to run memcached as.
 * `memcached['port']` - port for memcached to listen on.
 * `memcached['listen']` - IP address for memcached to listen on.
+* `memcached['logfilename']` - logfile to which memcached output will be redirected in /var/log/$logfilename.
 
 Usage
 =====
