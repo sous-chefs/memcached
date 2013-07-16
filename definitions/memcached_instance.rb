@@ -32,7 +32,8 @@ define :memcached_instance do
       :port => node['memcached']['port'],
       :listen => node['memcached']['listen'],
       :maxconn => node['memcached']['maxconn'],
-      :user => node['memcached']['user']}.merge(opts)
+      :user => node['memcached']['user'],
+      :logfilename => node['memcached']['logfilename']}.merge(opts)
     )
   end
 end
