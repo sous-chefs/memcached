@@ -63,7 +63,8 @@ when "rhel", "fedora", "suse"
       :group => node['memcached']['group'],
       :port => node['memcached']['port'],
       :maxconn => node['memcached']['maxconn'],
-      :memory => node['memcached']['memory']
+      :memory => node['memcached']['memory'],
+      :logfilename => node['memcached-chat']['logfilename']
     )
     notifies :restart, "service[memcached]"
   end

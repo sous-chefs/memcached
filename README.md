@@ -41,6 +41,7 @@ service.
 * `memcached['listen']` - IP address for memcached to listen on.
 * `memcached['maxconn']` - maximum number of connections to accept (defaults to 1024)
 * `memcached['max_object_size']` - maximum size of an object to cache (defaults to 1MB)
+* `memcached['logfilename']` - logfile to which memcached output will be redirected in /var/log/$logfilename.
 
 Usage
 =====
