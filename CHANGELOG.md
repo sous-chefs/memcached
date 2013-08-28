@@ -3,6 +3,18 @@ memcached Cookbook CHANGELOG
 This file is used to list changes made in each version of the memcached cookbook.
 
 
+v1.5.0
+------
+### Improvement
+- **[COOK-3336](https://tickets.opscode.com/browse/COOK-3336)** - Add option to specify logfile
+- **[COOK-3299](https://tickets.opscode.com/browse/COOK-3299)** - Document that `memcached` is exposed by default
+
+### Bug
+- **[COOK-2990](https://tickets.opscode.com/browse/COOK-2990)** - Include `listen`, `maxconn`, and `user` in the runit service
+
+### New Feature
+- **[COOK-2790](https://tickets.opscode.com/browse/COOK-2790)** - Add support for defining max object size
+
 v1.4.0
 ------
 ### Improvement
