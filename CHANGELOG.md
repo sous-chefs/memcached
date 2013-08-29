@@ -2,10 +2,6 @@ memcached Cookbook CHANGELOG
 ============================
 This file is used to list changes made in each version of the memcached cookbook.
 
-v1.5.1
-### Bug
-- **[COOK-3336](https://tickets.opscode.com/browse/COOK-3336)** - Fixed spelling error in logfile attribute
-
 v1.5.0
 ------
 ### Improvement
