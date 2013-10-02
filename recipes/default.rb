@@ -41,6 +41,7 @@ package "libmemcache-dev" do
   else
     package_name "libmemcache-dev"
   end
+  ignore_failure true
   action :install
 end
 
