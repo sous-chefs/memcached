@@ -42,6 +42,7 @@ service.
 * `memcached['maxconn']` - maximum number of connections to accept (defaults to 1024)
 * `memcached['max_object_size']` - maximum size of an object to cache (defaults to 1MB)
 * `memcached['logfilename']` - logfile to which memcached output will be redirected in /var/log/$logfilename.
+* `memcached['log_path']` - Use in lieu of memcached['logfilename'] to specify the full path to the log file.  Directory will be created if it does not exist. Ubuntu only at this time.`
 
 Usage
 =====

@@ -23,6 +23,8 @@ default['memcached']['listen'] = "0.0.0.0"
 default['memcached']['maxconn'] = 1024
 default['memcached']['max_object_size'] = "1m"
 default['memcached']['logfilename'] = "memcached.log"
+default['memcached']['log_path'] =
+  "/var/log/memcached.log"
 case node['platform_family']
 when 'suse', 'fedora', 'rhel'
   default['memcached']['user'] = 'memcached'

@@ -75,6 +75,17 @@ when "smartos"
     action :enable
   end
 else
+  # If the log_path is overridden we need to create the directory if it
+  # does not yet exist
+  if node['memcached']['log_path']
+    directory node['memcached']['log_path'] do
+      action :create
+      group node['memcached']['group']
+      mode '775'
+      owner node['memcached']['user']
+    end
+  end
+
   template "/etc/memcached.conf" do
     source "memcached.conf.erb"
     owner "root"
@@ -86,7 +97,9 @@ else
       :port => node['memcached']['port'],
       :maxconn => node['memcached']['maxconn'],
       :memory => node['memcached']['memory'],
-      :max_object_size => node['memcached']['max_object_size']
+      :max_object_size => node['memcached']['max_object_size'],
+      :logfilename => node['memcached']['logfilename'],
+      :log_path => node['memcached']['log_path']
     )
     notifies :restart, "service[memcached]"
   end
