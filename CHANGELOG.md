@@ -3,6 +3,14 @@ memcached Cookbook CHANGELOG
 This file is used to list changes made in each version of the memcached cookbook.
 
 
+v1.6.0
+------
+### Bug
+- **[COOK-3682](https://tickets.opscode.com/browse/COOK-3682)** - Set user when using Debian packages
+
+### Improvement
+- **[COOK-3336](https://tickets.opscode.com/browse/COOK-3336)** - Add an option to specify the logfile
+
 v1.5.0
 ------
 ### Improvement
