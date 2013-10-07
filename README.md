@@ -29,7 +29,8 @@ The following are node attributes passed to the template for the runit service.
 
 - `memcached['memory']` - maximum memory for memcached instances.
 - `memcached['user']` - user to run memcached as.
-- `memcached['port']` - port for memcached to listen on.
+- `memcached['port']` - TCP port for memcached to listen on.
+- `memcached['udp_port']` - UDP port for memcached to listen on.
 - `memcached['listen']` - IP address for memcache to listen on, defaults to **0.0.0.0** (world accessible).
 - `memcached['maxconn']` - maximum number of connections to accept (defaults to 1024)
 - `memcached['max_object_size']` - maximum size of an object to cache (defaults to 1MB)
