@@ -3,6 +3,11 @@ memcached Cookbook CHANGELOG
 This file is used to list changes made in each version of the memcached cookbook.
 
 
+v1.6.2
+------
+[COOK-3741] UDP settings for memcached
+
+
 v1.6.0
 ------
 ### Bug
