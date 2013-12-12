@@ -3,6 +3,11 @@ memcached Cookbook CHANGELOG
 This file is used to list changes made in each version of the memcached cookbook.
 
 
+v1.6.4
+------
+Locking yum dependency to '< 3'
+
+
 v1.6.2
 ------
 [COOK-3741] UDP settings for memcached
