@@ -3,6 +3,13 @@ memcached Cookbook CHANGELOG
 This file is used to list changes made in each version of the memcached cookbook.
 
 
+v1.7.0
+------
+Updating for yum ~> 3.0. 
+Fixing up style issues for rubocop. 
+Updating test-kitchen harness
+
+
 v1.6.6
 ------
 fixing metadata version error. locking to 3.0
