@@ -64,7 +64,7 @@ when 'rhel', 'fedora', 'suse'
       :logfilename     => node['memcached']['logfilename']
     )
     notifies :restart, 'service[memcached]'
-    
+
   end
 when 'smartos'
   # SMF directly configures memcached with no opportunity to alter settings
