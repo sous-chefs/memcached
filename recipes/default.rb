@@ -40,8 +40,8 @@ package 'libmemcache-dev' do
 end
 
 service 'memcached' do
-  action :nothing
-  supports :status => true, :start => true, :stop => true, :restart => true
+  action :enable
+  supports :status => true, :start => true, :stop => true, :restart => true, :enable => true
 end
 
 case node['platform_family']
