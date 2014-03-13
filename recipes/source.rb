@@ -44,8 +44,9 @@ end
 bash 'build memcache' do
   cwd Chef::Config[:file_cache_path]
   code <<-EOF
-tar -zxf memcached-#{version}.tar.gz
-(cd memcached-#{version} && make && make install)
-EOF
+    tar -zxf memcached-#{version}.tar.gz
+    (cd memcached-#{version} && ./configure --prefix=#{node['memcached']['prefix_dir']})
+    (cd memcached-#{version} && make && make install)
+  EOF
   not_if "which #{node['memcached']['bin']}"
 end
