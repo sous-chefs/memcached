@@ -18,11 +18,19 @@
 # limitations under the License.
 #
 
-
-
-# TODO: We'll likely need to install the development package for libevent
-# Ubuntu: apt-get install libevent-dev
-# Redhat/Fedora: yum install libevent-devel 
+# Install the development package for libevent
+case node['platform']
+when "debian", "ubuntu"
+  # Ubuntu: apt-get install libevent-dev
+  package "libevent-dev" do
+    action :install
+  end
+when "redhat", "centos", "fedora"
+  # Redhat/Fedora: yum install libevent-devel
+  package "libevent-devel" do
+    action :install
+  end
+end
 
 version = node['memcached']['version']
 
