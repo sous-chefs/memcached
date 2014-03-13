@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+default['memcached']['install_method'] = 'package'
+default['memcached']['bin'] = 'memcached'
 default['memcached']['memory'] = 64
 default['memcached']['port'] = 11_211
 default['memcached']['udp_port'] = 11_211
@@ -24,6 +26,13 @@ default['memcached']['listen'] = '0.0.0.0'
 default['memcached']['maxconn'] = 1024
 default['memcached']['max_object_size'] = '1m'
 default['memcached']['logfilename'] = 'memcached.log'
+
+# For older releases use https://memcached.googlecode.com/files/"
+default['memcached']['url'] = 'http://memcached.org/files'
+
+default['memcached']['version'] = '1.4.17'
+default['memcached']['checksum'] = '2b4fc706d39579cf355e3358cfd27b44d40bd79c'
+default['memcached']['prefix_dir'] = '/usr/bin'
 
 case node['platform_family']
 when 'suse', 'fedora', 'rhel'
