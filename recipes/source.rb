@@ -67,6 +67,7 @@ cmds.each do |cmd|
         #{cmd} &> #{results}
         EOH
     end
+end
 
 ruby_block "Memcached compile results" do
     only_if { ::File.exists?(results) }
