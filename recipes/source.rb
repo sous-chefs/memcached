@@ -61,11 +61,12 @@ cmds = ["tar -zxf memcached-#{version}.tar.gz",
         "./configure --prefix=#{node['memcached']['prefix_dir']}",
         "make",
         "make install"]
-bash cmd do
-    code <<-EOH
-    #{cmd} &> #{results}
-    EOH
-end
+cmds.each do |cmd|
+    bash cmd do
+        code <<-EOH
+        #{cmd} &> #{results}
+        EOH
+    end
 
 ruby_block "Memcached compile results" do
     only_if { ::File.exists?(results) }
