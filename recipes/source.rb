@@ -41,12 +41,35 @@ remote_file "#{Chef::Config[:file_cache_path]}/memcached-#{version}.tar.gz" do
   not_if "which #{node['memcached']['bin']}"
 end
 
-bash 'build memcache' do
-  cwd Chef::Config[:file_cache_path]
-  code <<-EOF
-    tar -zxf memcached-#{version}.tar.gz
-    (cd memcached-#{version} && ./configure --prefix=#{node['memcached']['prefix_dir']})
-    (cd memcached-#{version} && make && make install)
-  EOF
-  not_if "which #{node['memcached']['bin']}"
+#bash 'build memcached' do
+#  cwd Chef::Config[:file_cache_path]
+#  code <<-EOF
+#    tar -zxf memcached-#{version}.tar.gz
+#    (cd memcached-#{version} && ./configure --prefix=#{node['memcached']['prefix_dir']})
+#    (cd memcached-#{version} && make && make install)
+#  EOF
+#  not_if "which #{node['memcached']['bin']}"
+#end
+
+results = "/tmp/memcached_output.txt"
+file results do
+    action :delete
+end
+
+cmds = ["tar -zxf memcached-#{version}.tar.gz",
+        "cd memcached-#{version}",
+        "./configure --prefix=#{node['memcached']['prefix_dir']}",
+        "make",
+        "make install"]
+bash cmd do
+    code <<-EOH
+    #{cmd} &> #{results}
+    EOH
+end
+
+ruby_block "Memcached compile results" do
+    only_if { ::File.exists?(results) }
+    block do
+        print File.read(results)
+    end
 end
