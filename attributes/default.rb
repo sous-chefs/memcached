@@ -32,7 +32,7 @@ default['memcached']['url'] = 'http://memcached.org/files'
 
 default['memcached']['version'] = '1.4.17'
 default['memcached']['checksum'] = '2b4fc706d39579cf355e3358cfd27b44d40bd79c'
-default['memcached']['prefix_dir'] = '/usr/bin'
+default['memcached']['prefix'] = '/usr'
 
 case node['platform_family']
 when 'suse', 'fedora', 'rhel'

@@ -41,37 +41,24 @@ remote_file "#{Chef::Config[:file_cache_path]}/memcached-#{version}.tar.gz" do
   not_if "which #{node['memcached']['bin']}"
 end
 
-#bash 'build memcached' do
-#  cwd Chef::Config[:file_cache_path]
-#  code <<-EOF
-#    tar -zxf memcached-#{version}.tar.gz
-#    (cd memcached-#{version} && ./configure --prefix=#{node['memcached']['prefix_dir']})
-#    (cd memcached-#{version} && make && make install)
-#  EOF
-#  not_if "which #{node['memcached']['bin']}"
-#end
-
-results = "/tmp/memcached_output.txt"
-file results do
-    action :delete
+bash "Compile memcache" do
+  cwd Chef::Config[:file_cache_path]
+  code <<-EOH
+    tar -zxf memcached-#{version}.tar.gz
+    cd memcached-#{version}
+    ./configure --prefix=#{node['memcached']['prefix']}
+    make && make install
+    cp scripts/memached-init /etc/init.d/memcached
+    chmod 755 /etc/init.d/memcached
+    mkdir -p /usr/share/memcached/scripts/
+    cp scripts/start-memcached /usr/share/memcached/scripts
+    chmod 755 /usr/share/memcached/scripts
+  EOH
 end
 
-cmds = ["tar -zxf memcached-#{version}.tar.gz",
-        "cd memcached-#{version}",
-        "./configure --prefix=#{node['memcached']['prefix_dir']}",
-        "make",
-        "make install"]
-cmds.each do |cmd|
-    bash cmd do
-        code <<-EOH
-        #{cmd} &> #{results}
-        EOH
-    end
-end
-
-ruby_block "Memcached compile results" do
-    only_if { ::File.exists?(results) }
-    block do
-        print File.read(results)
-    end
+# memcached init.d Service
+template "/etc/init.d/memcached" do
+  source "memcached.init.erb"
+  owner 'root'
+  mode 0755
 end
