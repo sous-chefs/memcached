@@ -2,7 +2,7 @@
 # Cookbook Name:: memcached
 # Recipe:: default
 #
-# Copyright 2009-2013, Opscode, Inc.
+# Copyright 2009-2014, Opscode, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,10 +17,7 @@
 # limitations under the License.
 #
 
-# include epel on redhat/centos 5 and below in order to get the memcached packages
-include_recipe 'yum-epel' if node['platform_family'] == 'rhel' && node['platform_version'].to_i == 5
-
-package 'memcached'
+include_recipe "memcached::#{node['memcached']['install_method']}"
 
 package 'libmemcache-dev' do
   case node['platform_family']
