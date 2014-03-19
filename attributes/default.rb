@@ -27,7 +27,7 @@ default['memcached']['maxconn'] = 1024
 default['memcached']['max_object_size'] = '1m'
 default['memcached']['logfilename'] = 'memcached.log'
 
-# For older releases use https://memcached.googlecode.com/files/"
+# For older releases use https://memcached.googlecode.com/files"
 default['memcached']['url'] = 'http://memcached.org/files'
 
 default['memcached']['version'] = '1.4.17'
