@@ -39,11 +39,6 @@ package 'libmemcache-dev' do
   end
 end
 
-service 'memcached' do
-  action :enable
-  supports :status => true, :start => true, :stop => true, :restart => true, :enable => true
-end
-
 case node['platform_family']
 when 'rhel', 'fedora', 'suse'
   family = node['platform_family'] == 'suse' ? 'suse' : 'redhat'
@@ -88,4 +83,9 @@ else
     )
     notifies :restart, 'service[memcached]'
   end
+end
+
+service 'memcached' do
+  action [:start,:enable]
+  supports :status => true, :start => true, :stop => true, :restart => true, :enable => true
 end
