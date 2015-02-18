@@ -34,22 +34,22 @@ v1.6.2
 v1.6.0
 ------
 ### Bug
-- **[COOK-3682](https://tickets.opscode.com/browse/COOK-3682)** - Set user when using Debian packages
+- **[COOK-3682](https://tickets.chef.io/browse/COOK-3682)** - Set user when using Debian packages
 
 ### Improvement
-- **[COOK-3336](https://tickets.opscode.com/browse/COOK-3336)** - Add an option to specify the logfile (fix)
+- **[COOK-3336](https://tickets.chef.io/browse/COOK-3336)** - Add an option to specify the logfile (fix)
 
 v1.5.0
 ------
 ### Improvement
-- **[COOK-3336](https://tickets.opscode.com/browse/COOK-3336)** - Add option to specify logfile
-- **[COOK-3299](https://tickets.opscode.com/browse/COOK-3299)** - Document that `memcached` is exposed by default
+- **[COOK-3336](https://tickets.chef.io/browse/COOK-3336)** - Add option to specify logfile
+- **[COOK-3299](https://tickets.chef.io/browse/COOK-3299)** - Document that `memcached` is exposed by default
 
 ### Bug
-- **[COOK-2990](https://tickets.opscode.com/browse/COOK-2990)** - Include `listen`, `maxconn`, and `user` in the runit service
+- **[COOK-2990](https://tickets.chef.io/browse/COOK-2990)** - Include `listen`, `maxconn`, and `user` in the runit service
 
 ### New Feature
-- **[COOK-2790](https://tickets.opscode.com/browse/COOK-2790)** - Add support for defining max object size
+- **[COOK-2790](https://tickets.chef.io/browse/COOK-2790)** - Add support for defining max object size
 
 v1.4.0
 ------

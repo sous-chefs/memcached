@@ -1,6 +1,6 @@
 memcached Cookbook
 ==================
-[![Build Status](https://secure.travis-ci.org/opscode-cookbooks/memcached.png?branch=master)](http://travis-ci.org/opscode-cookbooks/memcached)
+[![Build Status](https://secure.travis-ci.org/chef-cookbooks/memcached.png?branch=master)](http://travis-ci.org/chef-cookbooks/memcached)
 
 
 Installs memcached and provides a define to set up an instance of memcache via runit.
@@ -52,11 +52,11 @@ The recipe also reads in whether to start up memcached from a `/etc/default/memc
 
 License & Authors
 -----------------
-- Author:: Joshua Timberman (<joshua@opscode.com>)
+- Author:: Joshua Timberman (<joshua@chef.io>)
 - Author:: Joshua Sierles (<joshua@37signals.com>)
 
 ```text
-Copyright:: 2009-2012, Opscode, Inc
+Copyright:: 2009-2012, Chef Software, Inc
 Copyright:: 2009, 37signals
 
 Licensed under the Apache License, Version 2.0 (the "License");
