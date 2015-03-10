@@ -40,7 +40,7 @@ package 'libmemcache-dev' do
 end
 
 service 'memcached' do
-  action :enable
+  action [:enable, :start]
   supports :status => true, :start => true, :stop => true, :restart => true, :enable => true
 end
 
@@ -69,7 +69,7 @@ when 'smartos'
   # SMF directly configures memcached with no opportunity to alter settings
   # If you need custom parameters, use the memcached_instance provider
   service 'memcached' do
-    action :enable
+    action [:enable, :start]
   end
 else
   template '/etc/memcached.conf' do
