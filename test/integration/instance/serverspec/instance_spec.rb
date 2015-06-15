@@ -1,10 +1,15 @@
-require 'serverspec'
-include Serverspec::Helper::Exec
-include Serverspec::Helper::DetectOS
+require 'spec_helper'
+set :path, '$PATH:/sbin' if os[:family] == 'redhat' && os[:release].match(/^5\.\d+/)
 
-describe 'memcached_instance definition' do
-  it 'is running with the correct attributes' do
-    expect(service('memcached')).to be_running
-    expect(port(11_211)).to be_listening
-  end
+describe package('memcached') do
+  it { should be_installed }
+end
+
+describe service('memcached') do
+  it { should be_enabled }
+  it { should be_running }
+end
+
+describe port(11211) do
+  it { should be_listening.with('tcp') }
 end
