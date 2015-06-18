@@ -41,9 +41,9 @@ Usage
 -----
 Simply set the attributes and it will configure the `/etc/memcached.conf` file. If you want to use multiple memcached instances, you'll need to modify the recipe to disable the startup script and the template in the default recipe.
 
-Use the definition, `memcached_instance`, to set up a runit service for the named memcached instance.
+Use the definition, `memcached_instance`, to set up a runit service for the named memcached instance. (If the instance name is `memcached` the service name will be `memcached` otherwise it will be `memcached-#{service_name}`)
 
-```ruby
+```
 memcached_instance 'myproj'
 ```
 

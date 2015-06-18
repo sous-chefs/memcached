@@ -17,5 +17,26 @@
 # limitations under the License.
 #
 
-include_recipe 'memcached::install'
-include_recipe 'memcached::configure'
+# include epel on redhat/centos 5 and below in order to get the memcached packages
+include_recipe 'yum-epel' if node['platform_family'] == 'rhel' && node['platform_version'].to_i == 5
+
+package 'memcached'
+
+package 'libmemcache-dev' do
+  case node['platform_family']
+  when 'rhel', 'fedora'
+    package_name 'libmemcached-devel'
+  when 'smartos'
+    package_name 'libmemcached'
+  when 'suse'
+    if node['platform_version'].to_f < 12
+      package_name 'libmemcache-devel'
+    else
+      package_name 'libmemcached-devel'
+    end
+  when 'debian'
+    package_name 'libmemcached-dev'
+  else
+    package_name 'libmemcache-dev'
+  end
+end

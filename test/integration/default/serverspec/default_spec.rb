@@ -7,13 +7,10 @@ describe package('memcached') do
 end
 
 describe service('memcached') do
+  it { should be_enabled }
   it { should be_running }
 end
 
-describe command('service memcached status') do
-  its(:stdout) { should match /^run: memcached/ }
-end
-
-describe port(11212) do
+describe port(11211) do
   it { should be_listening.with('tcp') }
 end
