@@ -21,11 +21,12 @@ define :memcached_instance do
   include_recipe 'runit'
   include_recipe 'memcached::install'
 
+  instance_name = params[:name] == 'memcached' ? 'memcached' : "memcached-#{params[:name]}"
+
   service 'memcached' do
     action [:disable, :stop]
+    not_if { File.exists?("/etc/service/#{instance_name}/run") }
   end
-
-  instance_name = params[:name] == 'memcached' ? 'memcached' : "memcached-#{params[:name]}"
 
   opts = params
 
@@ -45,4 +46,4 @@ define :memcached_instance do
       :experimental_options => Array(node['memcached']['experimental_options'])
     }.merge(opts))
   end
-end
+ end

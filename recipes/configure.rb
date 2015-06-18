@@ -38,8 +38,9 @@ when 'rhel', 'fedora', 'suse'
       :udp_port        => node['memcached']['udp_port'],
       :maxconn         => node['memcached']['maxconn'],
       :memory          => node['memcached']['memory'],
-      :max_object_size => node['memcached']['max_object_size'],
-      :logfilename     => node['memcached']['logfilename']
+      :logfilename     => node['memcached']['logfilename'],
+      :threads         => node['memcached']['threads'],
+      :max_object_size => node['memcached']['max_object_size']
     )
     notifies :restart, 'service[memcached]'
   end
@@ -62,7 +63,10 @@ else
       :udp_port        => node['memcached']['udp_port'],
       :maxconn         => node['memcached']['maxconn'],
       :memory          => node['memcached']['memory'],
-      :max_object_size => node['memcached']['max_object_size']
+      :logfilename     => node['memcached']['logfilename'],
+      :threads         => node['memcached']['threads'],
+      :max_object_size => node['memcached']['max_object_size'],
+      :experimental_options => Array(node['memcached']['experimental_options'])
     )
     notifies :restart, 'service[memcached]'
   end
