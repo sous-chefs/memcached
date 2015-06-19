@@ -17,5 +17,5 @@
 # limitations under the License.
 #
 
-include_recipe 'memcached::install'
+include_recipe 'memcached::package'
 include_recipe 'memcached::configure'

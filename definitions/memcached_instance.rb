@@ -19,7 +19,7 @@
 
 define :memcached_instance do
   include_recipe 'runit'
-  include_recipe 'memcached::install'
+  include_recipe 'memcached::package'
 
   instance_name = params[:name] == 'memcached' ? 'memcached' : "memcached-#{params[:name]}"
 
