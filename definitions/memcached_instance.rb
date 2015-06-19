@@ -43,7 +43,8 @@ define :memcached_instance do
       :user    => node['memcached']['user'],
       :threads    => node['memcached']['threads'],
       :max_object_size => node['memcached']['max_object_size'],
-      :experimental_options => Array(node['memcached']['experimental_options'])
+      :experimental_options => Array(node['memcached']['experimental_options']),
+      :ulimit  => node['memcached']['ulimit']
     }.merge(opts))
   end
  end
