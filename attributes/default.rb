@@ -17,6 +17,7 @@
 # limitations under the License.
 #
 
+default['memcached']['version'] = nil
 default['memcached']['memory'] = 64
 default['memcached']['port'] = 11_211
 default['memcached']['udp_port'] = 11_211

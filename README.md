@@ -35,7 +35,9 @@ The following are node attributes passed to the template for the runit service.
 - `memcached['maxconn']` - maximum number of connections to accept (defaults to 1024)
 - `memcached['max_object_size']` - maximum size of an object to cache (defaults to 1MB)
 - `memcached['logfilename']` - logfile to which memcached output will be redirected in /var/log/$logfilename.
-
+- `memcached['threads']` - Number of threads to use to process incoming requests. The default is 4.
+- `memcached['experimental_options']` - Comma separated list of extended or experimental options. (array)
+- `memcached['ulimit']` - boolean `true` will set the ulimit to the `maxconn` value
 
 Usage
 -----
