@@ -23,11 +23,6 @@ define :memcached_instance do
 
   instance_name = params[:name] == 'memcached' ? 'memcached' : "memcached-#{params[:name]}"
 
-  service 'memcached' do
-    action [:disable, :stop]
-    not_if { File.exists?("/etc/service/#{instance_name}/run") }
-  end
-
   opts = params
 
   runit_service instance_name do
