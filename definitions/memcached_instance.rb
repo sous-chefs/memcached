@@ -30,16 +30,16 @@ define :memcached_instance do
     default_logger    true
     cookbook          'memcached'
     options({
-      :memory  => node['memcached']['memory'],
-      :port    => node['memcached']['port'],
-      :udp_port => node['memcached']['udp_port'],
-      :listen  => node['memcached']['listen'],
-      :maxconn => node['memcached']['maxconn'],
-      :user    => node['memcached']['user'],
-      :threads    => node['memcached']['threads'],
-      :max_object_size => node['memcached']['max_object_size'],
+      :memory               => node['memcached']['memory'],
+      :port                 => node['memcached']['port'],
+      :udp_port             => node['memcached']['udp_port'],
+      :listen               => node['memcached']['listen'],
+      :maxconn              => node['memcached']['maxconn'],
+      :user                 => node['memcached']['user'],
+      :threads              => node['memcached']['threads'],
+      :max_object_size      => node['memcached']['max_object_size'],
       :experimental_options => Array(node['memcached']['experimental_options']),
-      :ulimit  => node['memcached']['ulimit']
+      :ulimit               => node['memcached']['ulimit']
     }.merge(opts))
   end
  end

@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+directory node['memcached']['logfilepath']
+
 service 'memcached' do
   action :enable
   supports :status => true, :start => true, :stop => true, :restart => true, :enable => true
@@ -38,6 +40,7 @@ when 'rhel', 'fedora', 'suse'
       :udp_port        => node['memcached']['udp_port'],
       :maxconn         => node['memcached']['maxconn'],
       :memory          => node['memcached']['memory'],
+      :logfilepath     => node['memcached']['logfilepath'],
       :logfilename     => node['memcached']['logfilename'],
       :threads         => node['memcached']['threads'],
       :max_object_size => node['memcached']['max_object_size']
@@ -63,6 +66,7 @@ else
       :udp_port        => node['memcached']['udp_port'],
       :maxconn         => node['memcached']['maxconn'],
       :memory          => node['memcached']['memory'],
+      :logfilepath     => node['memcached']['logfilepath'],
       :logfilename     => node['memcached']['logfilename'],
       :threads         => node['memcached']['threads'],
       :max_object_size => node['memcached']['max_object_size'],

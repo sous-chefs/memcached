@@ -12,7 +12,7 @@
 -d
 
 # Log memcached's output to /var/log/memcached
-logfile /var/log/<%= @logfilename %>
+logfile <%= @logfilepath %><%= @logfilename %>
 
 # Be verbose
 -v
