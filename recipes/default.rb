@@ -85,6 +85,7 @@ else
       :maxconn         => node['memcached']['maxconn'],
       :memory          => node['memcached']['memory'],
       :max_object_size => node['memcached']['max_object_size']
+      :logfilename     => node['memcached']['logfilename']
     )
     notifies :restart, 'service[memcached]'
   end

@@ -11,8 +11,12 @@
 # information.
 -d
 
-# Log memcached's output to /var/log/memcached
+# Log memcached's output to /var/log/memcached.log
+<%- if @logfilename %>
+logfile /var/log/<%= @logfilename %>
+<%- else %>
 logfile /var/log/memcached.log
+<%- end %>
 
 # Be verbose
 -v
