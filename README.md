@@ -12,7 +12,7 @@ A runit service can be set up for instances using the `memcache_instance` defini
 
 ### Platforms
 - Ubuntu 10.04, 12.04
-- CentOS 5.8, 6.3
+- CentOS/RHEL 5.8, 6.3
 - openSUSE 12.3
 - SLES 12 SP2
 - SmartOS base64 1.8.1 - Note that SMF directly configures memcached with no opportunity to alter settings. If you need custom parameters, use the `memcached_instance` provider instead.
@@ -21,6 +21,8 @@ May work on other systems with or without modification.
 
 ### Cookbooks
 - runit
+- yum
+- yum-epel
 
 
 Attributes
@@ -34,7 +36,8 @@ The following are node attributes passed to the template for the runit service.
 - `memcached['listen']` - IP address for memcache to listen on, defaults to **0.0.0.0** (world accessible).
 - `memcached['maxconn']` - maximum number of connections to accept (defaults to 1024)
 - `memcached['max_object_size']` - maximum size of an object to cache (defaults to 1MB)
-- `memcached['logfilename']` - logfile to which memcached output will be redirected in /var/log/$logfilename.
+- `memcached['logfilepath']` - path to directory where log file will be written.
+- `memcached['logfilename']` - logfile to which memcached output will be redirected in $logfilepath/$logfilename.
 - `memcached['threads']` - Number of threads to use to process incoming requests. The default is 4.
 - `memcached['experimental_options']` - Comma separated list of extended or experimental options. (array)
 - `memcached['ulimit']` - boolean `true` will set the ulimit to the `maxconn` value
