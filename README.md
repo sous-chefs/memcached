@@ -35,15 +35,17 @@ The following are node attributes passed to the template for the runit service.
 - `memcached['maxconn']` - maximum number of connections to accept (defaults to 1024)
 - `memcached['max_object_size']` - maximum size of an object to cache (defaults to 1MB)
 - `memcached['logfilename']` - logfile to which memcached output will be redirected in /var/log/$logfilename.
-
+- `memcached['threads']` - Number of threads to use to process incoming requests. The default is 4.
+- `memcached['experimental_options']` - Comma separated list of extended or experimental options. (array)
+- `memcached['ulimit']` - boolean `true` will set the ulimit to the `maxconn` value
 
 Usage
 -----
 Simply set the attributes and it will configure the `/etc/memcached.conf` file. If you want to use multiple memcached instances, you'll need to modify the recipe to disable the startup script and the template in the default recipe.
 
-Use the definition, `memcached_instance`, to set up a runit service for the named memcached instance.
+Use the definition, `memcached_instance`, to set up a runit service for the named memcached instance. (If the instance name is `memcached` the service name will be `memcached` otherwise it will be `memcached-#{service_name}`)
 
-```ruby
+```
 memcached_instance 'myproj'
 ```
 
