@@ -1,13 +1,17 @@
 ---
 language: ruby
-script:
-  - chmod -R a+x bin/
-  - bin/rubocop
-  - bin/foodcritic .
-  - bin/rspec
+notifications:
+  slack: bloomberg-rnd:eHp3Czg42iGzaTgG8sAFeD9v
+install:
+  - bundle install --retry 3 --without kitchen_vagrant kitchen_cloud
+  - bundle exec berks install
+script: bundle exec rake travis
 rvm:
   - 2.1
   - 2.2
+cache:
+  directories:
+    - vendor/bundle
 branches:
   only:
     - master
