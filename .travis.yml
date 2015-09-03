@@ -1,13 +1,20 @@
+---
 language: ruby
-bundler_args: --without development integration
-rvm:
-  - 1.9.3
-  - 2.0.0
-before_install:
-  - "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
-before_script:
+notifications:
+  slack: bloomberg-rnd:eHp3Czg42iGzaTgG8sAFeD9v
+install:
+  - bundle install --retry 3 --without kitchen_vagrant kitchen_cloud
   - bundle exec berks install
-script:
-  - bundle exec foodcritic -f any . --tags ~FC005 --tags ~FC015
-  - bundle exec rubocop
-  - bundle exec rspec --color --format progress
+script: bundle exec rake travis
+rvm:
+  - 2.1
+  - 2.2
+cache:
+  directories:
+    - vendor/bundle
+branches:
+  only:
+    - master
+builder_args: --jobs 7
+matrix:
+  fast_finish: true

@@ -1,0 +1,31 @@
+author      "Shaun Harding <shaun@socialengine.com>"
+description "Handles starting of Memcached on server reboot, or in the event of an error"
+
+env DAEMON="/usr/bin/memcached"
+env DAEMONBOOTSTRAP="/usr/share/memcached/scripts/start-memcached"
+env MEMCACHED_CONFIG="/etc/memcached.conf"
+env PIDFILE="/var/run/memcached.pid"
+
+start on runlevel [2345]
+stop on runlevel [016]
+
+expect daemon 
+
+respawn
+respawn limit 10 5
+
+exec start-stop-daemon --start --quiet --exec "$DAEMONBOOTSTRAP" -- $MEMCACHED_CONFIG $PIDFILE
+
+pre-start script
+  if [ -f $PIDFILE ]; then
+    start-stop-daemon --stop --quiet --oknodo --retry 5 --pidfile $PIDFILE --exec $DAEMON
+    echo "Restarting memcached" | logger -t "memcached"
+    rm -f $PIDFILE
+  else
+    echo "Memcached started" | logger -t "memcached"
+  fi
+end script
+
+pre-stop script
+  echo "Memcached stopped" | logger -t "memcached"
+end script

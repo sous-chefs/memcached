@@ -1,0 +1,19 @@
+# Memcached config for <%= @instance_name %>
+<% if @config.bind_ip %>
+BIND_IP="<%= @config.bind_ip %>"
+<% end %>
+<% if @config.port %>
+PORT="<%= @config.port %>"
+<% end %>
+<% if @config.service_user %>
+USER="<%= @config.service_user %>"
+<% end %>
+<% if @config.max_connections %>
+MAXCONN="<%= @config.max_connections %>"
+<% end %>
+<% @config.cachesize %>
+CACHESIZE="<%= @config.cachesize %>"
+<% end %>
+<% if @config.options %>
+OPTIONS="<%= @config.options %>"
+<% end %>
