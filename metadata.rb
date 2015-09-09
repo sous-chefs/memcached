@@ -22,6 +22,9 @@ supports 'ubuntu'
 
 recipe 'memcached', 'Installs and configures memcached'
 
+source_url 'https://github.com/chef-cookbooks/memcached' if respond_to?(:source_url)
+issues_url 'https://github.com/chef-cookbooks/memcached/issues' if respond_to?(:issues_url)
+
 attribute 'memcached/memory',
           :display_name => 'Memcached Memory',
           :description  => 'Memory allocated for memcached instance',
