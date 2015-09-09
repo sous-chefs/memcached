@@ -8,7 +8,7 @@ describe 'memcached::default' do
   end
 
   context 'on rhel' do
-    let(:chef_run) { ChefSpec::Runner.new(:platform => 'redhat', :version => '6.3').converge(described_recipe) }
+    let(:chef_run) { ChefSpec::Runner.new(platform: 'redhat', version: '6.3').converge(described_recipe) }
     let(:template) { chef_run.template('/etc/sysconfig/memcached') }
 
     it 'writes the /etc/sysconfig/memcached' do
@@ -24,7 +24,7 @@ describe 'memcached::default' do
   end
 
   context 'on smartos' do
-    let(:chef_run) { ChefSpec::Runner.new(:platform => 'smartos', :version => 'joyent_20130111T180733Z').converge(described_recipe) }
+    let(:chef_run) { ChefSpec::Runner.new(platform: 'smartos', version: 'joyent_20130111T180733Z').converge(described_recipe) }
 
     it 'enables the memcached service' do
       expect(chef_run).to enable_service('memcached')
@@ -32,7 +32,7 @@ describe 'memcached::default' do
   end
 
   context 'on ubuntu' do
-    let(:chef_run) { ChefSpec::Runner.new(:platform => 'ubuntu', :version => '12.04').converge(described_recipe) }
+    let(:chef_run) { ChefSpec::Runner.new(platform: 'ubuntu', version: '12.04').converge(described_recipe) }
     let(:template) { chef_run.template('/etc/memcached.conf') }
 
     it 'writes the /etc/memcached.conf' do

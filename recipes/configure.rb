@@ -21,7 +21,7 @@ directory node['memcached']['logfilepath']
 
 service 'memcached' do
   action :enable
-  supports :status => true, :start => true, :stop => true, :restart => true, :enable => true
+  supports status: true, start: true, stop: true, restart: true, enable: true
 end
 
 case node['platform_family']
@@ -33,17 +33,17 @@ when 'rhel', 'fedora', 'suse'
     group 'root'
     mode  '0644'
     variables(
-      :listen          => node['memcached']['listen'],
-      :user            => node['memcached']['user'],
-      :group           => node['memcached']['group'],
-      :port            => node['memcached']['port'],
-      :udp_port        => node['memcached']['udp_port'],
-      :maxconn         => node['memcached']['maxconn'],
-      :memory          => node['memcached']['memory'],
-      :logfilepath     => node['memcached']['logfilepath'],
-      :logfilename     => node['memcached']['logfilename'],
-      :threads         => node['memcached']['threads'],
-      :max_object_size => node['memcached']['max_object_size']
+      listen: node['memcached']['listen'],
+      user: node['memcached']['user'],
+      group: node['memcached']['group'],
+      port: node['memcached']['port'],
+      udp_port: node['memcached']['udp_port'],
+      maxconn: node['memcached']['maxconn'],
+      memory: node['memcached']['memory'],
+      logfilepath: node['memcached']['logfilepath'],
+      logfilename: node['memcached']['logfilename'],
+      threads: node['memcached']['threads'],
+      max_object_size: node['memcached']['max_object_size']
     )
     notifies :restart, 'service[memcached]'
   end
@@ -60,17 +60,17 @@ else
     group  'root'
     mode   '0644'
     variables(
-      :listen          => node['memcached']['listen'],
-      :user            => node['memcached']['user'],
-      :port            => node['memcached']['port'],
-      :udp_port        => node['memcached']['udp_port'],
-      :maxconn         => node['memcached']['maxconn'],
-      :memory          => node['memcached']['memory'],
-      :logfilepath     => node['memcached']['logfilepath'],
-      :logfilename     => node['memcached']['logfilename'],
-      :threads         => node['memcached']['threads'],
-      :max_object_size => node['memcached']['max_object_size'],
-      :experimental_options => Array(node['memcached']['experimental_options'])
+      listen: node['memcached']['listen'],
+      user: node['memcached']['user'],
+      port: node['memcached']['port'],
+      udp_port: node['memcached']['udp_port'],
+      maxconn: node['memcached']['maxconn'],
+      memory: node['memcached']['memory'],
+      logfilepath: node['memcached']['logfilepath'],
+      logfilename: node['memcached']['logfilename'],
+      threads: node['memcached']['threads'],
+      max_object_size: node['memcached']['max_object_size'],
+      experimental_options: Array(node['memcached']['experimental_options'])
     )
     notifies :restart, 'service[memcached]'
   end

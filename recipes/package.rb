@@ -43,7 +43,6 @@ else
   end
 end
 
-
 package 'libmemcache-dev' do
   case node['platform_family']
   when 'rhel', 'fedora'

@@ -26,26 +26,26 @@ source_url 'https://github.com/chef-cookbooks/memcached' if respond_to?(:source_
 issues_url 'https://github.com/chef-cookbooks/memcached/issues' if respond_to?(:issues_url)
 
 attribute 'memcached/memory',
-          :display_name => 'Memcached Memory',
-          :description  => 'Memory allocated for memcached instance',
-          :default      => '64'
+          display_name: 'Memcached Memory',
+          description: 'Memory allocated for memcached instance',
+          default: '64'
 
 attribute 'memcached/port',
-          :display_name => 'Memcached Port',
-          :description  => 'Port to use for memcached instance',
-          :default      => '11211'
+          display_name: 'Memcached Port',
+          description: 'Port to use for memcached instance',
+          default: '11211'
 
 attribute 'memcached/user',
-          :display_name => 'Memcached User',
-          :description  => 'User to run memcached instance as',
-          :default      => 'nobody'
+          display_name: 'Memcached User',
+          description: 'User to run memcached instance as',
+          default: 'nobody'
 
 attribute 'memcached/listen',
-          :display_name => 'Memcached IP Address',
-          :description  => 'IP address to use for memcached instance',
-          :default      => '0.0.0.0'
+          display_name: 'Memcached IP Address',
+          description: 'IP address to use for memcached instance',
+          default: '0.0.0.0'
 
 attribute 'memcached/logfilename',
-          :display_name => 'Memcached logfilename',
-          :description  => 'The filename used to log memcached',
-          :default      => 'memcached.log'
+          display_name: 'Memcached logfilename',
+          description: 'The filename used to log memcached',
+          default: 'memcached.log'

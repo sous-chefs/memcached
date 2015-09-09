@@ -14,6 +14,6 @@ describe command('service memcached status') do
   its(:stdout) { should match /^run: memcached/ }
 end
 
-describe port(11212) do
+describe port(11_212) do
   it { should be_listening.with('tcp') }
 end
