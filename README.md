@@ -1,7 +1,8 @@
 memcached Cookbook
 ==================
-[![Build Status](https://secure.travis-ci.org/chef-cookbooks/memcached.png?branch=master)](http://travis-ci.org/chef-cookbooks/memcached)
 
+[![Build Status](https://travis-ci.org/chef-cookbooks/memcached.svg?branch=master)](http://travis-ci.org/chef-cookbooks/memcached)
+[![Cookbook Version](https://img.shields.io/cookbook/v/memcached.svg)](https://supermarket.chef.io/cookbooks/mmemcached)
 
 Installs memcached and provides a define to set up an instance of memcache via runit.
 
@@ -61,7 +62,7 @@ License & Authors
 - Author:: Joshua Sierles (<joshua@37signals.com>)
 
 ```text
-Copyright:: 2009-2012, Chef Software, Inc
+Copyright:: 2009-2015, Chef Software, Inc
 Copyright:: 2009, 37signals
 
 Licensed under the Apache License, Version 2.0 (the "License");
