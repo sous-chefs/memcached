@@ -2,7 +2,7 @@ memcached Cookbook
 ==================
 
 [![Build Status](https://travis-ci.org/chef-cookbooks/memcached.svg?branch=master)](http://travis-ci.org/chef-cookbooks/memcached)
-[![Cookbook Version](https://img.shields.io/cookbook/v/memcached.svg)](https://supermarket.chef.io/cookbooks/mmemcached)
+[![Cookbook Version](https://img.shields.io/cookbook/v/memcached.svg)](https://supermarket.chef.io/cookbooks/memcached)
 
 Installs memcached and provides a define to set up an instance of memcache via runit.
 
