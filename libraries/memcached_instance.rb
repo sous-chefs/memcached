@@ -17,13 +17,19 @@ module MemcachedCookbook
       # @return [String]
       attribute(:instance, kind_of: String, name_attribute: true)
 
+      attribute(:log_file, kind_of: String, default: '/var/log/memcached.log')
+      attribute(:verbose, equal_to: %{1 2})
       attribute(:bind_ip, kind_of: String, default: '127.0.0.1')
       attribute(:port, kind_of: String, default: '11211')
+      attribute(:udp_port, kind_of: [String, NilClass], default: nil)
       attribute(:max_connections, kind_of: Integer, default: 1024)
-      attribute(:cachesize, kind_of: Integer, default: 64)
+      attribute(:max_memory, kind_of: Integer, default: 64)
+      attribute(:max_object_size, kind_of: Integer)
+      attribute(:threads, kind_of: Integer)
       attribute(:service_user, kind_of: String, default: 'memcache')
       attribute(:enabled, equal_to: %w{yes no}, default: 'yes')
       attribute(:options, kind_of: [String, NilClass], default: nil)
+      attribute(:experimental_options, kind_of: [String, NilClass], default: nil)
     end
   end
 
@@ -81,7 +87,7 @@ module MemcachedCookbook
       end
 
       def start_command
-        start = "/usr/bin/memcached -m #{new_resource.cachesize} -p #{new_resource.port} -u #{new_resource.service_user} -l #{new_resource.bind_ip} -c #{new_resource.max_connections} -P /var/run/memcached.pid"
+        start = "/usr/bin/memcached -m #{new_resource.max_memory} -p #{new_resource.port} -u #{new_resource.service_user} -l #{new_resource.bind_ip} -c #{new_resource.max_connections} -P /var/run/memcached.pid"
         if new_resource.options.nil?
           "#{start}"
         else
@@ -95,6 +101,8 @@ module MemcachedCookbook
         service.directory('/var/run')
         service.user(new_resource.service_user)
         service.restart_on_update(true)
+        service.options :sysvinit, template: "memcached:memcached-init.erb"
+        service.options :upstart, template: "memcached:memcached-upstart.erb"
       end
     end
   end

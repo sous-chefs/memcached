@@ -3,5 +3,5 @@ memcached_instance 'test' do
   bind_ip "127.0.0.1"
   port "11211"
   max_connections 4096
-  cachesize 4096
+  max_memory 4096
 end

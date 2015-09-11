@@ -12,8 +12,6 @@ USER="<%= @config.service_user %>"
 MAXCONN="<%= @config.max_connections %>"
 <% end %>
 <% @config.cachesize %>
-CACHESIZE="<%= @config.cachesize %>"
+CACHESIZE="<%= @config.max_memory %>"
 <% end %>
-<% if @config.options %>
-OPTIONS="<%= @config.options %>"
-<% end %>
+OPTIONS="<% if @config.udp_port %>-U <% @config.udp_port %><% end %> <% if @config.threads %> -t <%= @config.threads %><% end %> <% if @config.max_object_size %> -I <%= @config.max_object_size %><% end %><% if @config.options %> <%= @config.options %><% end %>"
