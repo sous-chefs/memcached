@@ -101,8 +101,8 @@ module MemcachedCookbook
         service.directory('/var/run')
         service.user(new_resource.service_user)
         service.restart_on_update(true)
-        service.options :sysvinit, template: "memcached:memcached-init.erb"
-        service.options :upstart, template: "memcached:memcached-upstart.erb"
+        service.options :sysvinit, template: 'memcached:memcached-init.erb'
+        service.options :upstart, template: 'memcached:memcached-upstart.erb'
       end
     end
   end
