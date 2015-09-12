@@ -2,6 +2,26 @@ memcached Cookbook CHANGELOG
 ============================
 This file is used to list changes made in each version of the memcached cookbook.
 
+unreleased
+---------------
+- Debian/Ubuntu switched the user that memcached runs under from nobody to memcache.  Updated the cookbook to use this user on those platforms and create it in case we're on an older distro release that didn't yet have that user
+- Removed use of shellout that was causing issues for users
+- Improved the workaround on Debian/Ubuntu for not starting the service on package install so that it doesn't show up as a changed resource on every Chef run
+- Updated Chefspec to 4.X and added additional specs
+- Add oracle to the metadata
+- Add issues_url and source_url to the metadata
+- Add new contributing.md, maintainers.md, and testing.md docs
+- Add travis and cookbook version badges to the readme
+- Clarified Chef 11 is the minimum required chef release
+- Updated platforms in the Kitchen config
+- Added chefignore file
+- Removed all hash rockets
+- Added a .foodcritic file with exclusions
+- Updated travis to use their container infrastructure, cache bundler gems, and test on more modern Ruby releases
+- Added a Rakefile to simplify testing
+- Removed yum as a dependency as it wasn't being used.
+
+
 v1.8.0 (2015-08-11)
 -------------------
 - updated serverspec tests to pass (See 3c7b5c9)
