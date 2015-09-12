@@ -10,6 +10,11 @@ describe 'memcached::default' do
 
   context 'on rhel' do
     let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'redhat', version: '6.3').converge(described_recipe) }
+
+    it 'creates memcached group' do
+      expect(chef_run).to create_group('memcached')
+    end
+
     let(:template) { chef_run.template('/etc/sysconfig/memcached') }
 
     it 'writes the /etc/sysconfig/memcached' do
@@ -30,6 +35,10 @@ describe 'memcached::default' do
     it 'enables the memcached service' do
       expect(chef_run).to enable_service('memcached')
     end
+
+    it 'creates nogroup group' do
+      expect(chef_run).to create_group('nogroup')
+    end
   end
 
   context 'on ubuntu' do
@@ -49,6 +58,10 @@ describe 'memcached::default' do
 
     it 'notifies the service to restart' do
       expect(template).to notify('service[memcached]').to(:restart)
+    end
+
+    it 'creates memcache group' do
+      expect(chef_run).to create_group('memcache')
     end
   end
 end
