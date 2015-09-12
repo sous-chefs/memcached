@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe 'memcached::default' do
+  before do
+    stub_command("getent passwd memcached").and_return(false)
+    stub_command("getent passwd nobody").and_return(false)
+  end
+
   let(:chef_run) { ChefSpec::ServerRunner.new.converge(described_recipe) }
 
   it 'installs the libmemcache-dev package' do
