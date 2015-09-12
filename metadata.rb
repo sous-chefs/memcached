@@ -7,7 +7,6 @@ long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version           '1.8.0'
 
 depends           'runit', '~> 1.0'
-depends           'yum', '~> 3.0'
 depends           'yum-epel'
 
 supports 'amazon'

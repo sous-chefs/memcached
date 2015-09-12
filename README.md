@@ -24,7 +24,6 @@ May work on other systems with or without modification.
 
 #### Cookbooks
 - runit
-- yum
 - yum-epel
 
 
