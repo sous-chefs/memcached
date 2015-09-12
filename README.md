@@ -11,7 +11,7 @@ Requirements
 ------------
 A runit service can be set up for instances using the `memcache_instance` definition.
 
-### Platforms
+#### Platforms
 - Ubuntu 10.04+
 - CentOS/RHEL 5+
 - openSUSE/SLES 12+
@@ -19,7 +19,10 @@ A runit service can be set up for instances using the `memcache_instance` defini
 
 May work on other systems with or without modification.
 
-### Cookbooks
+#### Chef
+- Chef 11+
+
+#### Cookbooks
 - runit
 - yum
 - yum-epel
@@ -57,7 +60,7 @@ The recipe also reads in whether to start up memcached from a `/etc/default/memc
 
 License & Authors
 -----------------
-- Author:: Joshua Timberman (<joshua@chef.io>)
+- Author:: Cookbook Engineering Team (<cookbooks@chef.io>)
 - Author:: Joshua Sierles (<joshua@37signals.com>)
 
 ```text
