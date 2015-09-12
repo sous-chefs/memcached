@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe 'memcached::default' do
   before do
-    stub_command("getent passwd memcached").and_return(false)
-    stub_command("getent passwd nobody").and_return(false)
-    stub_command("getent passwd memcache").and_return(false)
-    stub_command("dpkg -s memcached").and_return(true)
+    stub_command('getent passwd memcached').and_return(false)
+    stub_command('getent passwd nobody').and_return(false)
+    stub_command('getent passwd memcache').and_return(false)
+    stub_command('dpkg -s memcached').and_return(true)
   end
 
   context 'on rhel' do
