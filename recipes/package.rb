@@ -17,6 +17,9 @@
 # limitations under the License.
 #
 
+# Chef client 11 compatibility.
+::Chef::Recipe.send(:include, ::Chef::Mixin::ShellOut) unless respond_to?(:shell_out)
+
 # include epel on redhat/centos 5 and below in order to get the memcached packages
 include_recipe 'yum-epel' if node['platform_family'] == 'rhel' && node['platform_version'].to_i == 5
 
