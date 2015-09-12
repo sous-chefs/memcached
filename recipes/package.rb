@@ -56,6 +56,8 @@ package 'libmemcache-dev' do
     else
       package_name 'libmemcached-devel'
     end
+  when 'debian'
+    package_name 'libmemcached-dev'
   else
     package_name 'libmemcache-dev'
   end
