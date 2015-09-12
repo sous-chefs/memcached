@@ -23,8 +23,10 @@ include_recipe 'yum-epel' if node['platform_family'] == 'rhel' && node['platform
 if node['platform_family'] == 'debian'
   # dpkg, imma let you finish but don't start services automatically
   # https://jpetazzo.github.io/2013/10/06/policy-rc-d-do-not-start-services-automatically/
-  execute 'disable auto-start' do
-    command 'echo exit 101 > /usr/sbin/policy-rc.d ; chmod +x /usr/sbin/policy-rc.d'
+  file '/usr/sbin/policy-rc.d with exit 101' do
+    path '/usr/sbin/policy-rc.d'
+    content 'exit 101'
+    mode '0755'
     not_if 'dpkg -s memcached'
   end
 
@@ -33,10 +35,11 @@ if node['platform_family'] == 'debian'
     action :install
   end
 
-  execute 'undo service disable hack' do
-    command 'echo exit 0 > /usr/sbin/policy-rc.d'
+  file '/usr/sbin/policy-rc.d with exit 0' do
+    path '/usr/sbin/policy-rc.d'
+    content 'exit 0'
+    mode '0755'
   end
-
 else
   package 'memcached' do
     version node['memcached']['version']
