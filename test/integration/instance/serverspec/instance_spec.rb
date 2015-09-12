@@ -11,7 +11,7 @@ describe service('memcached') do
 end
 
 describe command('service memcached status') do
-  its(:stdout) { should match /^run: memcached/ }
+  its(:stdout) { should match(/^run: memcached/) }
 end
 
 describe port(11_212) do

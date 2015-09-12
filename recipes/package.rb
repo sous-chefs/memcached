@@ -20,7 +20,7 @@
 # include epel on redhat/centos 5 and below in order to get the memcached packages
 include_recipe 'yum-epel' if node['platform_family'] == 'rhel' && node['platform_version'].to_i == 5
 
-if node['platform_family'] == 'debian' && shell_out('dpkg -l memcached | grep "^ii  memcached"').error?
+if node['platform_family'] == 'debian' && shell_out('dpkg -s memcached').error?
   # dpkg, imma let you finish but don't start services automatically
   # https://jpetazzo.github.io/2013/10/06/policy-rc-d-do-not-start-services-automatically/
   execute 'disable auto-start' do
@@ -60,4 +60,21 @@ package 'libmemcache-dev' do
   else
     package_name 'libmemcache-dev'
   end
+end
+
+group node['memcached']['group'] do
+  system true
+  notifies :create, "user[#{node['memcached']['user']}]", :immediately
+  notifies :lock, "user[#{node['memcached']['user']}]", :immediately
+  not_if "getent passwd #{node['memcached']['user']}"
+end
+
+user node['memcached']['user'] do
+  system true
+  manage_home false
+  gid node['memcached']['group']
+  home '/nonexistent'
+  comment 'Memcached'
+  shell '/bin/false'
+  action :nothing
 end
