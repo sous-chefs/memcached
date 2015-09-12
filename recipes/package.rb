@@ -20,11 +20,12 @@
 # include epel on redhat/centos 5 and below in order to get the memcached packages
 include_recipe 'yum-epel' if node['platform_family'] == 'rhel' && node['platform_version'].to_i == 5
 
-if node['platform_family'] == 'debian' && shell_out('dpkg -s memcached').error?
+if node['platform_family'] == 'debian'
   # dpkg, imma let you finish but don't start services automatically
   # https://jpetazzo.github.io/2013/10/06/policy-rc-d-do-not-start-services-automatically/
   execute 'disable auto-start' do
     command 'echo exit 101 > /usr/sbin/policy-rc.d ; chmod +x /usr/sbin/policy-rc.d'
+    not_if 'dpkg -s memcached'
   end
 
   package 'memcached' do
@@ -50,13 +51,11 @@ package 'libmemcache-dev' do
   when 'smartos'
     package_name 'libmemcached'
   when 'suse'
-    if node['platform_version'].to_f < 12
+    if node['platform_version'].to_i < 12
       package_name 'libmemcache-devel'
     else
       package_name 'libmemcached-devel'
     end
-  when 'debian'
-    package_name 'libmemcached-dev'
   else
     package_name 'libmemcache-dev'
   end

@@ -4,12 +4,8 @@ describe 'memcached::default' do
   before do
     stub_command("getent passwd memcached").and_return(false)
     stub_command("getent passwd nobody").and_return(false)
-  end
-
-  let(:chef_run) { ChefSpec::ServerRunner.new.converge(described_recipe) }
-
-  it 'installs the libmemcache-dev package' do
-    expect(chef_run).to install_package('libmemcache-dev')
+    stub_command("getent passwd memcache").and_return(false)
+    stub_command("dpkg -s memcached").and_return(true)
   end
 
   context 'on rhel' do
@@ -39,6 +35,10 @@ describe 'memcached::default' do
   context 'on ubuntu' do
     let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '12.04').converge(described_recipe) }
     let(:template) { chef_run.template('/etc/memcached.conf') }
+
+    it 'installs the libmemcache-dev package' do
+      expect(chef_run).to install_package('libmemcache-dev')
+    end
 
     it 'writes the /etc/memcached.conf' do
       expect(template).to be
