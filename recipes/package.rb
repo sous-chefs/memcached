@@ -47,25 +47,6 @@ else
   end
 end
 
-package 'libmemcache-dev' do
-  case node['platform_family']
-  when 'rhel', 'fedora'
-    package_name 'libmemcached-devel'
-  when 'smartos'
-    package_name 'libmemcached'
-  when 'suse'
-    if node['platform_version'].to_i < 12
-      package_name 'libmemcache-devel'
-    else
-      package_name 'libmemcached-devel'
-    end
-  when 'debian'
-    package_name 'libmemcached-dev'
-  else
-    package_name 'libmemcache-dev'
-  end
-end
-
 group node['memcached']['group'] do
   system true
   notifies :create, "user[#{node['memcached']['user']}]", :immediately
