@@ -25,4 +25,4 @@ suites:
       - recipe[memcached::default]
   - name: instance
     run_list:
-      - recipe[fake::instance]
+      - recipe[test::instance]
