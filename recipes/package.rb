@@ -47,19 +47,25 @@ else
   end
 end
 
-group node['memcached']['group'] do
+group service_group do
   system true
-  notifies :create, "user[#{node['memcached']['user']}]", :immediately
-  notifies :lock, "user[#{node['memcached']['user']}]", :immediately
-  not_if "getent passwd #{node['memcached']['user']}"
+  notifies :create, "user[#{service_user}]", :immediately
+  notifies :lock, "user[#{service_user}]", :immediately
+  not_if "getent passwd #{service_user}"
 end
 
-user node['memcached']['user'] do
+user service_user do
   system true
   manage_home false
-  gid node['memcached']['group']
+  gid service_group
   home '/nonexistent'
   comment 'Memcached'
   shell '/bin/false'
   action :nothing
+end
+
+# Disable the default memcached service so we configure it from the custom resource
+# If the memcached::default is included the configure.rb recipe will start/enable the service
+service 'memcached' do
+  action [:stop, :disable]
 end
