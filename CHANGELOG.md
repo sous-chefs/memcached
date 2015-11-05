@@ -2,8 +2,11 @@ memcached Cookbook CHANGELOG
 ============================
 This file is used to list changes made in each version of the memcached cookbook.
 
-unreleased
----------------
+1.9.0 (2015-11-05)
+------------------
+
+NOTE: This will be the last version of this cookbook that supports Chef 11 and the traditional attribute / resource hybrid setup for memcached instances. After this release this cookbook will function with attributes for a simple install or Chef 12.5 custom resources for creating individual memcached instances.  If you utilize memcached instances using the attributes to define the config you'll need to pin to ~1.0 and later update to the new format in ~2.0.
+
 - Debian/Ubuntu switched the user that memcached runs under from nobody to memcache.  Updated the cookbook to use this user on those platforms and create it in case we're on an older distro release that didn't yet have that user
 - Removed use of shellout that was causing issues for users
 - Improved the workaround on Debian/Ubuntu for not starting the service on package install so that it doesn't show up as a changed resource on every Chef run
@@ -17,10 +20,10 @@ unreleased
 - Added chefignore file
 - Removed all hash rockets
 - Added a .foodcritic file with exclusions
-- Updated travis to use their container infrastructure, cache bundler gems, and test on more modern Ruby releases
+- Updated travis to use their container infrastructure, chef-dk for testing deps, and kitchen-docker for integration testing
 - Added a Rakefile to simplify testing
 - Removed yum as a dependency as it wasn't being used.
-
+- Removed attributes from the metadata as they hadn't been updated
 
 v1.8.0 (2015-08-11)
 -------------------
