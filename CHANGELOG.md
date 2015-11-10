@@ -2,6 +2,13 @@ memcached Cookbook CHANGELOG
 ============================
 This file is used to list changes made in each version of the memcached cookbook.
 
+2.0.0 (2015-11-10)
+------------------
+
+BREAKING CHANGES:
+ - The user and group attributes have been removed and are instead handled by a helper that picks the appropriate user / group based on the platform
+ - The memcached_instance definition that used both passed values and node attributes for configuration has been rewritten as a 12.5 custom resource with compat_resource providing backwards compatibility to all Chef 12.X releases.  This new custom resource handles the installation of memcached and all configuration is passed in via custom resource properties.  See the readme for examples of how to use this new resource.  This change should greatly improve the ability to use memcached_instance within wrapper cookbooks.
+
 1.9.0 (2015-11-05)
 ------------------
 
