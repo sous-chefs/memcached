@@ -29,8 +29,8 @@ when 'rhel', 'fedora', 'suse'
     mode  '0644'
     variables(
       listen: node['memcached']['listen'],
-      user: node['memcached']['user'],
-      group: node['memcached']['group'],
+      user: service_user,
+      group: service_group,
       port: node['memcached']['port'],
       udp_port: node['memcached']['udp_port'],
       maxconn: node['memcached']['maxconn'],
@@ -56,7 +56,7 @@ else
     mode   '0644'
     variables(
       listen: node['memcached']['listen'],
-      user: node['memcached']['user'],
+      user: service_user,
       port: node['memcached']['port'],
       udp_port: node['memcached']['udp_port'],
       maxconn: node['memcached']['maxconn'],
