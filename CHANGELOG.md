@@ -2,6 +2,10 @@ memcached Cookbook CHANGELOG
 ============================
 This file is used to list changes made in each version of the memcached cookbook.
 
+2.0.1 (2015-11-19)
+------------------
+- Push new version to Supermarket to deal with bad artifact
+
 2.0.0 (2015-11-10)
 ------------------
 
