@@ -1,5 +1,3 @@
-rvm: 2.2
-
 sudo: required
 
 # install the pre-release chef-dk.  Use chef-stable-precise to install the stable release
@@ -18,7 +16,7 @@ env:
   - INSTANCE=default-ubuntu-1404
   - INSTANCE=default-centos-6
   - INSTANCE=default-centos-7
-  - INSTANCE=instance-ubuntu-1204  
+  - INSTANCE=instance-ubuntu-1204
   - INSTANCE=instance-ubuntu-1404
   - INSTANCE=instance-centos-6
   - INSTANCE=instance-centos-7
