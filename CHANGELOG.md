@@ -1,6 +1,9 @@
 # memcached Cookbook CHANGELOG
 This file is used to list changes made in each version of the memcached cookbook.
 
+## 2.0.3 (2015-02-16)
+- Fix template whitespace location that resulted in bad command
+
 ## 2.0.2 (2015-11-20)
 - Push new version to Supermarket to deal with bad artifact
 
