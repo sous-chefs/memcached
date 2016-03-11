@@ -66,6 +66,7 @@ end
 
 # Disable the default memcached service so we configure it from the custom resource
 # If the memcached::default is included the configure.rb recipe will start/enable the service
-service 'memcached' do
-  action [:stop, :disable]
-end
+#service 'memcached' do
+#  action [:stop, :disable]
+#end
+## ULIVE HAS EXPLICITLY DISABLED THIS STOP ACTION - LEFT HERE TO NOTE THIS CHANGE
