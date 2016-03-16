@@ -34,27 +34,27 @@ action :create do
   include_recipe 'runit'
   include_recipe 'memcached::package'
 
-  runit_service instance_name do
+  runit_service new_resource.instance_name do
     run_template_name 'memcached'
     default_logger true
-    cookbook template_cookbook
+    cookbook new_resource.template_cookbook
     options(
-      memory:  memory,
-      port: port,
-      udp_port: udp_port,
-      listen: listen,
-      maxconn: maxconn,
-      user: service_user,
-      threads: threads,
-      max_object_size: max_object_size,
-      experimental_options: experimental_options,
-      ulimit: ulimit
+      memory:  new_resource.memory,
+      port: new_resource.port,
+      udp_port: new_resource.udp_port,
+      listen: new_resource.listen,
+      maxconn: new_resource.maxconn,
+      user: new_resource.service_user,
+      threads: new_resource.threads,
+      max_object_size: new_resource.max_object_size,
+      experimental_options: new_resource.experimental_options,
+      ulimit: new_resource.ulimit
     )
   end
 end
 
 action :remove do
-  runit_service instance_name do
+  runit_service new_resource.instance_name do
     action [:stop, :disable]
   end
 end
