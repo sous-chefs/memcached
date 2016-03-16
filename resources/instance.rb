@@ -44,7 +44,7 @@ action :create do
       udp_port: new_resource.udp_port,
       listen: new_resource.listen,
       maxconn: new_resource.maxconn,
-      user: new_resource.service_user,
+      user: service_user,
       threads: new_resource.threads,
       max_object_size: new_resource.max_object_size,
       experimental_options: new_resource.experimental_options,
