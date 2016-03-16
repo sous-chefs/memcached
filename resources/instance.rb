@@ -29,10 +29,19 @@ property :max_object_size, String, default: '1m'
 property :experimental_options, Array, default: []
 property :ulimit, [Integer, String]
 property :template_cookbook, String, default: 'memcached'
+property :disable_default_instance, [TrueClass, FalseClass], default: true
 
 action :create do
   include_recipe 'runit'
   include_recipe 'memcached::package'
+
+  # Disable the default memcached service so we configure it from the custom resource
+  if new_resource.disable_default_instance
+    service 'disable default memcached' do
+      service_name 'memcached'
+      action [:stop, :disable]
+    end
+  end
 
   runit_service new_resource.instance_name do
     run_template_name 'memcached'

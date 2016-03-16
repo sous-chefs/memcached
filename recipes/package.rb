@@ -63,10 +63,3 @@ user service_user do
   shell '/bin/false'
   action :nothing
 end
-
-# Disable the default memcached service so we configure it from the custom resource
-# If the memcached::default is included the configure.rb recipe will start/enable the service
-service ':delete memcached' do
-  service_name 'memcached'
-  action [:stop, :disable]
-end
