@@ -2,7 +2,7 @@
 # Cookbook Name:: memcached
 # resource:: instance
 #
-# Copyright 2009-2015, Chef Software, Inc.
+# Copyright 2009-2016, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,11 +23,11 @@ property :port, [Integer, String], default: 11_211
 property :udp_port, [Integer, String], default: 11_211
 property :listen, String, default: '0.0.0.0'
 property :maxconn, [Integer, String], default: 1024
-property :user, String, default: nil
-property :threads, [Integer, String], default: nil
+property :user, String
+property :threads, [Integer, String]
 property :max_object_size, String, default: '1m'
 property :experimental_options, Array, default: []
-property :ulimit, [Integer, String], default: nil
+property :ulimit, [Integer, String]
 property :template_cookbook, String, default: 'memcached'
 
 action :create do
