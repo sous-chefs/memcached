@@ -35,12 +35,11 @@ action :create do
   include_recipe 'runit'
   include_recipe 'memcached::package'
 
-  # Disable the default memcached service so we configure it from the custom resource
-  if new_resource.disable_default_instance
-    service 'disable default memcached' do
-      service_name 'memcached'
-      action [:stop, :disable]
-    end
+  # Disable the default memcached service to avoid port conflicts + wasted memory
+  service 'disable default memcached' do
+    service_name 'memcached'
+    action [:stop, :disable]
+    only_if { new_resource.disable_default_instance }
   end
 
   runit_service new_resource.instance_name do
