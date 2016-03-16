@@ -8,7 +8,7 @@ version           '2.0.3'
 
 depends           'runit', '~> 1.0'
 depends           'yum-epel'
-depends           'compat_resource'
+depends           'compat_resource', '>= 12.9.0'
 
 %w(ubuntu debian redhat centos suse scientific oracle amazon smartos).each do |os|
   supports os
