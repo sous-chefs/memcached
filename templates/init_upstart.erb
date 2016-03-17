@@ -1,0 +1,17 @@
+description "Memcached Server <%= @instance -%>"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+respawn
+respawn limit 10 5
+
+exec /usr/bin/memcached -d \
+  -m <%= @memory %> \
+  -U <%= @udp_port %> \
+  -p <%= @port %> \
+  -u <%= @user %> \
+  -l <%= @listen %> \
+  -c <%= @maxconn %> \
+  -I <%= @max_object_size %><% if @experimental_options.any? %> \
+  -o <%= @experimental_options.join(', ') %><% end %><% if @threads %> \
+  -t <%= @threads %><% end %>
