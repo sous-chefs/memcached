@@ -8,7 +8,6 @@ describe port(11_212) do
   it { should be_listening.with('tcp') }
 end
 
-# serverspec service checks don't work with runit on systemd systems
-describe file('/etc/sv/super_custom_memcached/supervise/stat') do
-  its(:content) { should match(/run/) }
+describe port(11_213) do
+  it { should be_listening.with('tcp') }
 end
