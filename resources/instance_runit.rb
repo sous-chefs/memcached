@@ -35,7 +35,7 @@ property :disable_default_instance, [TrueClass, FalseClass], default: true
 
 action :create do
   include_recipe 'runit'
-  include_recipe 'memcached::package'
+  include_recipe 'memcached::_package'
 
   # Disable the default memcached service to avoid port conflicts + wasted memory
   service 'disable default memcached' do

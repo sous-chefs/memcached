@@ -65,7 +65,7 @@ end
 
 action_class.class_eval do
   def create_init
-    include_recipe 'memcached::package'
+    include_recipe 'memcached::_package'
 
     # define the lock dir for RHEL vs. debian
     platform_lock_dir = value_for_platform_family(

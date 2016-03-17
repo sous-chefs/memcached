@@ -68,7 +68,7 @@ end
 
 action_class.class_eval do
   def create_init
-    include_recipe 'memcached::package'
+    include_recipe 'memcached::_package'
 
     template "/lib/systemd/system/memcached_#{instance_name}.service" do
       source 'init_systemd.erb'

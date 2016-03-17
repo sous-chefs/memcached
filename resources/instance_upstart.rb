@@ -56,7 +56,7 @@ end
 
 action_class.class_eval do
   def create_init
-    include_recipe 'memcached::package'
+    include_recipe 'memcached::_package'
 
     template "/etc/init/memcached_#{new_resource.instance_name}.conf" do
       source 'init_upstart.erb'
