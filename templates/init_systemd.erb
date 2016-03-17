@@ -1,0 +1,22 @@
+# Systemd unit file for memcached_<%= @instance %>
+
+[Unit]
+Description=<%= @instance %> memcached instance
+After=network.target
+
+[Service]
+Type=forking
+
+ExecStart=/usr/bin/memcached -d \
+  -m <%= @memory %> \
+  -U <%= @udp_port %> \
+  -p <%= @port %> \
+  -u <%= @user %> \
+  -l <%= @listen %> \
+  -c <%= @maxconn %> \
+  -I <%= @max_object_size %><% if @experimental_options.any? %> \
+  -o <%= @experimental_options.join(', ') %><% end %><% if @threads %> \
+  -t <%= @threads %><% end %>
+
+[Install]
+WantedBy=multi-user.target
