@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+provides :memcached_instance
+
 property :instance_name, String, name_attribute: true
 property :memory, [Integer, String], default: 64
 property :port, [Integer, String], default: 11_211
