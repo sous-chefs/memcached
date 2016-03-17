@@ -13,3 +13,8 @@ def service_group
     'default' => 'nogroup'
   )
 end
+
+# if the instance name is memcached don't spit out memcached_memcached
+def memcached_instance_name
+  new_resource.instance_name == 'memcached' ? 'memcached' : "memcached_#{new_resource.instance_name}"
+end

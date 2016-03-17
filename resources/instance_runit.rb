@@ -44,7 +44,7 @@ action :create do
     only_if { new_resource.disable_default_instance }
   end
 
-  runit_service new_resource.instance_name do
+  runit_service memcached_instance_name do
     run_template_name 'memcached'
     default_logger true
     cookbook new_resource.template_cookbook
@@ -64,7 +64,7 @@ action :create do
 end
 
 action :remove do
-  runit_service new_resource.instance_name do
+  runit_service memcached_instance_name do
     action [:stop, :disable]
   end
 end

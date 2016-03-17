@@ -29,17 +29,17 @@ property :disable_default_instance, [TrueClass, FalseClass], default: true
 action :start do
   create_init
 
-  service "memcached_#{new_resource.instance_name}" do
+  service memcached_instance_name do
     supports restart: true, status: true
     action :start
   end
 end
 
 action :stop do
-  service "memcached_#{new_resource.instance_name}" do
+  service memcached_instance_name do
     supports status: true
     action :stop
-    only_if { ::File.exist?("/lib/systemd/system/memcached_#{new_resource.instance_name}.service") }
+    only_if { ::File.exist?("/lib/systemd/system/#{memcached_instance_name}.service") }
   end
 end
 
@@ -49,20 +49,20 @@ action :restart do
 end
 
 action :disable do
-  service "memcached_#{new_resource.instance_name}" do
+  service memcached_instance_name do
     supports status: true
     action :disable
-    only_if { ::File.exist?("/lib/systemd/system/memcached_#{new_resource.instance_name}.service") }
+    only_if { ::File.exist?("/lib/systemd/system/#{memcached_instance_name}.service") }
   end
 end
 
 action :enable do
   create_init
 
-  service "memcached_#{new_resource.instance_name}" do
+  service memcached_instance_name do
     supports status: true
     action :enable
-    only_if { ::File.exist?("/lib/systemd/system/memcached_#{new_resource.instance_name}.service") }
+    only_if { ::File.exist?("/lib/systemd/system/#{memcached_instance_name}.service") }
   end
 end
 
@@ -70,10 +70,10 @@ action_class.class_eval do
   def create_init
     include_recipe 'memcached::_package'
 
-    template "/lib/systemd/system/memcached_#{instance_name}.service" do
+    template "/lib/systemd/system/#{memcached_instance_name}.service" do
       source 'init_systemd.erb'
       variables(
-        instance: new_resource.instance_name,
+        instance: memcached_instance_name,
         memory:  new_resource.memory,
         port: new_resource.port,
         udp_port: new_resource.udp_port,
@@ -86,7 +86,7 @@ action_class.class_eval do
         ulimit: new_resource.ulimit
       )
       cookbook 'memcached'
-      notifies :restart, "service[memcached_#{instance_name}]", :immediately
+      notifies :restart, "service[#{memcached_instance_name}]", :immediately
       owner 'root'
       group 'root'
       mode '0644'
