@@ -1,0 +1,89 @@
+#! /bin/sh
+#
+# memcached      This shell script takes care of starting and stopping Memcached
+#
+# This script based off Atsushi NAGASE's script at https://gist.github.com/ngs/3081846
+
+# chkconfig: - 55 45
+### BEGIN INIT INFO
+# Provides: memcached
+# Required-Start: $network $syslog
+# Required-Stop: $network $syslog
+# Default-Start:       2 3 4 5
+# Default-Stop:        0 1 6
+# Description:  The memcached daemon is a network memory cache service.
+# Processname: memcached
+# Short-Description: start and stop memcached
+### END INIT INFO
+
+# Standard LSB functions
+#. /lib/lsb/init-functions
+
+# Source function library.
+. /etc/init.d/functions
+
+RETVAL=0
+prog="memcached"
+
+start () {
+        echo -n $"Starting $prog: "
+        # insure that /var/run/memcached has proper permissions
+    if [ "`stat -c %U /var/run/memcached`" != "<%= @user %>" ]; then
+        chown <%= @user %> /var/run/memcached
+    fi
+
+        daemon --pidfile /var/run/memcached/memcached_<%= @instance %>.pid /usr/bin/memcached -d \
+          -P /var/run/memcached/memcached_<%= @instance %>.pid \
+          -m <%= @memory %> \
+          -U <%= @udp_port %> \
+          -p <%= @port %> \
+          -u <%= @user %> \
+          -l <%= @listen %> \
+          -c <%= @maxconn %> \
+          -I <%= @max_object_size %><% if @experimental_options.any? %> \
+          -o <%= @experimental_options.join(', ') %><% end %><% if @threads %> \
+          -t <%= @threads %><% end %>
+        RETVAL=$?
+        echo
+        [ $RETVAL -eq 0 ] && touch <%= @lock_dir %>/memcached
+}
+stop () {
+        echo -n $"Stopping $prog: "
+        killproc -p /var/run/memcached/memcached_<%= @instance %>.pid /usr/local/bin/memcached
+        RETVAL=$?
+        echo
+        if [ $RETVAL -eq 0 ] ; then
+            rm -f <%= @lock_dir %>/memcached
+            rm -f /var/run/memcached_<%= @instance %>.pid
+        fi
+}
+
+restart () {
+        stop
+        start
+}
+
+
+# See how we were called.
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  status)
+        status memcached
+        ;;
+  restart|reload|force-reload)
+        restart
+        ;;
+  condrestart)
+        [ -f <%= @lock_dir %>/memcached ] && restart || :
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|status|restart|reload|force-reload|condrestart}"
+        exit 1
+esac
+
+exit $?
