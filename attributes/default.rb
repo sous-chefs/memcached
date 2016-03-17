@@ -17,6 +17,9 @@
 # limitations under the License.
 #
 
+# these attributes are only used if running the default recipe
+# they have no impact on the custom resources
+# see the readme for usage details
 default['memcached']['version'] = nil
 default['memcached']['memory'] = 64
 default['memcached']['port'] = 11_211
