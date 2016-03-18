@@ -26,8 +26,14 @@ RETVAL=0
 prog="memcached"
 
 start () {
-        echo -n $"Starting $prog: "
-        # insure that /var/run/memcached has proper permissions
+    echo -n $"Starting $prog: "
+
+    # insure that /var/run/memcached actually exists (doesn't on debian by default)
+    if [ ! -d /var/run/memcached ]; then
+      mkdir /var/run/memcached
+    fi
+
+    # insure that /var/run/memcached has proper permissions
     if [ "`stat -c %U /var/run/memcached`" != "<%= @user %>" ]; then
         chown <%= @user %> /var/run/memcached
     fi
