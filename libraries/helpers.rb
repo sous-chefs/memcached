@@ -40,10 +40,5 @@ def remove_default_memcached_configs
     file '/etc/default/memcached' do
       action :delete
     end
-
-    file '/etc/init.d/memcached' do
-      action :delete
-      not_if { new_resource.instance_name == 'memcached' }
-    end
   end
 end
