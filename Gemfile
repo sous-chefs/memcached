@@ -17,8 +17,13 @@ end
 
 group :kitchen_common do
   gem 'test-kitchen', '~> 1.5'
+  gem 'kitchen-inspec', '~> 0.12.2'
 end
 
 group :kitchen_vagrant do
   gem 'kitchen-vagrant', '~> 0.19'
+end
+
+group :kitchen_dokken do
+  gem 'kitchen_dokken'
 end
