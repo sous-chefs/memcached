@@ -64,6 +64,11 @@ action_class.class_eval do
     # cleanup default configs to avoid confusion
     remove_default_memcached_configs
 
+    # service resource for notification
+    service memcached_instance_name do
+      action :nothing
+    end
+
     template "/etc/init/#{memcached_instance_name}.conf" do
       source 'init_upstart.erb'
       variables(

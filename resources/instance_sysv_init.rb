@@ -73,6 +73,11 @@ action_class.class_eval do
     # cleanup default configs to avoid confusion
     remove_default_memcached_configs
 
+    # service resource for notification
+    service memcached_instance_name do
+      action :nothing
+    end
+
     # define the lock dir for RHEL vs. debian
     platform_lock_dir = value_for_platform_family(
       %w(rhel fedora suse) => '/var/lock/subsys',

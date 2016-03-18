@@ -77,6 +77,11 @@ action_class.class_eval do
     # cleanup default configs to avoid confusion
     remove_default_memcached_configs
 
+    # service resource for notification
+    service memcached_instance_name do
+      action :nothing
+    end
+
     template "/lib/systemd/system/#{memcached_instance_name}.service" do
       source 'init_systemd.erb'
       variables(
