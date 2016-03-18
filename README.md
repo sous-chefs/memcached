@@ -8,11 +8,10 @@ Installs/configures a single memcached instance managed by the systems init syst
 
 ### Platforms
 
-- Debian / Ubuntu
+- Debian / Ubuntu and derivatives
 - RHEL and derivatives
 - Fedora
 - openSUSE/SLES
-- SmartOS base64 1.8.1 - Note that SMF directly configures memcached with no opportunity to alter settings. If you need custom parameters, use the `memcached_instance` provider instead.
 
 ### Chef
 
