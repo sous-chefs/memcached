@@ -48,7 +48,7 @@ end
 action :enable do
   create_init
 
-  service "memcached_#{instance_name}" do
+  service memcached_instance_name do
     supports status: true
     action :enable
     only_if { ::File.exist?("/etc/init.d/#{memcached_instance_name}") }

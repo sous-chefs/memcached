@@ -32,4 +32,5 @@ memcached_instance 'memcached' do
   threads node['memcached']['threads']
   experimental_options node['memcached']['experimental_options']
   ulimit node['memcached']['ulimit']
+  action [:start, :enable]
 end
