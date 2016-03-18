@@ -16,11 +16,15 @@
 # Short-Description: start and stop memcached
 ### END INIT INFO
 
-# Standard LSB functions
-#. /lib/lsb/init-functions
-
-# Source function library.
-. /etc/init.d/functions
+## Source function library.
+#. /etc/rc.d/init.d/functions
+# Source LSB function library.
+if [ -r /lib/lsb/init-functions ]; then
+    . /lib/lsb/init-functions
+else
+    echo 'Could not find necessary /lib/lsb/init-functions'
+    exit 1
+fi
 
 RETVAL=0
 prog="memcached"
@@ -38,7 +42,7 @@ start () {
         chown <%= @user %> /var/run/memcached
     fi
 
-        daemon --pidfile /var/run/memcached/memcached_<%= @instance %>.pid /usr/bin/memcached -d \
+        start_daemon -p /var/run/memcached/memcached_<%= @instance %>.pid /usr/bin/memcached -d \
           -P /var/run/memcached/memcached_<%= @instance %>.pid \
           -m <%= @memory %> \
           -U <%= @udp_port %> \
@@ -60,7 +64,7 @@ stop () {
         echo
         if [ $RETVAL -eq 0 ] ; then
             rm -f <%= @lock_dir %>/memcached
-            rm -f /var/run/memcached_<%= @instance %>.pid
+            rm -f /var/run/memcached/memcached_<%= @instance %>.pid
         fi
 }
 
