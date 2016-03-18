@@ -25,6 +25,7 @@ property :experimental_options, Array, default: []
 property :ulimit, [Integer, String]
 property :template_cookbook, String, default: 'memcached'
 property :disable_default_instance, [TrueClass, FalseClass], default: true
+property :remove_default_config, [TrueClass, FalseClass], default: true
 
 action :start do
   create_init
@@ -69,6 +70,12 @@ end
 action_class.class_eval do
   def create_init
     include_recipe 'memcached::_package'
+
+    # Disable the default memcached service to avoid port conflicts + wasted memory
+    disable_default_memcached_instance
+
+    # cleanup default configs to avoid confusion
+    remove_default_memcached_configs
 
     template "/lib/systemd/system/#{memcached_instance_name}.service" do
       source 'init_systemd.erb'

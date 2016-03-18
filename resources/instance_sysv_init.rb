@@ -67,6 +67,12 @@ action_class.class_eval do
   def create_init
     include_recipe 'memcached::_package'
 
+    # Disable the default memcached service to avoid port conflicts + wasted memory
+    disable_default_memcached_instance
+
+    # cleanup default configs to avoid confusion
+    remove_default_memcached_configs
+
     # define the lock dir for RHEL vs. debian
     platform_lock_dir = value_for_platform_family(
       %w(rhel fedora suse) => '/var/lock/subsys',

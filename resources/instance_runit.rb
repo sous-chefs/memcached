@@ -38,11 +38,10 @@ action :create do
   include_recipe 'memcached::_package'
 
   # Disable the default memcached service to avoid port conflicts + wasted memory
-  service 'disable default memcached' do
-    service_name 'memcached'
-    action [:stop, :disable]
-    only_if { new_resource.disable_default_instance }
-  end
+  disable_default_memcached_instance
+
+  # cleanup default configs to avoid confusion
+  remove_default_memcached_configs
 
   runit_service memcached_instance_name do
     run_template_name 'memcached'
