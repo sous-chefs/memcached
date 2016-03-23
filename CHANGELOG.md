@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the memcached cookbook.
 
-## 2.1.0 (2015-03-16)
+## 2.1.0 (2016-03-16)
 
 - Added a new property, disable_default_instance, to the instance custom resource for disabling the package installed memcached service.  This prevents resource merging from resulting in a service that isn't disabled.
 - Updated the custom resource to avoid potential namespace conflicts
@@ -10,7 +10,7 @@ This file is used to list changes made in each version of the memcached cookbook
 - Resolved nil attribute deprecation warnings
 - Added maintainers files
 
-## 2.0.3 (2015-02-16)
+## 2.0.3 (2016-02-16)
 
 - Fix template whitespace location that resulted in bad command
 
