@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+provides :memcached_instance
+
 property :instance_name, String, name_attribute: true
 property :memory, [Integer, String], default: 64
 property :port, [Integer, String], default: 11_211
@@ -27,22 +29,21 @@ property :user, String
 property :threads, [Integer, String]
 property :max_object_size, String, default: '1m'
 property :experimental_options, Array, default: []
-property :ulimit, [Integer, String]
+property :ulimit, [Integer, String], default: 1024
 property :template_cookbook, String, default: 'memcached'
 property :disable_default_instance, [TrueClass, FalseClass], default: true
 
 action :create do
   include_recipe 'runit'
-  include_recipe 'memcached::package'
+  include_recipe 'memcached::_package'
 
   # Disable the default memcached service to avoid port conflicts + wasted memory
-  service 'disable default memcached' do
-    service_name 'memcached'
-    action [:stop, :disable]
-    only_if { new_resource.disable_default_instance }
-  end
+  disable_default_memcached_instance
 
-  runit_service new_resource.instance_name do
+  # cleanup default configs to avoid confusion
+  remove_default_memcached_configs
+
+  runit_service memcached_instance_name do
     run_template_name 'memcached'
     default_logger true
     cookbook new_resource.template_cookbook
@@ -62,7 +63,7 @@ action :create do
 end
 
 action :remove do
-  runit_service new_resource.instance_name do
+  runit_service memcached_instance_name do
     action [:stop, :disable]
   end
 end

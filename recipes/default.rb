@@ -17,5 +17,20 @@
 # limitations under the License.
 #
 
-include_recipe 'memcached::package'
-include_recipe 'memcached::configure'
+# this recipe simply uses the memcached_instance custom resource
+# for additional customization you can use this resource in your own wrapper cookbook
+# this recipe simply uses the memcached_instance custom resource
+# for additional customization you can use this resource in your own wrapper cookbook
+memcached_instance 'memcached' do
+  memory node['memcached']['memory']
+  port node['memcached']['port']
+  udp_port node['memcached']['udp_port']
+  listen node['memcached']['listen']
+  maxconn node['memcached']['maxconn']
+  user service_user
+  max_object_size node['memcached']['max_object_size']
+  threads node['memcached']['threads']
+  experimental_options node['memcached']['experimental_options']
+  ulimit node['memcached']['ulimit']
+  action [:start, :enable]
+end

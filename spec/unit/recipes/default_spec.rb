@@ -8,56 +8,67 @@ describe 'memcached::default' do
     stub_command('dpkg -s memcached').and_return(true)
   end
 
-  context 'on rhel' do
-    let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'redhat', version: '6.3').converge(described_recipe) }
+  context 'on rhel 5' do
+    let(:chef_run) { ChefSpec::ServerRunner.new(step_into: ['memcached_instance'], platform: 'centos', version: '5.11').converge(described_recipe) }
+
+    it 'installs redhat-lsb package' do
+      expect(chef_run).to install_package('redhat-lsb')
+    end
+
+    it 'installs memcached package' do
+      expect(chef_run).to install_package('memcached')
+    end
 
     it 'creates memcached group' do
       expect(chef_run).to create_group('memcached')
     end
 
-    let(:template) { chef_run.template('/etc/sysconfig/memcached') }
-
-    it 'writes the /etc/sysconfig/memcached' do
-      expect(template).to be
-      expect(template.owner).to eq('root')
-      expect(template.group).to eq('root')
-      expect(template.mode).to eq('0644')
+    it 'creates memcached user' do
+      expect(chef_run).to create_user('memcached')
     end
 
-    it 'notifies the service to restart' do
-      expect(template).to notify('service[memcached]').to(:restart)
+    it 'templates /etc/init.d/memcached' do
+      expect(chef_run).to create_template('/etc/init.d/memcached')
     end
   end
 
-  context 'on smartos' do
-    let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'smartos', version: 'joyent_20130111T180733Z').converge(described_recipe) }
+  context 'on rhel 6' do
+    let(:chef_run) { ChefSpec::ServerRunner.new(step_into: ['memcached_instance'], platform: 'centos', version: '6.7').converge(described_recipe) }
 
-    it 'enables the memcached service' do
-      expect(chef_run).to enable_service('memcached')
+    it 'installs redhat-lsb package' do
+      expect(chef_run).to install_package('redhat-lsb-core')
     end
 
-    it 'creates nogroup group' do
-      expect(chef_run).to create_group('nogroup')
+    it 'installs memcached package' do
+      expect(chef_run).to install_package('memcached')
+    end
+
+    it 'creates memcached user' do
+      expect(chef_run).to create_user('memcached')
+    end
+
+    it 'creates memcached group' do
+      expect(chef_run).to create_group('memcached')
+    end
+
+    it 'templates /etc/init.d/memcached' do
+      expect(chef_run).to create_template('/etc/init.d/memcached')
     end
   end
 
   context 'on ubuntu' do
-    let(:chef_run) { ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '12.04').converge(described_recipe) }
-    let(:template) { chef_run.template('/etc/memcached.conf') }
+    let(:chef_run) { ChefSpec::ServerRunner.new(step_into: ['memcached_instance'], platform: 'ubuntu', version: '14.04').converge(described_recipe) }
 
-    it 'writes the /etc/memcached.conf' do
-      expect(template).to be
-      expect(template.owner).to eq('root')
-      expect(template.group).to eq('root')
-      expect(template.mode).to eq('0644')
-    end
-
-    it 'notifies the service to restart' do
-      expect(template).to notify('service[memcached]').to(:restart)
+    it 'installs memcached package' do
+      expect(chef_run).to install_package('memcached')
     end
 
     it 'creates memcache group' do
       expect(chef_run).to create_group('memcache')
+    end
+
+    it 'deletes /etc/default/memcached' do
+      expect(chef_run).to delete_file('/etc/default/memcached')
     end
   end
 end

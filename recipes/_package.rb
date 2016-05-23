@@ -49,8 +49,6 @@ end
 
 group service_group do
   system true
-  notifies :create, "user[#{service_user}]", :immediately
-  notifies :lock, "user[#{service_user}]", :immediately
   not_if "getent passwd #{service_user}"
 end
 
@@ -61,5 +59,5 @@ user service_user do
   home '/nonexistent'
   comment 'Memcached'
   shell '/bin/false'
-  action :nothing
+  action [:create, :lock]
 end

@@ -1,0 +1,21 @@
+# Systemd unit file for <%= @instance %>
+
+[Unit]
+Description=memcached instance <%= @instance %>
+After=network.target
+
+[Service]
+LimitNOFILE=<%= @ulimit %> \
+ExecStart=<%= @memcached_binary %> \
+  -m <%= @memory %> \
+  -U <%= @udp_port %> \
+  -p <%= @port %> \
+  -u <%= @user %> \
+  -l <%= @listen %> \
+  -c <%= @maxconn %> \
+  -I <%= @max_object_size %><% if @experimental_options.any? %> \
+  -o <%= @experimental_options.join(', ') %><% end %><% if @threads %> \
+  -t <%= @threads %><% end %>
+
+[Install]
+WantedBy=multi-user.target
