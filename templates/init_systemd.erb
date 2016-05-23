@@ -1,7 +1,7 @@
-# Systemd unit file for memcached_<%= @instance %>
+# Systemd unit file for <%= @instance %>
 
 [Unit]
-Description=<%= @instance %> memcached instance
+Description=memcached instance <%= @instance %>
 After=network.target
 
 [Service]
