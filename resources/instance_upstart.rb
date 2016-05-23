@@ -80,16 +80,8 @@ action_class.class_eval do
       source 'init_upstart.erb'
       variables(
         instance: memcached_instance_name,
-        memory:  new_resource.memory,
-        port: new_resource.port,
-        udp_port: new_resource.udp_port,
-        listen: new_resource.listen,
-        maxconn: new_resource.maxconn,
-        user: service_user,
-        threads: new_resource.threads,
-        max_object_size: new_resource.max_object_size,
-        experimental_options: new_resource.experimental_options,
-        ulimit: new_resource.ulimit
+        ulimit: new_resource.ulimit,
+        cli_options: cli_options
       )
       cookbook 'memcached'
       notifies :restart, "service[#{memcached_instance_name}]", :immediately

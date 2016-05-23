@@ -6,16 +6,7 @@ After=network.target
 
 [Service]
 LimitNOFILE=<%= @ulimit %>
-ExecStart=<%= @memcached_binary %> \
-  -m <%= @memory %> \
-  -U <%= @udp_port %> \
-  -p <%= @port %> \
-  -u <%= @user %> \
-  -l <%= @listen %> \
-  -c <%= @maxconn %> \
-  -I <%= @max_object_size %><% if @experimental_options.any? %> \
-  -o <%= @experimental_options.join(', ') %><% end %><% if @threads %> \
-  -t <%= @threads %><% end %>
+ExecStart=<%= @binary_path %> <%= @cli_options %>
 
 [Install]
 WantedBy=multi-user.target

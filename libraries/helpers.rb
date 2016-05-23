@@ -14,7 +14,7 @@ def service_group
   )
 end
 
-def memcached_binary
+def binary_path
   value_for_platform_family(
     'suse' => '/usr/sbin/memcached',
     'default' => '/usr/bin/memcached'
@@ -63,4 +63,21 @@ def remove_default_memcached_configs
       action :delete
     end
   end
+end
+
+def cli_options
+  options = "-m #{new_resource.memory} \
+-U #{new_resource.udp_port} \
+-p #{new_resource.port} \
+-u #{new_resource.user} \
+-l #{new_resource.listen} \
+-c #{new_resource.maxconn} \
+-I #{new_resource.max_object_size}"
+
+  if new_resource.experimental_options.any?
+    options << " -o #{new_resource.experimental_options.join(', ')}"
+  end
+
+  options << " -t #{new_resource.threads}" if new_resource.threads
+  options
 end

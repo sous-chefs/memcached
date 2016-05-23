@@ -46,16 +46,7 @@ start () {
     fi
 
         start_daemon -p /var/run/memcached/memcached_<%= @instance %>.pid /usr/bin/memcached -d \
-          -P /var/run/memcached/memcached_<%= @instance %>.pid \
-          -m <%= @memory %> \
-          -U <%= @udp_port %> \
-          -p <%= @port %> \
-          -u <%= @user %> \
-          -l <%= @listen %> \
-          -c <%= @maxconn %> \
-          -I <%= @max_object_size %><% if @experimental_options.any? %> \
-          -o <%= @experimental_options.join(', ') %><% end %><% if @threads %> \
-          -t <%= @threads %><% end %>
+          -P /var/run/memcached/memcached_<%= @instance %>.pid <%= @cli_options %>
         RETVAL=$?
         echo
         [ $RETVAL -eq 0 ] && touch <%= @lock_dir %>/memcached

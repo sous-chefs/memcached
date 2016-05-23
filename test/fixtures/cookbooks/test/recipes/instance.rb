@@ -13,4 +13,4 @@ memcached_instance 'backend_cache' do
   threads 10
   user 'memcached_other_user'
   action [:start, :enable]
-ends
+end
