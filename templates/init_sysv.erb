@@ -16,8 +16,11 @@
 # Short-Description: start and stop memcached
 ### END INIT INFO
 
+ulimit -n <%= @ulimit %>
+
 ## Source function library.
 . /etc/rc.d/init.d/functions
+
 # Source LSB function library.
 if [ -r /lib/lsb/init-functions ]; then
     . /lib/lsb/init-functions

@@ -88,7 +88,7 @@ platforms:
     pid_one_command: /bin/systemd
     intermediate_instructions:
       - RUN zypper refresh
-      - RUN zypper install net-tools --yes
+      - RUN zypper install -y net-tools
 
 suites:
   - name: default

@@ -5,6 +5,8 @@ stop on runlevel [!2345]
 respawn
 respawn limit 10 5
 
+limit nofile <%= @ulimit -%> <%= @ulimit -%>
+
 exec /usr/bin/memcached \
   -m <%= @memory %> \
   -U <%= @udp_port %> \
