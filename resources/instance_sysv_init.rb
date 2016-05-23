@@ -77,28 +77,15 @@ action_class.class_eval do
       action :nothing
     end
 
-    # define the lock dir for RHEL vs. debian
-    platform_lock_dir = value_for_platform_family(
-      %w(rhel fedora suse) => '/var/lock/subsys',
-      'debian' => '/var/lock',
-      'default' => '/var/lock'
-    )
-
     # the init script will not run without redhat-lsb packages
-    if platform_family?('rhel')
-      if node['platform_version'].to_i < 6.0
-        package 'redhat-lsb'
-      else
-        package 'redhat-lsb-core'
-      end
-    end
+    package lsb_package if node['platform_family'] == 'rhel'
 
     template "/etc/init.d/#{memcached_instance_name}" do
       mode '0755'
       source 'init_sysv.erb'
       cookbook 'memcached'
       variables(
-        lock_dir: platform_lock_dir,
+        lock_dir: lock_dir,
         instance: memcached_instance_name,
         memory:  new_resource.memory,
         port: new_resource.port,
