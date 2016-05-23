@@ -12,7 +12,7 @@ property :user, String
 property :threads, [Integer, String]
 property :max_object_size, String, default: '1m'
 property :experimental_options, Array, default: []
-property :ulimit, [Integer, String]
+property :ulimit, [Integer, String], default: 1024
 property :template_cookbook, String, default: 'memcached'
 property :disable_default_instance, [TrueClass, FalseClass], default: true
 

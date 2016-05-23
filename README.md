@@ -38,7 +38,7 @@ The following are node attributes are used to configure the command line options
 - `memcached['logfilename']` - logfile to which memcached output will be redirected in $logfilepath/$logfilename.
 - `memcached['threads']` - Number of threads to use to process incoming requests. The default is 4.
 - `memcached['experimental_options']` - Comma separated list of extended or experimental options. (array)
-- `memcached['ulimit']` - boolean `true` will set the ulimit to the `maxconn` value
+- `memcached['ulimit']` - maxfile limit to set (needs to be at least maxconn)
 
 ## Usage
 

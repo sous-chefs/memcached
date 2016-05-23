@@ -5,6 +5,7 @@ Description=memcached instance <%= @instance %>
 After=network.target
 
 [Service]
+LimitNOFILE=<%= @ulimit %> \
 ExecStart=<%= @memcached_binary %> \
   -m <%= @memory %> \
   -U <%= @udp_port %> \
