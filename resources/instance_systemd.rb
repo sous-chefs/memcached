@@ -20,7 +20,7 @@ property :port, [Integer, String], default: 11_211
 property :udp_port, [Integer, String], default: 11_211
 property :listen, String, default: '0.0.0.0'
 property :maxconn, [Integer, String], default: 1024
-property :user, String
+property :user, String, default: lazy { service_user }
 property :threads, [Integer, String]
 property :max_object_size, String, default: '1m'
 property :experimental_options, Array, default: []
@@ -88,17 +88,9 @@ action_class.class_eval do
       source 'init_systemd.erb'
       variables(
         instance: memcached_instance_name,
-        memory:  new_resource.memory,
-        port: new_resource.port,
-        udp_port: new_resource.udp_port,
-        listen: new_resource.listen,
-        maxconn: new_resource.maxconn,
-        user: service_user,
-        threads: new_resource.threads,
-        max_object_size: new_resource.max_object_size,
-        experimental_options: new_resource.experimental_options,
         ulimit: new_resource.ulimit,
-        memcached_binary: memcached_binary
+        binary_path: binary_path,
+        cli_options: cli_options
       )
       cookbook 'memcached'
       notifies :run, 'execute[reload_unit_file]', :immediately

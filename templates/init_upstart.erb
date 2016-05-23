@@ -7,13 +7,4 @@ respawn limit 10 5
 
 limit nofile <%= @ulimit -%> <%= @ulimit -%>
 
-exec /usr/bin/memcached \
-  -m <%= @memory %> \
-  -U <%= @udp_port %> \
-  -p <%= @port %> \
-  -u <%= @user %> \
-  -l <%= @listen %> \
-  -c <%= @maxconn %> \
-  -I <%= @max_object_size %><% if @experimental_options.any? %> \
-  -o <%= @experimental_options.join(', ') %><% end %><% if @threads %> \
-  -t <%= @threads %><% end %>
+exec /usr/bin/memcached <%= @cli_options %>
