@@ -1,4 +1,3 @@
-provides :memcached_instance, platform_family: 'suse'
 provides :memcached_instance, platform: 'amazon'
 
 provides :memcached_instance, platform: %w(redhat centos scientific oracle) do |node| # ~FC005

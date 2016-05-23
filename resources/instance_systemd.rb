@@ -1,3 +1,5 @@
+provides :memcached_instance, platform_family: 'suse'
+
 provides :memcached_instance, platform: 'fedora'
 
 provides :memcached_instance, platform: %w(redhat centos scientific oracle) do |node| # ~FC005
@@ -40,7 +42,7 @@ action :stop do
   service memcached_instance_name do
     supports status: true
     action :stop
-    only_if { ::File.exist?("/lib/systemd/system/#{memcached_instance_name}.service") }
+    only_if { ::File.exist?("/etc/systemd/system/#{memcached_instance_name}.service") }
   end
 end
 
@@ -53,7 +55,7 @@ action :disable do
   service memcached_instance_name do
     supports status: true
     action :disable
-    only_if { ::File.exist?("/lib/systemd/system/#{memcached_instance_name}.service") }
+    only_if { ::File.exist?("/etc/systemd/system/#{memcached_instance_name}.service") }
   end
 end
 
@@ -63,7 +65,7 @@ action :enable do
   service memcached_instance_name do
     supports status: true
     action :enable
-    only_if { ::File.exist?("/lib/systemd/system/#{memcached_instance_name}.service") }
+    only_if { ::File.exist?("/etc/systemd/system/#{memcached_instance_name}.service") }
   end
 end
 
@@ -82,7 +84,7 @@ action_class.class_eval do
       action :nothing
     end
 
-    template "/lib/systemd/system/#{memcached_instance_name}.service" do
+    template "/etc/systemd/system/#{memcached_instance_name}.service" do
       source 'init_systemd.erb'
       variables(
         instance: memcached_instance_name,
