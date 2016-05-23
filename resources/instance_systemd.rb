@@ -97,13 +97,21 @@ action_class.class_eval do
         threads: new_resource.threads,
         max_object_size: new_resource.max_object_size,
         experimental_options: new_resource.experimental_options,
-        ulimit: new_resource.ulimit
+        ulimit: new_resource.ulimit,
+        memcached_binary: memcached_binary
       )
       cookbook 'memcached'
+      notifies :run, 'execute[reload_unit_file]', :immediately
       notifies :restart, "service[#{memcached_instance_name}]", :immediately
       owner 'root'
       group 'root'
       mode '0644'
+    end
+
+    # systemd is cool like this
+    execute 'reload_unit_file' do
+      command 'systemctl daemon-reload'
+      action :nothing
     end
   end
 end

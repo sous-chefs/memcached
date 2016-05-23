@@ -5,9 +5,7 @@ Description=memcached instance <%= @instance %>
 After=network.target
 
 [Service]
-Type=forking
-
-ExecStart=/usr/bin/memcached -d \
+ExecStart=<%= @memcached_binary %> \
   -m <%= @memory %> \
   -U <%= @udp_port %> \
   -p <%= @port %> \
