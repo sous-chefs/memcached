@@ -61,6 +61,13 @@ action_class.class_eval do
     # Disable the default memcached service to avoid port conflicts + wasted memory
     disable_default_memcached_instance
 
+    # remove the default init script if our service is also named
+    # memcached so we don't have both an upstart script and an sys-v script
+    file '/etc/init.d/memcached' do
+      action :delete
+      only_if { new_resource.name == 'memcached' }
+    end
+
     # cleanup default configs to avoid confusion
     remove_default_memcached_configs
 
