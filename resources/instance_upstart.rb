@@ -8,7 +8,7 @@ property :port, [Integer, String], default: 11_211
 property :udp_port, [Integer, String], default: 11_211
 property :listen, String, default: '0.0.0.0'
 property :maxconn, [Integer, String], default: 1024
-property :user, String
+property :user, String, default: lazy { service_user }
 property :threads, [Integer, String]
 property :max_object_size, String, default: '1m'
 property :experimental_options, Array, default: []
