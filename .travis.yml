@@ -18,13 +18,17 @@ env:
   - INSTANCE=default-ubuntu-1204
   - INSTANCE=default-ubuntu-1404
   - INSTANCE=default-ubuntu-1604
+  - INSTANCE=default-centos-5
   - INSTANCE=default-centos-6
   - INSTANCE=default-centos-7
+  - INSTANCE=default-opensuse-132
   - INSTANCE=instance-ubuntu-1204
   - INSTANCE=instance-ubuntu-1404
   - INSTANCE=instance-ubuntu-1604
+  - INSTANCE=instance-centos-5
   - INSTANCE=instance-centos-6
   - INSTANCE=instance-centos-7
+  - INSTANCE=instance-opensuse-132
 
   fast_finish: true
 

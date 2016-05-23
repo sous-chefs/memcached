@@ -23,6 +23,7 @@ platforms:
     run_list: apt::default
   - name: ubuntu-16.04
     run_list: apt::default
+  - name: opensuse-13.2
 
 suites:
   - name: default
