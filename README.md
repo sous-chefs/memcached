@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/chef-cookbooks/memcached.svg?branch=master)](http://travis-ci.org/chef-cookbooks/memcached) [![Cookbook Version](https://img.shields.io/cookbook/v/memcached.svg)](https://supermarket.chef.io/cookbooks/memcached)
 
-Installs/configures a single memcached instance managed by the system's init system. Also provides a custom resource to set up one or more memcached instances.
+Provides a custom resource for installing instances of memcached. Also ships with a default recipe that uses attributes to configure a single memcached instance on a host.
 
 ## Requirements
 
@@ -54,8 +54,10 @@ Adds or removes an instance of memcached running under the system's native init 
 
 #### Actions
 
-- :add: Add a new instance
-- :remove: Remove an existing instance
+- :start: Starts (and installs) an instance of memcached
+- :stop: Stops an instance of memcached
+- :enable: Enabled (and installs) an instance of memcached to run at boot
+- :restart: Restarts an instance of memcached
 
 #### Properties
 
