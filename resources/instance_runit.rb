@@ -19,7 +19,7 @@
 
 provides :memcached_instance_runit
 
-property :instance_name, String, name_attribute: true
+property :instance_name, String, name_property: true
 property :memory, [Integer, String], default: 64
 property :port, [Integer, String], default: 11_211
 property :udp_port, [Integer, String], default: 11_211
@@ -32,31 +32,91 @@ property :experimental_options, Array, default: []
 property :ulimit, [Integer, String], default: 1024
 property :template_cookbook, String, default: 'memcached'
 property :disable_default_instance, [TrueClass, FalseClass], default: true
+property :remove_default_config, [TrueClass, FalseClass], default: true
 
-action :create do
-  include_recipe 'runit'
-  include_recipe 'memcached::_package'
-
-  # Disable the default memcached service to avoid port conflicts + wasted memory
-  disable_default_memcached_instance
-
-  # cleanup default configs to avoid confusion
-  remove_default_memcached_configs
+action :start do
+  create_init
 
   runit_service memcached_instance_name do
-    run_template_name 'memcached'
-    default_logger true
-    cookbook new_resource.template_cookbook
-    options(
-      ulimit: new_resource.ulimit,
-      user: new_reousrce.user,
-      cli_options: cli_options
-    )
+    supports restart: true, status: true
+    action :start
   end
 end
+
+action :stop do
+  runit_service memcached_instance_name do
+    supports status: true
+    action :stop
+    only_if { ::File.exist?("/etc/sv/#{memcached_instance_name}/run") }
+  end
+end
+
+action :restart do
+  action_stop
+  action_start
+end
+
+action :enable do
+  create_init
+
+  runit_service memcached_instance_name do
+    supports status: true
+    action :enable
+    only_if { ::File.exist?("/etc/sv/#{memcached_instance_name}/run") }
+  end
+end
+
+action :disable do
+  runit_service memcached_instance_name do
+    supports status: true
+    action :disable
+    only_if { ::File.exist?("/etc/sv/#{memcached_instance_name}/run") }
+  end
+end
+
+### Legacy actions included for compatibility
 
 action :remove do
   runit_service memcached_instance_name do
     action [:stop, :disable]
+    only_if { ::File.exist?("/etc/sv/#{memcached_instance_name}/run") }
+  end
+end
+
+action :create do
+  create_init
+  runit_service memcached_instance_name do
+    action [:start, :enable]
+  end
+end
+
+
+action_class.class_eval do
+  def create_init
+    include_recipe 'runit'
+    include_recipe 'memcached::_package'
+
+    # Disable the default memcached service to avoid port conflicts + wasted memory
+    disable_default_memcached_instance
+
+    # cleanup default configs to avoid confusion
+    remove_default_memcached_configs
+
+    # service resource for notification
+    runit_service memcached_instance_name do
+      action :nothing
+    end
+
+    runit_service memcached_instance_name do
+      run_template_name 'memcached'
+      default_logger true
+      cookbook new_resource.template_cookbook
+      options(
+        user: new_resource.user,
+        ulimit: new_resource.ulimit,
+        binary_path: binary_path,
+        cli_options: cli_options
+      )
+    end
   end
 end

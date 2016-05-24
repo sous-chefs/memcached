@@ -93,6 +93,14 @@ memcached_instance 'super_custom_memcached'  do
 end
 ```
 
+Specify the runit provider to maintain legacy behavior (including optional usage of legacy actions)
+
+```ruby
+memcached_instance_runit 'super_custom_memcached'  do
+  action :create
+end
+```
+
 ## License & Authors
 
 - Author:: Cookbook Engineering Team ([cookbooks@chef.io](mailto:cookbooks@chef.io))

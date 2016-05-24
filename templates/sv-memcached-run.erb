@@ -3,6 +3,4 @@ exec 2>&1
 
 ulimit -n <%= @ulimit %>
 
-exec chpst -u <%= @user %> \
-  <%= @binary_path %> <%= @cli_options %>
-  <% end %>
+exec chpst -u <%= @options[:user] %> <%= @options[:binary_path] %> <%= @options[:cli_options] %>

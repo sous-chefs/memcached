@@ -32,3 +32,6 @@ suites:
   - name: instance
     run_list:
       - recipe[test::instance]
+  - name: runit_instance
+    run_list:
+      - recipe[test::runit]

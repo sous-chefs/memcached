@@ -36,6 +36,7 @@ property :experimental_options, Array, default: []
 property :ulimit, [Integer, String], default: 1024
 property :template_cookbook, String, default: 'memcached'
 property :disable_default_instance, [TrueClass, FalseClass], default: true
+property :remove_default_config, [TrueClass, FalseClass], default: true
 
 action :start do
   create_init
