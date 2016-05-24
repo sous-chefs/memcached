@@ -29,6 +29,8 @@ env:
   - INSTANCE=instance-centos-6
   - INSTANCE=instance-centos-7
   - INSTANCE=instance-opensuse-132
+  - INSTANCE=runit-instance-ubuntu-1604
+  - INSTANCE=runit-instance-centos-7
 
   fast_finish: true
 
