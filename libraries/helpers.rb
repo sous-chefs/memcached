@@ -81,3 +81,9 @@ def cli_options
   options << " -t #{new_resource.threads}" if new_resource.threads
   options
 end
+
+def disable_legacy_runit_instance
+  memcached_instance_runit memcached_instance_name do
+    action :remove
+  end
+end

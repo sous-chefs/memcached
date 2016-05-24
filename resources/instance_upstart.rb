@@ -80,6 +80,9 @@ action_class.class_eval do
   def create_init
     include_recipe 'memcached::_package'
 
+    # remove any runit instances with the same name if they exist
+    disable_legacy_runit_instance
+
     # Disable the default memcached service to avoid port conflicts + wasted memory
     disable_default_memcached_instance
 
