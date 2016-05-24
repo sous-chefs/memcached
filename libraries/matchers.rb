@@ -41,4 +41,32 @@ if defined?(ChefSpec)
   def disable_memcached_instance(resource_name)
     ChefSpec::Matchers::ResourceMatcher.new(:memcached_instance, :disable, resource_name)
   end
+
+  def start_memcached_instance_runit(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:memcached_instance_runit, :start, resource_name)
+  end
+
+  def enable_memcached_instance_runit(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:memcached_instance_runit, :enable, resource_name)
+  end
+
+  def restart_memcached_instance_runit(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:memcached_instance_runit, :restart, resource_name)
+  end
+
+  def stop_memcached_instance_runit(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:memcached_instance_runit, :stop, resource_name)
+  end
+
+  def disable_memcached_instance_runit(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:memcached_instance_runit, :disable, resource_name)
+  end
+
+  def create_memcached_instance_runit(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:memcached_instance_runit, :create, resource_name)
+  end
+
+  def remove_memcached_instance_runit(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:memcached_instance_runit, :remove, resource_name)
+  end
 end
