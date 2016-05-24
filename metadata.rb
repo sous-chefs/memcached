@@ -6,7 +6,7 @@ description       'Installs memcached and includes memcached_instance resource f
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version           '2.1.0'
 
-depends           'runit', '~> 1.0'
+depends           'runit', '>= 1.2.0'
 depends           'yum-epel'
 depends           'compat_resource', '>= 12.9.0'
 
