@@ -4,7 +4,7 @@ This file is used to list changes made in each version of the memcached cookbook
 
 ## UNRELEASED
 
-### BREAKING CHANGES
+## 3.0.0 (2016-05-24)
 
 - The preferred method of use for this cookbook is now the custom resources via your own wrapper cookbook. The default recipe simply wraps the custom resource and allows you to set attributes instead of directly changing custom resource properties. To support this goal, the custom resource now uses the native init system of your OS by default (sys-v, upstart or systemd). The Runit provider is still present for backwards compatibility, but must be specified. See the readme for an example of how to do that with the custom resource. The default recipe does not support using runit and runit is no longer an init system we suggest users use.
 
