@@ -63,6 +63,8 @@ action :restart do
 end
 
 action :enable do
+  create_init
+
   service memcached_instance_name do
     supports status: true
     action :enable
