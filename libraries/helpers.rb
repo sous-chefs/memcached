@@ -42,15 +42,17 @@ def memcached_instance_name
 end
 
 def disable_default_memcached_instance
-  service 'disable default memcached' do
-    service_name 'memcached'
-    action [:stop, :disable]
-    only_if { new_resource.disable_default_instance && !new_resource.instance_name == 'memcached' }
+  if new_resource.disable_default_instance
+    service 'disable default memcached' do
+      service_name 'memcached'
+      action [:stop, :disable]
+      only_if { new_resource.disable_default_instance && !new_resource.instance_name == 'memcached' }
+    end
   end
 end
 
 def remove_default_memcached_configs
-  if new_resource.disable_default_instance
+  if new_resource.remove_default_config
     file '/etc/memcached.conf' do
       action :delete
     end
@@ -83,7 +85,9 @@ def cli_options
 end
 
 def disable_legacy_runit_instance
-  memcached_instance_runit memcached_instance_name do
-    action :remove
+  if ::File.exist?("/etc/sv/#{memcached_instance_name}/run")
+    memcached_instance_runit memcached_instance_name do
+      action :remove
+    end
   end
 end
