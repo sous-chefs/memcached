@@ -68,8 +68,10 @@ action :stop do
 end
 
 action :restart do
-  action_stop
-  action_start
+  service memcached_instance_name do
+    supports restart: true, status: true
+    action :restart
+  end
 end
 
 action :disable do
