@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: memcached
-# resource:: instance
+# resource:: instance_runit
 #
 # Copyright 2009-2016, Chef Software, Inc.
 #
@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-provides :memcached_instance
+provides :memcached_instance_runit
 
 property :instance_name, String, name_attribute: true
 property :memory, [Integer, String], default: 64
