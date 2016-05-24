@@ -107,9 +107,6 @@ action_class.class_eval do
       )
       cookbook 'memcached'
       notifies :restart, "service[#{memcached_instance_name}]", :immediately
-      owner 'root'
-      group 'root'
-      mode '0644'
     end
   end
 end
