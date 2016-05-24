@@ -92,7 +92,6 @@ action :create do
   end
 end
 
-
 action_class.class_eval do
   def create_init
     include_recipe 'runit'
