@@ -103,11 +103,6 @@ action_class.class_eval do
     # cleanup default configs to avoid confusion
     remove_default_memcached_configs
 
-    # service resource for notification
-    runit_service memcached_instance_name do
-      action :nothing
-    end
-
     runit_service memcached_instance_name do
       run_template_name 'memcached'
       default_logger true
