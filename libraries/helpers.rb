@@ -63,7 +63,7 @@ def cli_options
 -I #{new_resource.max_object_size}"
 
   if new_resource.experimental_options.any?
-    options << " -o #{new_resource.experimental_options.join(', ')}"
+    options << " -o #{new_resource.experimental_options.join(',')}"
   end
 
   log_arg = ''
