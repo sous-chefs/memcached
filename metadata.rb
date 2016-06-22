@@ -10,7 +10,7 @@ depends           'runit', '>= 1.2.0'
 depends           'yum-epel'
 depends           'compat_resource', '>= 12.10'
 
-%w(ubuntu debian redhat centos suse scientific oracle amazon smartos zlinux).each do |os|
+%w(ubuntu debian redhat centos suse opensuse opensuseleap scientific oracle amazon zlinux).each do |os|
   supports os
 end
 
