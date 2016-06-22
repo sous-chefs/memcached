@@ -11,6 +11,7 @@ provisioner:
 
 verifier:
   name: inspec
+  format: doc
 
 platforms:
 - name: debian-7
@@ -47,6 +48,7 @@ platforms:
 - name: centos-7
   driver:
     image: centos:7
+    platform: rhel
     pid_one_command: /usr/lib/systemd/systemd
     intermediate_instructions:
       - RUN yum -y install lsof which net-tools
@@ -86,9 +88,6 @@ platforms:
   driver:
     image: opensuse:13.2
     pid_one_command: /bin/systemd
-    intermediate_instructions:
-      - RUN zypper refresh
-      - RUN zypper install -y net-tools
 
 suites:
   - name: default
