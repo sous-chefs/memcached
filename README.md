@@ -1,6 +1,6 @@
 # memcached Cookbook
 
-[![Build Status](https://travis-ci.org/chef-cookbooks/memcached.svg?branch=master)](http://travis-ci.org/chef-cookbooks/memcached) [![Cookbook Version](https://img.shields.io/cookbook/v/memcached.svg)](https://supermarket.chef.io/cookbooks/memcached)
+[![Build Status](https://travis-ci.org/chef-cookbooks/memcached.svg?branch=master)](https://travis-ci.org/chef-cookbooks/memcached) [![Cookbook Version](https://img.shields.io/cookbook/v/memcached.svg)](https://supermarket.chef.io/cookbooks/memcached)
 
 Provides a custom resource for installing instances of memcached. Also ships with a default recipe that uses attributes to configure a single memcached instance on a host.
 
