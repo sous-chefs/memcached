@@ -2,7 +2,14 @@
 
 This file is used to list changes made in each version of the memcached cookbook.
 
-## UNRELEASED
+## 3.0.1 (2016-06-23)
+
+- Remove smartos from the supported platforms metadata as it's not longer supported
+- Add opensuse and opensuseleap as supported platforms in the metadata
+- Increase the compat_resource depdency from >= 12.9 to >= 12.10 to bring in important fixes
+- Add requirement of Chef 12 to the metadata
+- Restart the service on failure when running under systemd
+- Disable FC023 in Foodcritic tests
 
 ## 3.0.0 (2016-05-24)
 
