@@ -55,6 +55,7 @@ action :start do
   create_init
 
   service memcached_instance_name do
+    provider Chef::Provider::Service::Systemd
     supports restart: true, status: true
     action :start
   end
@@ -62,6 +63,7 @@ end
 
 action :stop do
   service memcached_instance_name do
+    provider Chef::Provider::Service::Systemd
     supports status: true
     action :stop
     only_if { ::File.exist?("/etc/systemd/system/#{memcached_instance_name}.service") }
@@ -70,6 +72,7 @@ end
 
 action :restart do
   service memcached_instance_name do
+    provider Chef::Provider::Service::Systemd
     supports restart: true, status: true
     action :restart
   end
@@ -77,6 +80,7 @@ end
 
 action :disable do
   service memcached_instance_name do
+    provider Chef::Provider::Service::Systemd
     supports status: true
     action :disable
     only_if { ::File.exist?("/etc/systemd/system/#{memcached_instance_name}.service") }
@@ -87,6 +91,7 @@ action :enable do
   create_init
 
   service memcached_instance_name do
+    provider Chef::Provider::Service::Systemd
     supports status: true
     action :enable
     only_if { ::File.exist?("/etc/systemd/system/#{memcached_instance_name}.service") }
@@ -108,6 +113,7 @@ action_class.class_eval do
 
     # service resource for notification
     service memcached_instance_name do
+      provider Chef::Provider::Service::Systemd
       action :nothing
     end
 
