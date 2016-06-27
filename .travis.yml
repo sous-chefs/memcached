@@ -9,6 +9,9 @@ addons:
     packages:
       - chefdk
 
+# Don't `bundle install` which takes about 1.5 mins
+install: echo "skip bundle install"
+
 branches:
   only:
   - master
@@ -24,6 +27,8 @@ env:
   - INSTANCE=default-centos-6
   - INSTANCE=default-centos-7
   - INSTANCE=default-opensuse-132
+  - INSTANCE=default-opensuse-421
+  - INSTANCE=default-fedora-latest
   - INSTANCE=instance-ubuntu-1204
   - INSTANCE=instance-ubuntu-1404
   - INSTANCE=instance-ubuntu-1604
@@ -31,6 +36,8 @@ env:
   - INSTANCE=instance-centos-6
   - INSTANCE=instance-centos-7
   - INSTANCE=instance-opensuse-132
+  - INSTANCE=instance-opensuse-421
+  - INSTANCE=instance-fedora-latest
   - INSTANCE=runit-instance-ubuntu-1604
   - INSTANCE=runit-instance-centos-7
 
