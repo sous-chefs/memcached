@@ -89,11 +89,15 @@ platforms:
   driver:
     image: opensuse:13.2
     pid_one_command: /bin/systemd
+    intermediate_instructions:
+      - RUN zypper --non-interactive install net-tools
 
 - name: opensuse-42.1
   driver:
     image: opensuse:42.1
     pid_one_command: /bin/systemd
+    intermediate_instructions:
+      - RUN zypper --non-interactive install net-tools
 
 suites:
   - name: default
