@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the memcached cookbook.
 
+## 3.0.2 (2016-06-28)
+
+- Remove Chef 11 compatibility check in the metadata
+- Better handle specifying non-standard init systems
+
 ## 3.0.1 (2016-06-23)
 
 - Remove smartos from the supported platforms metadata as it's not longer supported
