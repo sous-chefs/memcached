@@ -114,6 +114,9 @@ action_class.class_eval do
     # the init script will not run without redhat-lsb packages
     package lsb_package if node['platform_family'] == 'rhel'
 
+    # chkconfig won't run without perl-Getopt-Long-Descriptive on suse
+    package 'perl-Getopt-Long-Descriptive' if node['platform_family'] == 'suse'
+
     template "/etc/init.d/#{memcached_instance_name}" do
       mode '0755'
       source 'init_sysv.erb'
