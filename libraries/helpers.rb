@@ -91,3 +91,11 @@ def disable_legacy_runit_instance
     end
   end
 end
+
+# choose the right platform init class
+def platform_sysv_init_class
+  value_for_platform_family(
+    'debian' => Chef::Provider::Service::Init::Debian,
+    'default' => Chef::Provider::Service::Init::Redhat
+  )
+end
