@@ -46,7 +46,7 @@ def disable_default_memcached_instance
     service 'disable default memcached' do
       service_name 'memcached'
       action [:stop, :disable]
-      only_if { new_resource.disable_default_instance && !new_resource.instance_name == 'memcached' }
+      not_if { new_resource.instance_name == 'memcached' }
     end
   end
 end
