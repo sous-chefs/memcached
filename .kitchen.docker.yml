@@ -90,14 +90,14 @@ platforms:
     image: opensuse:13.2
     pid_one_command: /bin/systemd
     intermediate_instructions:
-      - RUN zypper --non-interactive install net-tools
+      - RUN zypper --non-interactive install net-tools aaa_base perl-Getopt-Long-Descriptive
 
 - name: opensuse-42.1
   driver:
     image: opensuse:42.1
     pid_one_command: /bin/systemd
     intermediate_instructions:
-      - RUN zypper --non-interactive install net-tools
+      - RUN zypper --non-interactive install net-tools aaa_base perl-Getopt-Long-Descriptive
 
 suites:
   - name: default
