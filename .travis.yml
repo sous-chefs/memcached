@@ -41,9 +41,6 @@ env:
   - INSTANCE=runit-instance-ubuntu-1604
   - INSTANCE=runit-instance-centos-7
 
-# Don't `bundle install`
-install: echo "skip bundle install"
-
 # Ensure we make ChefDK's Ruby the default
 before_script:
   # https://github.com/zuazo/kitchen-in-travis-native/issues/1#issuecomment-142230889
@@ -60,7 +57,7 @@ matrix:
   include:
   - script: /opt/chefdk/embedded/bin/cookstyle
     env:  COOKSTYLE=1
-  - script: /opt/chefdk/embedded/bin/foodcritic . --exclude spec -f any
+  - script: /opt/chefdk/embedded/bin/foodcritic . --exclude spec -f any -P
     env:  FOODCRITIC=1
   - script: /opt/chefdk/embedded/bin/rspec
     env:  CHEFSPEC=1
