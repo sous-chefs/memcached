@@ -59,7 +59,7 @@ platforms:
     image: fedora:latest
     pid_one_command: /usr/lib/systemd/systemd
     intermediate_instructions:
-      - RUN dnf -y install yum which net-tools chkconfig
+      - RUN dnf -y install yum which net-tools chkconfig passwd
 
 - name: ubuntu-12.04
   driver:
@@ -90,14 +90,14 @@ platforms:
     image: opensuse:13.2
     pid_one_command: /bin/systemd
     intermediate_instructions:
-      - RUN zypper --non-interactive install net-tools
+      - RUN zypper --non-interactive install net-tools aaa_base perl-Getopt-Long-Descriptive
 
 - name: opensuse-42.1
   driver:
     image: opensuse:42.1
     pid_one_command: /bin/systemd
     intermediate_instructions:
-      - RUN zypper --non-interactive install net-tools
+      - RUN zypper --non-interactive install net-tools aaa_base perl-Getopt-Long-Descriptive
 
 suites:
   - name: default
