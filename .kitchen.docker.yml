@@ -101,7 +101,7 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[memcached::default]
+      - recipe[test::default]
   - name: instance
     run_list:
       - recipe[test::instance]
