@@ -1,3 +1,5 @@
+apt_update 'update' if platform_family?('debian')
+
 memcached_instance 'web_cache' do
   port 11_212
   udp_port 11_212
