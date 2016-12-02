@@ -119,7 +119,7 @@ action_class.class_eval do
         ulimit: new_resource.ulimit,
         cli_options: cli_options
       )
-      cookbook 'memcached'
+      cookbook new_resource.template_cookbook
       notifies :restart, "service[#{memcached_instance_name}]", :immediately
     end
   end

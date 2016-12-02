@@ -125,7 +125,7 @@ action_class.class_eval do
         binary_path: binary_path,
         cli_options: cli_options
       )
-      cookbook 'memcached'
+      cookbook new_resource.template_cookbook
       notifies :run, 'execute[reload_unit_file]', :immediately
       notifies :restart, "service[#{memcached_instance_name}]", :immediately
       owner 'root'
