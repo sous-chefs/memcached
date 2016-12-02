@@ -117,7 +117,7 @@ action_class.class_eval do
     template "/etc/init.d/#{memcached_instance_name}" do
       mode '0755'
       source 'init_sysv.erb'
-      cookbook 'memcached'
+      cookbook new_resource.template_cookbook
       variables(
         lock_dir: lock_dir,
         instance: memcached_instance_name,
