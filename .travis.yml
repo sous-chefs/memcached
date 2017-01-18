@@ -27,7 +27,7 @@ env:
   - INSTANCE=default-centos-6
   - INSTANCE=default-centos-7
   - INSTANCE=default-opensuse-132
-  - INSTANCE=default-opensuse-421
+  - INSTANCE=default-opensuse-leap
   - INSTANCE=default-fedora-latest
   - INSTANCE=instance-ubuntu-1204
   - INSTANCE=instance-ubuntu-1404
@@ -36,7 +36,7 @@ env:
   - INSTANCE=instance-centos-6
   - INSTANCE=instance-centos-7
   - INSTANCE=instance-opensuse-132
-  - INSTANCE=instance-opensuse-421
+  - INSTANCE=instance-opensuse-leap
   - INSTANCE=instance-fedora-latest
   - INSTANCE=runit-instance-ubuntu-1604
   - INSTANCE=runit-instance-centos-7
@@ -44,16 +44,14 @@ env:
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+  - /opt/chefdk/embedded/bin/chef --version
+  - /opt/chefdk/embedded/bin/cookstyle --version
+  - /opt/chefdk/embedded/bin/foodcritic --version
 
 script: KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
 
 matrix:
   include:
-    - before_script:
-      - eval "$(/opt/chefdk/bin/chef shell-init bash)"
-      - /opt/chefdk/embedded/bin/chef --version
-      - /opt/chefdk/embedded/bin/cookstyle --version
-      - /opt/chefdk/embedded/bin/foodcritic --version
     - script:
       - /opt/chefdk/bin/chef exec rake
       env: UNIT_AND_LINT=1
