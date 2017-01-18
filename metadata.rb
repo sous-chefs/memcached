@@ -8,7 +8,7 @@ version           '3.0.2'
 
 depends           'runit', '>= 1.2.0'
 depends           'yum-epel'
-depends           'compat_resource', '>= 12.14.6'
+depends           'compat_resource', '>= 12.16.3'
 
 %w(ubuntu debian redhat centos suse opensuse opensuseleap scientific oracle amazon zlinux).each do |os|
   supports os
@@ -18,4 +18,4 @@ recipe 'memcached::default', 'Installs and configures memcached'
 
 source_url 'https://github.com/chef-cookbooks/memcached'
 issues_url 'https://github.com/chef-cookbooks/memcached/issues'
-chef_version '>= 12.1'
+chef_version '>= 12.1' if respond_to?(:chef_version)
