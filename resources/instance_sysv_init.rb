@@ -122,6 +122,7 @@ action_class.class_eval do
         lock_dir: lock_dir,
         instance: memcached_instance_name,
         ulimit: new_resource.ulimit,
+        user: new_resource.user,
         cli_options: cli_options
       )
       notifies :restart, "service[#{memcached_instance_name}]", :immediately
