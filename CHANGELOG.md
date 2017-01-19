@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version of the memcached cookbook.
 
+## 3.0.3 (2017-01-19)
+
+- Add missing `user` variable to template in instance_sysv_init resource
+- Move testing to a test recipe and improve that testing
+- Depend on the latest compat_resource
+- Use :template_cookbook property for all template resources to fix specifying a different cookbook
+
 ## 3.0.2 (2016-06-28)
 
 - Remove Chef 11 compatibility check in the metadata
