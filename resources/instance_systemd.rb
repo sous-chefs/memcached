@@ -20,20 +20,8 @@
 
 provides :memcached_instance_systemd
 
-provides :memcached_instance, platform_family: 'suse'
-
-provides :memcached_instance, platform: 'fedora'
-
-provides :memcached_instance, platform: %w(redhat centos scientific oracle) do |node| # ~FC005
-  node['platform_version'].to_f >= 7.0
-end
-
-provides :memcached_instance, platform: 'debian' do |node|
-  node['platform_version'].to_i >= 8
-end
-
-provides :memcached_instance, platform: 'ubuntu' do |node|
-  node['platform_version'].to_f >= 15.10
+provides :memcached_instance, os: 'linux' do |_node|
+  Chef::Platform::ServiceHelpers.service_resource_providers.include?(:systemd)
 end
 
 property :instance_name, String, name_attribute: true

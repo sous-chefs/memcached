@@ -20,8 +20,9 @@
 
 provides :memcached_instance_upstart
 
-provides :memcached_instance, platform: 'ubuntu' do |node|
-  node['platform_version'].to_f < 15.10
+provides :memcached_instance, platform_family: 'debian' do |_node|
+  Chef::Platform::ServiceHelpers.service_resource_providers.include?(:upstart) &&
+    !Chef::Platform::ServiceHelpers.service_resource_providers.include?(:systemd)
 end
 
 property :instance_name, String, name_property: true

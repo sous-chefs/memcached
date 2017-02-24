@@ -20,15 +20,7 @@
 
 provides :memcached_instance_sysv_init
 
-provides :memcached_instance, platform: 'amazon'
-
-provides :memcached_instance, platform: %w(redhat centos scientific oracle) do |node| # ~FC005
-  node['platform_version'].to_f < 7.0
-end
-
-provides :memcached_instance, platform: 'debian' do |node|
-  node['platform_version'].to_i < 8
-end
+provides :memcached_instance, os: 'linux'
 
 property :instance_name, String, name_attribute: true
 property :memory, [Integer, String], default: 64
