@@ -15,13 +15,12 @@ Provides a custom resource for installing instances of memcached. Also ships wit
 
 ### Chef
 
-- Chef 12+
+- Chef 12.5+
 
 ### Cookbooks
 
 - runit (not used by default)
 - yum-epel
-- compat_resource
 
 ## Attributes
 
