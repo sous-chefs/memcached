@@ -1,4 +1,4 @@
-apt_update 'update' if platform_family?('debian')
+apt_update 'update'
 
 memcached_instance_runit 'legacy_web_cache' do
   port 11_212
