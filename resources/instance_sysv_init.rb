@@ -97,12 +97,6 @@ action_class.class_eval do
     # cleanup default configs to avoid confusion
     remove_default_memcached_configs
 
-    # service resource for notification
-    service memcached_instance_name do
-      provider platform_sysv_init_class
-      action :nothing
-    end
-
     # the init script will not run without redhat-lsb packages
     package lsb_package if node['platform_family'] == 'rhel'
 
