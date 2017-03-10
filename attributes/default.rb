@@ -28,7 +28,7 @@ default['memcached']['listen'] = '0.0.0.0'
 default['memcached']['maxconn'] = 1024
 default['memcached']['max_object_size'] = '1m'
 default['memcached']['experimental_options'] = []
-default['memcached']['extra_cli_options'] = ['-L']
+default['memcached']['extra_cli_options'] = []
 default['memcached']['ulimit'] = 1024
 
 default['memcached']['logfilepath'] = '/var/log/'
