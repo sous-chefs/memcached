@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version of the memcached cookbook.
 
+## 3.0.4 (TBD)
+- Added extra_cli_options so that you can support single item options suchas -L
+
 ## 3.0.3 (2017-01-19)
 
 - Add missing `user` variable to template in instance_sysv_init resource
