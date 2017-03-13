@@ -25,14 +25,14 @@ env:
   - INSTANCE=default-centos-6
   - INSTANCE=default-centos-7
   - INSTANCE=default-opensuse-leap
-  - INSTANCE=default-fedora-latest
+#  - INSTANCE=default-fedora-latest Docker only failure on passwd
   - INSTANCE=instance-ubuntu-1404
   - INSTANCE=instance-ubuntu-1604
   - INSTANCE=instance-debian-8
   - INSTANCE=instance-centos-6
   - INSTANCE=instance-centos-7
   - INSTANCE=instance-opensuse-leap
-  - INSTANCE=instance-fedora-latest
+#  - INSTANCE=instance-fedora-latest
   - INSTANCE=runit-instance-ubuntu-1604
   - INSTANCE=runit-instance-centos-7
 
