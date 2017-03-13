@@ -37,6 +37,7 @@ The following are node attributes are used to configure the command line options
 - `memcached['logfilename']` - logfile to which memcached output will be redirected in $logfilepath/$logfilename.
 - `memcached['threads']` - Number of threads to use to process incoming requests. The default is 4.
 - `memcached['experimental_options']` - Comma separated list of extended or experimental options. (array)
+- `memcached['extra_cli_options']` - Array of single item options suchas -L for large pages.
 - `memcached['ulimit']` - maxfile limit to set (needs to be at least maxconn)
 
 ## Usage
@@ -68,7 +69,8 @@ Adds or removes an instance of memcached running under the system's native init 
 - :user - the user to run as
 - :threads - the number of threads to use
 - :max_object_size - the largest object size to store
-- :experimental_options - an array of additional config options
+- :experimental_options - an array of experimental config options, such as: ['maxconns_fast', 'hashpower']
+- :extra_cli_options - an array of additional config options, such as: ['-L']
 - :ulimit - the ulimit setting to use for the service
 - :template_cookbook - the cookbook containing the runit service template. default: memcached
 - :disable_default_instance - disable the default 'memcached' service installed by the package, default: true

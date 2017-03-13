@@ -31,6 +31,7 @@ memcached_instance 'memcached' do
   max_object_size node['memcached']['max_object_size']
   threads node['memcached']['threads']
   experimental_options node['memcached']['experimental_options']
+  extra_cli_options node['memcached']['extra_cli_options']
   ulimit node['memcached']['ulimit']
   action [:start, :enable]
 end
