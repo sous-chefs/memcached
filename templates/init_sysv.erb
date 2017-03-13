@@ -53,7 +53,7 @@ start () {
 }
 stop () {
         echo -n $"Stopping $prog: "
-        killproc -p /var/run/memcached/memcached_<%= @instance %>.pid /usr/local/bin/memcached
+        killproc -p /var/run/memcached/memcached_<%= @instance %>.pid /usr/bin/memcached
         RETVAL=$?
         echo
         if [ $RETVAL -eq 0 ] ; then
