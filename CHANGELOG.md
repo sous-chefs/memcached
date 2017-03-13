@@ -2,6 +2,15 @@
 
 This file is used to list changes made in each version of the memcached cookbook.
 
+## 4.0.0 (2017-03-13)
+
+- Require 12.5 and remove dependency on compat_resource
+- Let chef pick the best init system instead of hardcoding init systems per distro / version
+- Avoid Chef 13 deprecation warnings
+- Test with Local Delivery instead of Rake
+- Add extra_cli_options for passing anything else you want in to the binary
+- Use a consistent memcached path in the sysv script
+
 ## 3.0.3 (2017-01-19)
 
 - Add missing `user` variable to template in instance_sysv_init resource
