@@ -15,7 +15,7 @@ Provides a custom resource for installing instances of memcached. Also ships wit
 
 ### Chef
 
-- Chef 12.5+
+- Chef 12.7+
 
 ### Cookbooks
 

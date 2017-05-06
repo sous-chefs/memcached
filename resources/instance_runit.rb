@@ -94,7 +94,7 @@ action :create do
   end
 end
 
-action_class.class_eval do
+action_class do
   def create_init
     include_recipe 'runit'
     include_recipe 'memcached::_package'
