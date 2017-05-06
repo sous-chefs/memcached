@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the memcached cookbook.
 
+## 4.1.0 (2017-05-06)
+
+- Require Chef 12.7+ to workaround action_class bug
+
 ## 4.0.1 (2017-04-26)
 
 - Update apache2 license string
