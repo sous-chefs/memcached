@@ -81,7 +81,7 @@ def cli_options
   end
 
   options << " -t #{new_resource.threads}" if new_resource.threads
-  options << " #{new_resource.extra_cli_options.join(' ')}"
+  options << " #{new_resource.extra_cli_options.join(' ')}" unless new_resource.extra_cli_options.empty?
   options
 end
 
