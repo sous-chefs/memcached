@@ -28,13 +28,12 @@ env:
 #  - INSTANCE=default-fedora-latest Docker only failure on passwd
   - INSTANCE=instance-ubuntu-1404
   - INSTANCE=instance-ubuntu-1604
+  - INSTANCE=instance-debian-7
   - INSTANCE=instance-debian-8
   - INSTANCE=instance-centos-6
   - INSTANCE=instance-centos-7
   - INSTANCE=instance-opensuse-leap
 #  - INSTANCE=instance-fedora-latest
-#  - INSTANCE=runit-instance-ubuntu-1604 Runit fails in travis for now
-#  - INSTANCE=runit-instance-centos-7
 
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )

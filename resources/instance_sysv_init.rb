@@ -101,9 +101,14 @@ action_class do
     # the init script will not run without redhat-lsb packages
     package lsb_package if node['platform_family'] == 'rhel'
 
+    # remove the debian defaults dir
+    file '/etc/default/memcached' do
+      action :delete
+    end
+
     template "/etc/init.d/#{memcached_instance_name}" do
       mode '0755'
-      source 'init_sysv.erb'
+      source platform_family?('debian') ? 'init_sysv_debian.erb' : 'init_sysv.erb'
       cookbook new_resource.template_cookbook
       variables(
         lock_dir: lock_dir,

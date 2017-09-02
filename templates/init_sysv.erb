@@ -35,7 +35,7 @@ prog="memcached"
 start () {
     echo -n $"Starting $prog: "
 
-    # ensure that /var/run/memcached actually exists (doesn't on debian by default)
+    # ensure that /var/run/memcached actually exists
     if [ ! -d /var/run/memcached ]; then
       mkdir /var/run/memcached
     fi
