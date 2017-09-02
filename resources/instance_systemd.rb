@@ -24,7 +24,7 @@ provides :memcached_instance, os: 'linux' do |_node|
   Chef::Platform::ServiceHelpers.service_resource_providers.include?(:systemd)
 end
 
-property :instance_name, String, name_attribute: true
+property :instance_name, String, name_property: true
 property :memory, [Integer, String], default: 64
 property :port, [Integer, String], default: 11_211
 property :udp_port, [Integer, String], default: 11_211
@@ -37,8 +37,8 @@ property :experimental_options, Array, default: []
 property :extra_cli_options, Array, default: []
 property :ulimit, [Integer, String], default: 1024
 property :template_cookbook, String, default: 'memcached'
-property :disable_default_instance, [TrueClass, FalseClass], default: true
-property :remove_default_config, [TrueClass, FalseClass], default: true
+property :disable_default_instance, [true, false], default: true
+property :remove_default_config, [true, false], default: true
 
 action :start do
   create_init
