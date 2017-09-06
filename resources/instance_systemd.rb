@@ -83,7 +83,6 @@ action :enable do
     provider Chef::Provider::Service::Systemd
     supports status: true
     action :enable
-    only_if { ::File.exist?("/etc/systemd/system/#{memcached_instance_name}.service") }
   end
 end
 
