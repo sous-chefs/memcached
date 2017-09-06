@@ -18,8 +18,6 @@
 # limitations under the License.
 #
 
-provides :memcached_instance_runit
-
 property :instance_name, String, name_property: true
 property :memory, [Integer, String], default: 64
 property :port, [Integer, String], default: 11_211
