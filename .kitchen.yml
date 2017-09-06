@@ -28,3 +28,5 @@ suites:
   - name: runit_instance
     run_list:
       - recipe[test::runit]
+    excludes:
+      - opensuse-leap-42
