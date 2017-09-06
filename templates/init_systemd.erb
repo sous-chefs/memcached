@@ -9,5 +9,20 @@ LimitNOFILE=<%= @ulimit %>
 ExecStart=<%= @binary_path %> <%= @cli_options %>
 Restart=on-failure
 
+# Various security configurations from:
+# https://github.com/memcached/memcached/blob/master/scripts/memcached.service
+PrivateTmp=true
+ProtectSystem=full
+NoNewPrivileges=true
+PrivateDevices=true
+CapabilityBoundingSet=CAP_SETGID CAP_SETUID CAP_SYS_RESOURCE
+RestrictNamespaces=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictRealtime=true
+ProtectControlGroups=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+MemoryDenyWriteExecute=true
+
 [Install]
 WantedBy=multi-user.target
