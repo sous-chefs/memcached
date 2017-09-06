@@ -7,7 +7,6 @@ long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version           '4.1.0'
 
 depends           'runit', '>= 1.2.0'
-depends           'yum-epel'
 
 %w(ubuntu debian redhat centos suse opensuse opensuseleap scientific oracle amazon zlinux).each do |os|
   supports os

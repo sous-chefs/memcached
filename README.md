@@ -20,7 +20,6 @@ Provides a custom resource for installing instances of memcached. Also ships wit
 ### Cookbooks
 
 - runit (not used by default)
-- yum-epel
 
 ## Attributes
 
