@@ -40,6 +40,9 @@ action :start do
   create_init
 
   runit_service memcached_instance_name do
+    run_template_name 'memcached'
+    default_logger true
+    cookbook new_resource.template_cookbook
     supports restart: true, status: true
     action :start
   end
@@ -47,6 +50,9 @@ end
 
 action :stop do
   runit_service memcached_instance_name do
+    run_template_name 'memcached'
+    default_logger true
+    cookbook new_resource.template_cookbook
     supports status: true
     action :stop
     only_if { ::File.exist?("/etc/sv/#{memcached_instance_name}/run") }
@@ -55,6 +61,9 @@ end
 
 action :restart do
   runit_service memcached_instance_name do
+    run_template_name 'memcached'
+    default_logger true
+    cookbook new_resource.template_cookbook
     supports restart: true, status: true
     action :restart
   end
@@ -64,6 +73,9 @@ action :enable do
   create_init
 
   runit_service memcached_instance_name do
+    run_template_name 'memcached'
+    default_logger true
+    cookbook new_resource.template_cookbook
     supports status: true
     action :enable
     only_if { ::File.exist?("/etc/sv/#{memcached_instance_name}/run") }
@@ -72,6 +84,9 @@ end
 
 action :disable do
   runit_service memcached_instance_name do
+    run_template_name 'memcached'
+    default_logger true
+    cookbook new_resource.template_cookbook
     supports status: true
     action :disable
     only_if { ::File.exist?("/etc/sv/#{memcached_instance_name}/run") }
@@ -82,6 +97,9 @@ end
 
 action :remove do
   runit_service memcached_instance_name do
+    run_template_name 'memcached'
+    default_logger true
+    cookbook new_resource.template_cookbook
     action [:stop, :disable]
     only_if { ::File.exist?("/etc/sv/#{memcached_instance_name}/run") }
   end
@@ -90,6 +108,9 @@ end
 action :create do
   create_init
   runit_service memcached_instance_name do
+    run_template_name 'memcached'
+    default_logger true
+    cookbook new_resource.template_cookbook
     action [:start, :enable]
   end
 end
