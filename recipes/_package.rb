@@ -65,4 +65,3 @@ directory node['memcached']['logfilepath'] do
   group 'memcache'
   mode '0755'
 end
-
