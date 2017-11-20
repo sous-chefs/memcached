@@ -73,6 +73,7 @@ Adds or removes an instance of memcached running under the system's native init 
 - :ulimit - the ulimit setting to use for the service
 - :template_cookbook - the cookbook containing the runit service template. default: memcached
 - :disable_default_instance - disable the default 'memcached' service installed by the package, default: true
+- :log_level - The level at which we log, default to 'info'. Choose from: 'info', 'debug', 'trace' which map to '-v', '-vv' or '-vvv' arguments.
 
 #### Examples
 

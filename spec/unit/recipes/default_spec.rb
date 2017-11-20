@@ -30,6 +30,10 @@ describe 'memcached::default' do
     it 'templates /etc/init.d/memcached' do
       expect(chef_run).to create_template('/etc/init.d/memcached')
     end
+
+    it 'creates log file' do
+      expect(chef_run).to create_file('/var/log/memcached.log')
+    end
   end
 
   context 'on rhel 6' do
@@ -54,6 +58,10 @@ describe 'memcached::default' do
     it 'templates /etc/init.d/memcached' do
       expect(chef_run).to create_template('/etc/init.d/memcached')
     end
+
+    it 'creates log file' do
+      expect(chef_run).to create_file('/var/log/memcached.log')
+    end
   end
 
   context 'on ubuntu' do
@@ -69,6 +77,10 @@ describe 'memcached::default' do
 
     it 'deletes /etc/default/memcached' do
       expect(chef_run).to delete_file('/etc/default/memcached')
+    end
+
+    it 'creates log file' do
+      expect(chef_run).to create_file('/var/log/memcached.log')
     end
   end
 end

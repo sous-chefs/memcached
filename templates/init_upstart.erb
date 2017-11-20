@@ -7,4 +7,4 @@ respawn limit 10 5
 
 limit nofile <%= @ulimit -%> <%= @ulimit -%>
 
-exec /usr/bin/memcached <%= @cli_options %>
+exec /usr/bin/memcached <%= @cli_options %> >> <%= @log_file %> 2>&1

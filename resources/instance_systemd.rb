@@ -39,6 +39,7 @@ property :ulimit, [Integer, String], default: 1024
 property :template_cookbook, String, default: 'memcached'
 property :disable_default_instance, [true, false], default: true
 property :remove_default_config, [true, false], default: true
+property :log_level, String, default: 'info'
 
 action :start do
   create_init
