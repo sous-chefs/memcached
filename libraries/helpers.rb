@@ -81,6 +81,10 @@ def cli_options
   end
 
   options << " -t #{new_resource.threads}" if new_resource.threads
+  
+  if new_resource.logfilepath && new_resource.logfilename
+    options << " -vv >> #{new_resource.logfilepath.chomp('/')}/#{new_resource.logfilename} 2>&1"
+  end
   options << " #{new_resource.extra_cli_options.join(' ')}" unless new_resource.extra_cli_options.empty?
   options
 end
