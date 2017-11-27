@@ -8,36 +8,8 @@ describe 'memcached::default' do
     stub_command('dpkg -s memcached').and_return(true)
   end
 
-  context 'on rhel 5' do
-    let(:chef_run) { ChefSpec::ServerRunner.new(step_into: ['memcached_instance'], platform: 'centos', version: '5.11').converge(described_recipe) }
-
-    it 'installs redhat-lsb package' do
-      expect(chef_run).to install_package('redhat-lsb')
-    end
-
-    it 'installs memcached package' do
-      expect(chef_run).to install_package('memcached')
-    end
-
-    it 'creates memcached group' do
-      expect(chef_run).to create_group('memcached')
-    end
-
-    it 'creates memcached user' do
-      expect(chef_run).to create_user('memcached')
-    end
-
-    it 'templates /etc/init.d/memcached' do
-      expect(chef_run).to create_template('/etc/init.d/memcached')
-    end
-
-    it 'creates log file' do
-      expect(chef_run).to create_file('/var/log/memcached.log')
-    end
-  end
-
   context 'on rhel 6' do
-    let(:chef_run) { ChefSpec::ServerRunner.new(step_into: ['memcached_instance'], platform: 'centos', version: '6.7').converge(described_recipe) }
+    let(:chef_run) { ChefSpec::ServerRunner.new(step_into: ['memcached_instance'], platform: 'centos', version: '6.9').converge(described_recipe) }
 
     it 'installs redhat-lsb package' do
       expect(chef_run).to install_package('redhat-lsb-core')
