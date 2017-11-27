@@ -100,7 +100,7 @@ action_class do
     remove_default_memcached_configs
 
     # the init script will not run without redhat-lsb packages
-    package 'redhat-lsb' if platform_family?('rhel', 'amazon')
+    package 'redhat-lsb-core' if platform_family?('fedora', 'rhel', 'amazon')
 
     # create the log file so we can write to it
     create_log_file
