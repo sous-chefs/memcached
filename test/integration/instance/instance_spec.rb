@@ -15,8 +15,8 @@ describe service('memcached_web_cache') do
   it { should be_running }
 end
 
-describe command('ps aux | grep -q /va[r]/run/memcached_painful_cache.pid') do
-  it { should exist }
+describe command('ps aux | grep -q [m]emcached_painful_cache.pid') do
+  its('exit_status') { should eq 0 }
 end
 
 describe port(11_212) do
