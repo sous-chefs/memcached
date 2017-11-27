@@ -28,14 +28,6 @@ def lock_dir
   )
 end
 
-def lsb_package
-  if node['platform_version'].to_i < 6.0
-    'redhat-lsb'
-  else
-    'redhat-lsb-core'
-  end
-end
-
 # if the instance name is memcached don't spit out memcached_memcached
 def memcached_instance_name
   new_resource.instance_name == 'memcached' ? 'memcached' : "memcached_#{new_resource.instance_name}"
