@@ -34,8 +34,8 @@ env:
   - INSTNACE=instance-debian-9
   - INSTANCE=instance-centos-6
   - INSTANCE=instance-centos-7
-  - INSTANCE=instance-opensuse-leap
-  - INSTANCE=instance-fedora-latest
+    #- INSTANCE=instance-opensuse-leap disable until we get init support working
+    #- INSTANCE=instance-fedora-latest disable until we have updated dokken image
 
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
