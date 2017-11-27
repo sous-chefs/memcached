@@ -114,6 +114,6 @@ def create_log_file
   file log_file_name do
     user service_user
     group service_group
-    mode 00644
+    mode '0644'
   end
 end
