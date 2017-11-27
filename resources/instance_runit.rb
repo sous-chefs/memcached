@@ -33,6 +33,7 @@ property :ulimit, [Integer, String], default: 1024
 property :template_cookbook, String, default: 'memcached'
 property :disable_default_instance, [true, false], default: true
 property :remove_default_config, [true, false], default: true
+property :log_level, String, default: 'info'
 
 action :start do
   Chef::Log.warn('The memcached_instance_runit resource has been deprecated as of 9/2017. This resource will be removed in the next major release of the memcached cookbook. We highly recommend using your distributions native init systeam instead.')

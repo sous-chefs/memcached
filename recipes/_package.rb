@@ -58,3 +58,15 @@ user service_user do
   shell '/bin/false'
   action [:create, :lock]
 end
+
+directory node['memcached']['logfilepath'] do
+  user service_user
+  group service_group
+  mode 00755
+end
+
+directory '/var/run/memcached' do
+  user service_user
+  group service_group
+  mode 00755
+end

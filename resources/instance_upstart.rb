@@ -40,6 +40,7 @@ property :ulimit, [Integer, String], default: 1024
 property :template_cookbook, String, default: 'memcached'
 property :disable_default_instance, [true, false], default: true
 property :remove_default_config, [true, false], default: true
+property :log_level, String, default: 'info'
 
 action :start do
   create_init
@@ -108,12 +109,16 @@ action_class do
     # cleanup default configs to avoid confusion
     remove_default_memcached_configs
 
+    # create the log file so we can write to it
+    create_log_file
+
     template "/etc/init/#{memcached_instance_name}.conf" do
       source 'init_upstart.erb'
       variables(
         instance: memcached_instance_name,
         ulimit: new_resource.ulimit,
-        cli_options: cli_options
+        cli_options: cli_options,
+        log_file: log_file_name
       )
       cookbook new_resource.template_cookbook
       notifies :restart, "service[#{memcached_instance_name}]", :immediately

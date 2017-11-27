@@ -37,6 +37,7 @@ property :ulimit, [Integer, String], default: 1024
 property :template_cookbook, String, default: 'memcached'
 property :disable_default_instance, [true, false], default: true
 property :remove_default_config, [true, false], default: true
+property :log_level, String, default: 'info'
 
 action :start do
   create_init
@@ -101,6 +102,9 @@ action_class do
     # the init script will not run without redhat-lsb packages
     package lsb_package if node['platform_family'] == 'rhel'
 
+    # create the log file so we can write to it
+    create_log_file
+
     # remove the debian defaults dir
     file '/etc/default/memcached' do
       action :delete
@@ -115,7 +119,8 @@ action_class do
         instance: memcached_instance_name,
         ulimit: new_resource.ulimit,
         user: new_resource.user,
-        cli_options: cli_options
+        cli_options: cli_options,
+        log_file: log_file_name
       )
       notifies :restart, "service[#{memcached_instance_name}]", :immediately
     end

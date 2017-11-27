@@ -80,6 +80,17 @@ def cli_options
     options << " -o #{new_resource.experimental_options.join(', ')}"
   end
 
+  log_arg = ''
+  case new_resource.log_level
+  when 'info'
+    log_arg = 'v'
+  when 'debug'
+    log_arg = 'vv'
+  when 'trace'
+    log_arg = 'vvv'
+  end
+  options << " -#{log_arg}"
+
   options << " -t #{new_resource.threads}" if new_resource.threads
   options << " #{new_resource.extra_cli_options.join(' ')}" unless new_resource.extra_cli_options.empty?
   options
@@ -99,4 +110,16 @@ def platform_sysv_init_class
     'debian' => Chef::Provider::Service::Init::Debian,
     'default' => Chef::Provider::Service::Init::Redhat
   )
+end
+
+def log_file_name
+  File.join(node['memcached']['logfilepath'], "#{memcached_instance_name}.log")
+end
+
+def create_log_file
+  file log_file_name do
+    user service_user
+    group service_group
+    mode 00644
+  end
 end
