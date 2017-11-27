@@ -1,6 +1,6 @@
 def service_user
   value_for_platform_family(
-    %w(suse fedora rhel) => 'memcached',
+    %w(suse fedora rhel amazon) => 'memcached',
     'debian' => 'memcache',
     'default' => 'nobody'
   )
@@ -8,7 +8,7 @@ end
 
 def service_group
   value_for_platform_family(
-    %w(suse fedora rhel) => 'memcached',
+    %w(suse fedora rhel amazon) => 'memcached',
     'debian' => 'memcache',
     'default' => 'nogroup'
   )
@@ -23,7 +23,7 @@ end
 
 def lock_dir
   value_for_platform_family(
-    %w(rhel fedora suse) => '/var/lock/subsys',
+    %w(rhel fedora suse amazon) => '/var/lock/subsys',
     'default' => '/var/lock'
   )
 end
