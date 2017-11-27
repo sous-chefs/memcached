@@ -103,7 +103,7 @@ action_class do
     # memcached so we don't have both an upstart script and an sys-v script
     file '/etc/init.d/memcached' do
       action :delete
-      only_if { new_resource.name == 'memcached' }
+      only_if { new_resource.instance_name == 'memcached' }
     end
 
     # cleanup default configs to avoid confusion
