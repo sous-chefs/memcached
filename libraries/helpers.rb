@@ -54,16 +54,10 @@ end
 def remove_default_memcached_configs
   return unless new_resource.remove_default_config
 
-  file '/etc/memcached.conf' do
-    action :delete
-  end
-
-  file '/etc/sysconfig/memcached' do
-    action :delete
-  end
-
-  file '/etc/default/memcached' do
-    action :delete
+  %w(/etc/memcached.conf /etc/sysconfig/memcached /etc/default/memcached).each do |f|
+    file f do
+      action :delete
+    end
   end
 end
 
