@@ -26,7 +26,7 @@ env:
   - INSTANCE=default-centos-6
   - INSTANCE=default-centos-7
   - INSTANCE=default-opensuse-leap
-  - INSTANCE=default-fedora-latest Docker only failure on passwd
+  - INSTANCE=default-fedora-latest
   - INSTANCE=instance-ubuntu-1404
   - INSTANCE=instance-ubuntu-1604
   - INSTANCE=instance-debian-7
@@ -35,7 +35,8 @@ env:
   - INSTANCE=instance-centos-6
   - INSTANCE=instance-centos-7
     #- INSTANCE=instance-opensuse-leap disable until we get init support working
-    #- INSTANCE=instance-fedora-latest disable until we have updated dokken image
+  - INSTANCE=instance-fedora-latest
+  - INSTANCE=instance-amazonlinux
 
 before_script:
   - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
