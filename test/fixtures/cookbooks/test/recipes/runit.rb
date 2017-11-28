@@ -1,5 +1,7 @@
 apt_update 'update'
 
+include_recipe 'runit::default' # installs runit
+
 memcached_instance_runit 'legacy_web_cache' do
   port 11_212
   memory 64
