@@ -36,7 +36,7 @@ ulimit -n <%= @ulimit %>
 do_start()
 {
   touch $PIDFILE
-  chown root:root $PIDFILE
+  chown <%= @user %>:root $PIDFILE
   chmod 660 $PIDFILE
   start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON --test > /dev/null \
     || return 1
