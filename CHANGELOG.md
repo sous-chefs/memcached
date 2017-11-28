@@ -2,6 +2,25 @@
 
 This file is used to list changes made in each version of the memcached cookbook.
 
+## 5.0.0 (2017-09-06)
+
+### Breaking changes
+
+- Support for RHEL 5 has been removed. This removes the cookbook dependency on yum-epel as well
+- Runit support has been marked as deprecated and will be removed in a future release of this cookbook. We highly recommend you utilize the native init system of your distro to have the best experience with memcached.
+
+### Other fixes
+
+- Fix using the resource to setup a sys-v init script on Fedora platforms
+- Fix Amazon Linux support on Chef >= 13
+- Don't delete the memcached init script if the instance name is 'memcached' and we're specifying the instance_name on the resource instead of using the resource's name
+- Added new resource property for `log_level` and fixed logging setup in the resources
+- Run failures with runit have been resolved
+- Minor property cleanup in the resources
+- Avoid an extra blank line in the command options
+- Add Debian Sys-V script for Debian to allow for Debian 7 support
+- Pull in systemd unit file security settings from upstream
+
 ## 4.1.0 (2017-05-06)
 
 - Require Chef 12.7+ to workaround action_class bug
