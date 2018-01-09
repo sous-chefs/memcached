@@ -40,6 +40,7 @@ property :ulimit, [Integer, String], default: 1024
 property :template_cookbook, String, default: 'memcached'
 property :disable_default_instance, [true, false], default: true
 property :remove_default_config, [true, false], default: true
+property :no_restart, [true, false], default: false
 property :log_level, String, default: 'info'
 
 action :start do
@@ -112,7 +113,7 @@ action_class do
       )
       cookbook new_resource.template_cookbook
       notifies :run, 'execute[reload_unit_file]', :immediately
-      notifies :restart, "service[#{memcached_instance_name}]", :immediately
+      notifies :restart, "service[#{memcached_instance_name}]", :immediately unless new_resource.no_restart
       owner 'root'
       group 'root'
       mode '0644'
