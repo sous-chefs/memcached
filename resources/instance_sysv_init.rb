@@ -119,6 +119,7 @@ action_class do
         instance: memcached_instance_name,
         ulimit: new_resource.ulimit,
         user: new_resource.user,
+        binary_path: binary_path,
         cli_options: cli_options,
         log_file: log_file_name
       )
