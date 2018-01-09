@@ -1,6 +1,6 @@
 #!/bin/sh
 exec 2>&1
 
-ulimit -n <%= @ulimit %>
+ulimit -n <%= @options[:ulimit] %>
 
 exec chpst -u <%= @options[:user] %> <%= @options[:binary_path] %> <%= @options[:cli_options] %>
