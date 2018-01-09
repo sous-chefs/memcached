@@ -132,8 +132,8 @@ action_class do
       default_logger true
       cookbook new_resource.template_cookbook
       options(
-        user: new_resource.user,
         ulimit: new_resource.ulimit,
+        user: new_resource.user,
         binary_path: binary_path,
         cli_options: cli_options
       )

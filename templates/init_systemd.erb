@@ -5,6 +5,7 @@ Description=memcached instance <%= @instance %>
 After=network.target
 
 [Service]
+User=<%= @user %>
 LimitNOFILE=<%= @ulimit %>
 ExecStart=<%= @binary_path %> <%= @cli_options %>
 Restart=on-failure
