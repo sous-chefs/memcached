@@ -62,9 +62,7 @@ def cli_options
 -c #{new_resource.maxconn} \
 -I #{new_resource.max_object_size}"
 
-  if new_resource.experimental_options.any?
-    options << " -o #{new_resource.experimental_options.join(',')}"
-  end
+  options << " -o #{new_resource.experimental_options.join(',')}" unless new_resource.experimental_options.empty?
 
   log_arg = ''
   case new_resource.log_level
