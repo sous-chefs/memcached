@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of the memcached cookbook.
 
+## 5.0.1 (2018-01-10)
+
+- Fix ulimit for runit based services
+- Use Systemd User directive which is more secure
+- Fix experimental_options to be properly spaced
+
 ## 5.0.0 (2017-09-06)
 
 ### Breaking changes
