@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the memcached cookbook.
 
+## 5.0.2 (2018-01-17)
+
+- Use binary_path helper throughout code for consistency
+
 ## 5.0.1 (2018-01-10)
 
 - Fix ulimit for runit based services
