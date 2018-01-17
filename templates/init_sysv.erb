@@ -45,7 +45,7 @@ start () {
         chown <%= @user %> /var/run/memcached
     fi
 
-        start_daemon -p /var/run/memcached/memcached_<%= @instance %>.pid /usr/bin/memcached -d \
+        start_daemon -p /var/run/memcached/memcached_<%= @instance %>.pid <%= @binary_path %> -d \
           -P /var/run/memcached/memcached_<%= @instance %>.pid <%= @cli_options %> >> <%= @log_file %> 2>&1
         RETVAL=$?
         echo
@@ -53,7 +53,7 @@ start () {
 }
 stop () {
         echo -n $"Stopping $prog: "
-        killproc -p /var/run/memcached/memcached_<%= @instance %>.pid /usr/bin/memcached
+        killproc -p /var/run/memcached/memcached_<%= @instance %>.pid <%= @binary_path %>
         RETVAL=$?
         echo
         if [ $RETVAL -eq 0 ] ; then
