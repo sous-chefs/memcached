@@ -66,13 +66,15 @@ Adds or removes an instance of memcached running under the system's native init 
 - :listen - the IP to listen on. default: '0.0.0.0'
 - :maxconn - the maximum number of connections to accept. default: 1024
 - :user - the user to run as
+- :binary_path - path of memcached binary, when set we assume memcached is already installed
 - :threads - the number of threads to use
 - :max_object_size - the largest object size to store
 - :experimental_options - an array of experimental config options, such as: ['maxconns_fast', 'hashpower']
 - :extra_cli_options - an array of additional config options, such as: ['-L']
 - :ulimit - the ulimit setting to use for the service
 - :template_cookbook - the cookbook containing the runit service template. default: memcached
-- :disable_default_instance - disable the default 'memcached' service installed by the package, default: true
+- :disable_default_instance - disable the default 'memcached' service installed by the package. default: true
+- :no_restart - disable the service restart on configuration change. default: false
 - :log_level - The level at which we log, default to 'info'. Choose from: 'info', 'debug', 'trace' which map to '-v', '-vv' or '-vvv' arguments.
 
 #### Examples
