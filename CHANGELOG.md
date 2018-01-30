@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the memcached cookbook.
 
+## 5.1.0 (2018-01-30)
+
+- Add 'binary-path' property to the resource
+- Add 'no-restart' property to the resource
+
 ## 5.0.2 (2018-01-17)
 
 - Use binary_path helper throughout code for consistency
