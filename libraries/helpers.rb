@@ -15,7 +15,7 @@ def service_group
 end
 
 def binary_path
-  value_for_platform_family(
+  new_resource.binary_path || value_for_platform_family(
     'suse' => '/usr/sbin/memcached',
     'default' => '/usr/bin/memcached'
   )

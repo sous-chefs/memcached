@@ -25,6 +25,7 @@ property :udp_port, [Integer, String], default: 11_211
 property :listen, String, default: '0.0.0.0'
 property :maxconn, [Integer, String], default: 1024
 property :user, String, default: lazy { service_user }
+property :binary_path, String
 property :threads, [Integer, String]
 property :max_object_size, String, default: '1m'
 property :experimental_options, Array, default: []
@@ -119,7 +120,7 @@ end
 action_class do
   def create_init
     include_recipe 'runit'
-    include_recipe 'memcached::_package'
+    include_recipe 'memcached::_package' unless new_resource.binary_path
 
     # Disable the default memcached service to avoid port conflicts + wasted memory
     disable_default_memcached_instance

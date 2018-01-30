@@ -32,6 +32,7 @@ property :udp_port, [Integer, String], default: 11_211
 property :listen, String, default: '0.0.0.0'
 property :maxconn, [Integer, String], default: 1024
 property :user, String, default: lazy { service_user }
+property :binary_path, String
 property :threads, [Integer, String]
 property :max_object_size, String, default: '1m'
 property :experimental_options, Array, default: []
@@ -40,6 +41,7 @@ property :ulimit, [Integer, String], default: 1024
 property :template_cookbook, String, default: 'memcached'
 property :disable_default_instance, [true, false], default: true
 property :remove_default_config, [true, false], default: true
+property :no_restart, [true, false], default: false
 property :log_level, String, default: 'info'
 
 action :start do
@@ -91,7 +93,7 @@ end
 
 action_class do
   def create_init
-    include_recipe 'memcached::_package'
+    include_recipe 'memcached::_package' unless new_resource.binary_path
 
     # remove any runit instances with the same name if they exist
     disable_legacy_runit_instance
@@ -122,7 +124,7 @@ action_class do
         log_file: log_file_name
       )
       cookbook new_resource.template_cookbook
-      notifies :restart, "service[#{memcached_instance_name}]", :immediately
+      notifies :restart, "service[#{memcached_instance_name}]", :immediately unless new_resource.no_restart
     end
   end
 end
