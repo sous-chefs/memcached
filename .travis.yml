@@ -29,7 +29,6 @@ env:
   - INSTANCE=default-fedora-latest
   - INSTANCE=instance-ubuntu-1404
   - INSTANCE=instance-ubuntu-1604
-  - INSTANCE=instance-debian-7
   - INSTANCE=instance-debian-8
   - INSTANCE=instance-debian-9
   - INSTANCE=instance-centos-6
