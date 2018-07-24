@@ -32,7 +32,7 @@ describe 'memcached::default' do
     end
 
     it 'creates log file' do
-      expect(chef_run).to create_file('/var/log/memcached.log')
+      expect(chef_run).to create_file('/var/log/memcached/memcached.log')
     end
   end
 
@@ -52,7 +52,7 @@ describe 'memcached::default' do
     end
 
     it 'creates log file' do
-      expect(chef_run).to create_file('/var/log/memcached.log')
+      expect(chef_run).to create_file('/var/log/memcached/memcached.log')
     end
   end
 end
