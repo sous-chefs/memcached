@@ -17,10 +17,6 @@ Provides a custom resource for installing instances of memcached. Also ships wit
 
 - Chef 12.7+
 
-### Cookbooks
-
-- runit (not used by default)
-
 ## Attributes
 
 The following are node attributes are used to configure the command line options of memcached if using the default.rb recipe. They are not used if using the memcached_instance custom resource.
@@ -49,7 +45,7 @@ The cookbook can also within other cookbooks in your infrastructure with the `me
 
 ### instance
 
-Adds or removes an instance of memcached running under the system's native init system (sys-v, upstart, or systemd). For backwards compatibility there is also a runit provider that can be used if desired.
+Adds or removes an instance of memcached running under the system's native init system (sys-v, upstart, or systemd).
 
 #### Actions
 
@@ -72,7 +68,6 @@ Adds or removes an instance of memcached running under the system's native init 
 - :experimental_options - an array of experimental config options, such as: ['maxconns_fast', 'hashpower']
 - :extra_cli_options - an array of additional config options, such as: ['-L']
 - :ulimit - the ulimit setting to use for the service
-- :template_cookbook - the cookbook containing the runit service template. default: memcached
 - :disable_default_instance - disable the default 'memcached' service installed by the package. default: true
 - :no_restart - disable the service restart on configuration change. default: false
 - :log_level - The level at which we log, default to 'info'. Choose from: 'info', 'debug', 'trace' which map to '-v', '-vv' or '-vvv' arguments.
@@ -96,20 +91,12 @@ memcached_instance 'super_custom_memcached'  do
 end
 ```
 
-Specify the runit provider to maintain legacy behavior (including optional usage of legacy actions)
-
-```ruby
-memcached_instance_runit 'super_custom_memcached'  do
-  action :create
-end
-```
-
 ## License & Authors
 
 - Author:: Cookbook Engineering Team ([cookbooks@chef.io](mailto:cookbooks@chef.io))
 
 ```text
-Copyright:: 2009-2016, Chef Software, Inc
+Copyright:: 2009-2018, Chef Software, Inc
 Copyright:: 2009, 37signals
 
 Licensed under the Apache License, Version 2.0 (the "License");
