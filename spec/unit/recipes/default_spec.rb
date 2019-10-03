@@ -37,7 +37,7 @@ describe 'memcached::default' do
   end
 
   context 'on ubuntu' do
-    let(:chef_run) { ChefSpec::ServerRunner.new(step_into: ['memcached_instance'], platform: 'ubuntu', version: '14.04').converge(described_recipe) }
+    let(:chef_run) { ChefSpec::ServerRunner.new(step_into: ['memcached_instance'], platform: 'ubuntu', version: '16.04').converge(described_recipe) }
 
     it 'installs memcached package' do
       expect(chef_run).to install_package('memcached')

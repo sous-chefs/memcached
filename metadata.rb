@@ -12,6 +12,6 @@ end
 
 recipe 'memcached::default', 'Installs and configures memcached'
 
-source_url 'https://github.com/chef-cookbooks/memcached'
-issues_url 'https://github.com/chef-cookbooks/memcached/issues'
-chef_version '>= 12.7'
+source_url 'https://github.com/sous-chefs/memcached'
+issues_url 'https://github.com/sous-chefs/memcached/issues'
+chef_version      '>= 13.8'
