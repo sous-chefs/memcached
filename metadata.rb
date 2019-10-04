@@ -11,5 +11,3 @@ version           '5.1.1'
 %w(ubuntu debian redhat centos suse opensuse opensuseleap scientific oracle amazon zlinux).each do |os|
   supports os
 end
-
-

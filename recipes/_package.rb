@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-if node['platform_family'] == 'debian'
+if platform_family?('debian')
   # dpkg, imma let you finish but don't start services automatically
   # https://jpetazzo.github.io/2013/10/06/policy-rc-d-do-not-start-services-automatically/
   file '/usr/sbin/policy-rc.d with exit 101' do
