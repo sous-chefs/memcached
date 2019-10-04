@@ -1,6 +1,5 @@
 driver:
   name: dokken
-  # because Docker and SystemD/Upstart
   privileged: true
   env: [CHEF_LICENSE=accept]
 
