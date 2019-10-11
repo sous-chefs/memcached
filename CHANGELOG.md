@@ -175,23 +175,13 @@ Locking yum dependency to '< 3'
 
 ## v1.6.0
 
-### Bug
-
 - **[COOK-3682](https://tickets.chef.io/browse/COOK-3682)** - Set user when using Debian packages
-
-### Improvement
-
 - **[COOK-3336](https://tickets.chef.io/browse/COOK-3336)** - Add an option to specify the logfile (fix)
 
 ## v1.5.0
 
-### Improvement
-
 - **[COOK-3336](https://tickets.chef.io/browse/COOK-3336)** - Add option to specify logfile
 - **[COOK-3299](https://tickets.chef.io/browse/COOK-3299)** - Document that `memcached` is exposed by default
-
-### Bug
-
 - **[COOK-2990](https://tickets.chef.io/browse/COOK-2990)** - Include `listen`, `maxconn`, and `user` in the runit service
 
 ### New Feature
@@ -200,13 +190,8 @@ Locking yum dependency to '< 3'
 
 ## v1.4.0
 
-### Improvement
-
 - [COOK-2756]: add SUSE support to memcached cookbook
 - [COOK-2791]: Remove the template for Karmic from the memcached cookbook
-
-### Bug
-
 - [COOK-2600]: support memcached on SmartOS
 
 ## v1.3.0
