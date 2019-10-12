@@ -17,31 +17,17 @@
 # limitations under the License.
 #
 
-if platform_family?('debian')
-  # dpkg, imma let you finish but don't start services automatically
-  # https://jpetazzo.github.io/2013/10/06/policy-rc-d-do-not-start-services-automatically/
-  file '/usr/sbin/policy-rc.d with exit 101' do
-    path '/usr/sbin/policy-rc.d'
-    content 'exit 101'
-    mode '0755'
-    not_if 'dpkg -s memcached'
+# Mask the service to prevent it from starting up after install
+if node['init_package'] == 'systemd'
+  service 'memcached' do
+    action :mask
+    not_if { ::File.exist?('/etc/systemd/system/memcached.service') }
   end
+end
 
-  package 'memcached' do
-    version node['memcached']['version']
-    action :install
-  end
-
-  file '/usr/sbin/policy-rc.d with exit 0' do
-    path '/usr/sbin/policy-rc.d'
-    content 'exit 0'
-    mode '0755'
-  end
-else
-  package 'memcached' do
-    version node['memcached']['version']
-    action :install
-  end
+package 'memcached' do
+  version node['memcached']['version']
+  action :install
 end
 
 group service_group do

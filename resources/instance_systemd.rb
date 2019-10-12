@@ -113,6 +113,8 @@ action_class do
       cookbook new_resource.template_cookbook
       notifies :run, 'execute[reload_unit_file]', :immediately
       notifies :restart, "service[#{memcached_instance_name}]", :immediately unless new_resource.no_restart
+      force_unlink true
+      manage_symlink_source false
       owner 'root'
       group 'root'
       mode '0644'
