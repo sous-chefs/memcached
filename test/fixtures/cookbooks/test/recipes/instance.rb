@@ -20,8 +20,8 @@ memcached_instance 'backend_cache' do
   action [:start, :enable]
 end
 
-if platform?('centos') && node['platform_version'].to_f < 7.0
-  memcached_instance_sysv_init 'painful_cache' do
+if Chef::Platform::ServiceHelpers.service_resource_providers.include?(:systemd)
+  memcached_instance_systemd 'painful_cache' do
     port 11_214
     udp_port 11_214
     memory 64
@@ -31,7 +31,7 @@ if platform?('centos') && node['platform_version'].to_f < 7.0
     action [:start, :enable]
   end
 else
-  memcached_instance_systemd 'painful_cache' do
+  memcached_instance_sysv_init 'painful_cache' do
     port 11_214
     udp_port 11_214
     memory 64
