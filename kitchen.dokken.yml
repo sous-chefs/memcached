@@ -11,7 +11,6 @@ provisioner:
   name: dokken
   product_name: chef
   product_version: <%= ENV['CHEF_VERSION'] || 'latest' %>
-  install_strategy: once
 
 verifier:
   name: inspec

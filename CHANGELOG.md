@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of the memcached cookbook.
 
+- Adoption by Sous-Chefs, adds CircleCI configuration for supported Os
+- Remove support / testing for Ubuntu 14.04 
+- Remove testing for fedora
+- Remove upstart support
+- Systemd service will be used when systemd is available if not then sysv init is used
+
 ## 5.1.1 (2018-07-24)
 
 - Fix logging directory default to be /var/log/memcached not /var/log/
