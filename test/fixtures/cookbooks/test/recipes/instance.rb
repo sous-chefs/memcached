@@ -18,13 +18,3 @@ memcached_instance 'backend_cache' do
   user 'memcached_other_user'
   action [:start, :enable]
 end
-
-memcached_instance 'painful_cache' do
-  port 11_214
-  udp_port 11_214
-  memory 64
-  ulimit 31_337
-  threads 10
-  user 'memcached_other_user'
-  action [:start, :enable]
-end
