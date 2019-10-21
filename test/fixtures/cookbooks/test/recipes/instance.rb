@@ -19,7 +19,7 @@ memcached_instance 'backend_cache' do
   action [:start, :enable]
 end
 
-memcached_instance_sysv_init 'painful_cache' do
+memcached_instance 'painful_cache' do
   port 11_214
   udp_port 11_214
   memory 64
