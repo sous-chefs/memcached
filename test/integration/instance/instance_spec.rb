@@ -21,7 +21,3 @@ end
 describe port(11_213) do
   it { should be_listening }
 end
-
-describe port(11_214) do
-  it { should be_listening }
-end
