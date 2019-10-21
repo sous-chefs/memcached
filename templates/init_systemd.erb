@@ -17,13 +17,16 @@ ProtectSystem=full
 NoNewPrivileges=true
 PrivateDevices=true
 CapabilityBoundingSet=CAP_SETGID CAP_SETUID CAP_SYS_RESOURCE
-RestrictNamespaces=true
 RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+<% if @security_flags_support %>
+RestrictNamespaces=true
 RestrictRealtime=true
 ProtectControlGroups=true
 ProtectKernelTunables=true
 ProtectKernelModules=true
 MemoryDenyWriteExecute=true
+<% end %>
 
 [Install]
 WantedBy=multi-user.target

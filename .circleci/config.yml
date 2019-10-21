@@ -1,0 +1,77 @@
+---
+lint_and_unit: &lint_and_unit
+  - delivery
+  - danger
+  - lint-yaml
+  - lint-markdown
+version: 2.1
+orbs:
+  kitchen: sous-chefs/kitchen@2
+workflows:
+  kitchen:
+    jobs:
+      - kitchen/yamllint:
+          name: lint-yaml
+      - kitchen/mdlint:
+          name: lint-markdown
+      - kitchen/danger:
+          name: danger
+          context: Danger
+      - kitchen/delivery:
+          name: delivery
+      - kitchen/dokken-single:
+          name: default-amazonlinux
+          suite: default-amazonlinux
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: default-debian-8
+          suite: default-debian-8
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: default-debian-9
+          suite: default-debian-9
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: default-centos-6
+          suite: default-centos-6
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: default-centos-7
+          suite: default-centos-7
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: default-ubuntu-1604
+          suite: default-ubuntu-1604
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: default-ubuntu-1804
+          suite: default-ubuntu-1804
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: instance-amazonlinux
+          suite: instance-amazonlinux
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: instance-debian-8
+          suite: instance-debian-8
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: instance-debian-9
+          suite: instance-debian-9
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: instance-centos-6
+          suite: instance-centos-6
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: instance-centos-7
+          suite: instance-centos-7
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: instance-ubuntu-1604
+          suite: instance-ubuntu-1604
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: instance-ubuntu-1804
+          suite: instance-ubuntu-1804
+          requires: *lint_and_unit

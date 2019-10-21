@@ -80,14 +80,6 @@ def cli_options
   options
 end
 
-def disable_legacy_runit_instance
-  return unless ::File.exist?("/etc/sv/#{memcached_instance_name}/run")
-
-  memcached_instance_runit memcached_instance_name do
-    action :remove
-  end
-end
-
 # choose the right platform init class
 def platform_sysv_init_class
   value_for_platform_family(

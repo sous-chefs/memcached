@@ -92,9 +92,6 @@ action_class do
   def create_init
     include_recipe 'memcached::_package' unless new_resource.binary_path
 
-    # remove any runit instances with the same name if they exist
-    disable_legacy_runit_instance
-
     # Disable the default memcached service to avoid port conflicts + wasted memory
     disable_default_memcached_instance
 
@@ -114,7 +111,7 @@ action_class do
 
     template "/etc/init.d/#{memcached_instance_name}" do
       mode '0755'
-      source platform_family?('debian') ? 'init_sysv_debian.erb' : 'init_sysv.erb'
+      source 'init_sysv.erb'
       cookbook new_resource.template_cookbook
       variables(
         lock_dir: lock_dir,

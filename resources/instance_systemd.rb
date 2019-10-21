@@ -93,9 +93,6 @@ action_class do
   def create_init
     include_recipe 'memcached::_package' unless new_resource.binary_path
 
-    # remove any runit instances with the same name if they exist
-    disable_legacy_runit_instance
-
     # Disable the default memcached service to avoid port conflicts + wasted memory
     disable_default_memcached_instance
 
@@ -109,11 +106,15 @@ action_class do
         ulimit: new_resource.ulimit,
         user: new_resource.user,
         binary_path: binary_path,
-        cli_options: cli_options
+        cli_options: cli_options,
+        # RHEL7 and Centos 7 do not support those additional security flags
+        security_flags_support: !platform_family?('rhel') && !platform_family?('centos')
       )
       cookbook new_resource.template_cookbook
       notifies :run, 'execute[reload_unit_file]', :immediately
       notifies :restart, "service[#{memcached_instance_name}]", :immediately unless new_resource.no_restart
+      force_unlink true
+      manage_symlink_source false
       owner 'root'
       group 'root'
       mode '0644'
