@@ -2,6 +2,18 @@
 
 This file is used to list changes made in each version of the memcached cookbook.
 
+## [Unreleased]
+
+### Added
+
+### Changed
+
+- Added CircleCI configuration
+
+### Deprecated
+
+### Removed
+
 ## 5.1.1 (2018-07-24)
 
 - Fix logging directory default to be /var/log/memcached not /var/log/
