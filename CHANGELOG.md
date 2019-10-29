@@ -1,4 +1,3 @@
-<!-- markdownlint-disable MD024 -->
 # CHANGELOG
 
 This file is used to list changes made in each version of the memcached cookbook.
@@ -364,5 +363,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Preparing repository for splitting cookbooks into their own repos
-
-<!-- markdownlint-restore -->
