@@ -216,6 +216,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Attributes from the metadata as they hadn't been updated
 
 ### Added
+
 - Oracle to the metadata
 - Issues_url and source_url to the metadata
 - New contributing.md, maintainers.md, and testing.md docs
@@ -244,7 +245,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated serverspec tests to pass (See 3c7b5c9)
 - Deconflict memcached_instance runit definition from default init (See b06d2d)
 - Split `default.rb` into `install.rb` and `configure.rb` so that memcached_instance only starts the specified number of instances
-
 **NOTE: if memcached_instance name is not specified or set to "memcached", the instance name will be "memcached". If anything else is specified, the instance name will be "memcached-${name}"**
 
 ## [1.7.2] - 2014-03-12
