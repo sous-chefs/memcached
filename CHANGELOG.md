@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Systemd service will be used when systemd is available if not then sysv init is used
+- migrated to github actions
 
 ### Removed
 
