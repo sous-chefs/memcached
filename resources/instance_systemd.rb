@@ -108,7 +108,7 @@ action_class do
         binary_path: binary_path,
         cli_options: cli_options,
         # RHEL7 and Centos 7 do not support those additional security flags
-        security_flags_support: !platform_family?('rhel') && !platform_family?('centos')
+        security_flags_support: !platform_family?('rhel')
       )
       cookbook new_resource.template_cookbook
       notifies :run, 'execute[reload_unit_file]', :immediately
