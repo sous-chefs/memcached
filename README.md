@@ -15,7 +15,6 @@ Provides a custom resource for installing instances of memcached. Also ships wit
 - Debian / Ubuntu and derivatives
 - RHEL and derivatives
 - Fedora
-- openSUSE/SLES
 
 ### Chef
 

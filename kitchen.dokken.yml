@@ -16,29 +16,12 @@ verifier:
   name: inspec
 
 platforms:
-  - name: amazonlinux
-    driver:
-      image: dokken/amazonlinux
-      pid_one_command: /sbin/init
-
-  - name: debian-8
-    driver:
-      image: dokken/debian-8
-      pid_one_command: /bin/systemd
-      intermediate_instructions:
-        - RUN /usr/bin/apt-get update
-
   - name: debian-9
     driver:
       image: dokken/debian-9
       pid_one_command: /bin/systemd
       intermediate_instructions:
         - RUN /usr/bin/apt-get update
-
-  - name: centos-6
-    driver:
-      image: dokken/centos-6
-      pid_one_command: /sbin/init
 
   - name: centos-7
     driver:

@@ -1,9 +1,10 @@
 #
 # Cookbook:: memcached
-# resource:: instance_sysv_init
+# resource:: memcached_instance
 #
 # Author:: Tim Smith <tsmith@chef.io>
 # Copyright:: 2016, Chef Software, Inc.
+# Copyright:: 2020, Oregon State University
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,9 +19,7 @@
 # limitations under the License.
 #
 
-provides :memcached_instance_sysv_init
-
-provides :memcached_instance, os: 'linux'
+resource_name :memcached_instance
 
 property :instance_name, String, name_property: true
 property :memory, [Integer, String], default: 64
@@ -35,7 +34,6 @@ property :max_object_size, String, default: '1m'
 property :experimental_options, Array, default: []
 property :extra_cli_options, Array, default: []
 property :ulimit, [Integer, String], default: 1024
-property :template_cookbook, String, default: 'memcached'
 property :disable_default_instance, [true, false], default: true
 property :remove_default_config, [true, false], default: true
 property :no_restart, [true, false], default: false
@@ -45,26 +43,25 @@ action :start do
   create_init
 
   service memcached_instance_name do
-    provider platform_sysv_init_class
-    supports restart: true, status: true
     action :start
   end
 end
 
 action :stop do
   service memcached_instance_name do
-    provider platform_sysv_init_class
-    supports status: true
     action :stop
-    only_if { ::File.exist?("/etc/init.d/#{memcached_instance_name}") }
   end
 end
 
 action :restart do
   service memcached_instance_name do
-    provider platform_sysv_init_class
-    supports restart: true, status: true
     action :restart
+  end
+end
+
+action :disable do
+  service memcached_instance_name do
+    action :disable
   end
 end
 
@@ -72,19 +69,7 @@ action :enable do
   create_init
 
   service memcached_instance_name do
-    provider platform_sysv_init_class
-    supports status: true
     action :enable
-    only_if { ::File.exist?("/etc/init.d/#{memcached_instance_name}") }
-  end
-end
-
-action :disable do
-  service memcached_instance_name do
-    provider platform_sysv_init_class
-    supports status: true
-    action :disable
-    only_if { ::File.exist?("/etc/init.d/#{memcached_instance_name}") }
   end
 end
 
@@ -98,31 +83,46 @@ action_class do
     # cleanup default configs to avoid confusion
     remove_default_memcached_configs
 
-    # the init script will not run without redhat-lsb packages
-    package 'redhat-lsb-core' if platform_family?('fedora', 'rhel', 'amazon')
+    # RHEL7 and Centos 7 do not support those additional security flags
+    security_flags_support =
+      unless platform_family?('rhel')
+        <<-EOF.gsub(/^\s+/, '')
+        RestrictNamespaces=true
+        RestrictRealtime=true
+        ProtectControlGroups=true
+        ProtectKernelTunables=true
+        ProtectKernelModules=true
+        MemoryDenyWriteExecute=true
+        EOF
+      end
 
-    # create the log file so we can write to it
-    create_log_file
+    systemd_unit "#{memcached_instance_name}.service" do
+      content <<-EOF.gsub(/^ {6}/, '')
+      [Unit]
+      Description=memcached instance #{memcached_instance_name}
+      After=network.target
 
-    # remove the debian defaults dir
-    file '/etc/default/memcached' do
-      action :delete
-    end
+      [Service]
+      User=#{new_resource.user}
+      LimitNOFILE=#{new_resource.ulimit}
+      ExecStart=#{binary_path} #{cli_options}
+      Restart=on-failure
 
-    template "/etc/init.d/#{memcached_instance_name}" do
-      mode '0755'
-      source 'init_sysv.erb'
-      cookbook new_resource.template_cookbook
-      variables(
-        lock_dir: lock_dir,
-        instance: memcached_instance_name,
-        ulimit: new_resource.ulimit,
-        user: new_resource.user,
-        binary_path: binary_path,
-        cli_options: cli_options,
-        log_file: log_file_name
-      )
+      # Various security configurations from:
+      # https://github.com/memcached/memcached/blob/master/scripts/memcached.service
+      PrivateTmp=true
+      ProtectSystem=full
+      NoNewPrivileges=true
+      PrivateDevices=true
+      CapabilityBoundingSet=CAP_SETGID CAP_SETUID CAP_SYS_RESOURCE
+      RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+      #{security_flags_support}
+
+      [Install]
+      WantedBy=multi-user.target
+      EOF
       notifies :restart, "service[#{memcached_instance_name}]", :immediately unless new_resource.no_restart
+      action :create
     end
   end
 end

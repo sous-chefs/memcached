@@ -8,51 +8,165 @@ describe 'memcached::default' do
     stub_command('dpkg -s memcached').and_return(true)
   end
 
-  context 'on rhel 6' do
-    let(:chef_run) { ChefSpec::ServerRunner.new(step_into: ['memcached_instance'], platform: 'centos', version: '6.9').converge(described_recipe) }
+  context 'on rhel 7' do
+    platform 'redhat', '7'
+    step_into :memcached_instance
 
-    it 'installs redhat-lsb package' do
-      expect(chef_run).to install_package('redhat-lsb-core')
+    it do
+      is_expected.to start_memcached_instance('memcached').with(
+        memory: 64,
+        port: 11211,
+        udp_port: 11211,
+        listen: '0.0.0.0',
+        maconn: nil,
+        user: 'memcached',
+        max_object_size: '1m',
+        threads: nil,
+        experimental_options: [],
+        extra_cli_options: [],
+        ulimit: 1024
+      )
     end
+    it { is_expected.to enable_memcached_instance('memcached') }
+    it { is_expected.to install_package('memcached').with(version: nil) }
+    it { expect(chef_run).to create_group('memcached') }
+    it do
+      is_expected.to create_user('memcached').with(
+        system: true,
+        manage_home: false,
+        gid: 'memcached',
+        home: '/nonexistent',
+        comment: 'Memcached',
+        shell: '/bin/false'
+      )
+    end
+    it { is_expected.to lock_user('memcached') }
+    it do
+      is_expected.to create_directory('/var/log/memcached').with(
+        user: 'memcached',
+        group: 'memcached',
+        mode: '0755'
+      )
+    end
+    it do
+      is_expected.to create_directory('/var/run/memcached').with(
+        user: 'memcached',
+        group: 'memcached',
+        mode: '0755'
+      )
+    end
+    it do
+      is_expected.to create_systemd_unit('memcached.service').with(
+        content: <<-EOF.gsub(/^ {8}/, '')
+        [Unit]
+        Description=memcached instance memcached
+        After=network.target
 
-    it 'installs memcached package' do
-      expect(chef_run).to install_package('memcached')
-    end
+        [Service]
+        User=memcached
+        LimitNOFILE=1024
+        ExecStart=/usr/bin/memcached -m 64 -U 11211 -p 11211 -u memcached -l 0.0.0.0 -c 1024 -I 1m -v
+        Restart=on-failure
 
-    it 'creates memcached user' do
-      expect(chef_run).to create_user('memcached')
-    end
+        # Various security configurations from:
+        # https://github.com/memcached/memcached/blob/master/scripts/memcached.service
+        PrivateTmp=true
+        ProtectSystem=full
+        NoNewPrivileges=true
+        PrivateDevices=true
+        CapabilityBoundingSet=CAP_SETGID CAP_SETUID CAP_SYS_RESOURCE
+        RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
 
-    it 'creates memcached group' do
-      expect(chef_run).to create_group('memcached')
-    end
 
-    it 'templates /etc/init.d/memcached' do
-      expect(chef_run).to create_template('/etc/init.d/memcached')
+        [Install]
+        WantedBy=multi-user.target
+        EOF
+      )
     end
-
-    it 'creates log file' do
-      expect(chef_run).to create_file('/var/log/memcached/memcached.log')
-    end
+    it { expect(chef_run.systemd_unit('memcached.service')).to notify('service[memcached]').to(:restart).immediately }
   end
 
-  context 'on ubuntu' do
-    let(:chef_run) { ChefSpec::ServerRunner.new(step_into: ['memcached_instance'], platform: 'ubuntu', version: '16.04').converge(described_recipe) }
+  context 'on ubuntu 18.04' do
+    platform 'ubuntu', '18.04'
+    step_into :memcached_instance
 
-    it 'installs memcached package' do
-      expect(chef_run).to install_package('memcached')
+    it do
+      is_expected.to start_memcached_instance('memcached').with(
+        memory: 64,
+        port: 11211,
+        udp_port: 11211,
+        listen: '0.0.0.0',
+        maconn: nil,
+        user: 'memcache',
+        max_object_size: '1m',
+        threads: nil,
+        experimental_options: [],
+        extra_cli_options: [],
+        ulimit: 1024
+      )
     end
+    it { is_expected.to enable_memcached_instance('memcached') }
+    it { is_expected.to install_package('memcached').with(version: nil) }
+    it { expect(chef_run).to create_group('memcache') }
+    it do
+      is_expected.to create_user('memcache').with(
+        system: true,
+        manage_home: false,
+        gid: 'memcache',
+        home: '/nonexistent',
+        comment: 'Memcached',
+        shell: '/bin/false'
+      )
+    end
+    it { is_expected.to lock_user('memcache') }
+    it do
+      is_expected.to create_directory('/var/log/memcached').with(
+        user: 'memcache',
+        group: 'memcache',
+        mode: '0755'
+      )
+    end
+    it do
+      is_expected.to create_directory('/var/run/memcached').with(
+        user: 'memcache',
+        group: 'memcache',
+        mode: '0755'
+      )
+    end
+    it do
+      is_expected.to create_systemd_unit('memcached.service').with(
+        content: <<-EOF.gsub(/^ {8}/, '')
+        [Unit]
+        Description=memcached instance memcached
+        After=network.target
 
-    it 'creates memcache group' do
-      expect(chef_run).to create_group('memcache')
-    end
+        [Service]
+        User=memcache
+        LimitNOFILE=1024
+        ExecStart=/usr/bin/memcached -m 64 -U 11211 -p 11211 -u memcache -l 0.0.0.0 -c 1024 -I 1m -v
+        Restart=on-failure
 
-    it 'deletes /etc/default/memcached' do
-      expect(chef_run).to delete_file('/etc/default/memcached')
-    end
+        # Various security configurations from:
+        # https://github.com/memcached/memcached/blob/master/scripts/memcached.service
+        PrivateTmp=true
+        ProtectSystem=full
+        NoNewPrivileges=true
+        PrivateDevices=true
+        CapabilityBoundingSet=CAP_SETGID CAP_SETUID CAP_SYS_RESOURCE
+        RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+        RestrictNamespaces=true
+        RestrictRealtime=true
+        ProtectControlGroups=true
+        ProtectKernelTunables=true
+        ProtectKernelModules=true
+        MemoryDenyWriteExecute=true
 
-    it 'creates log file' do
-      expect(chef_run).to create_file('/var/log/memcached/memcached.log')
+
+        [Install]
+        WantedBy=multi-user.target
+        EOF
+      )
     end
+    it { expect(chef_run.systemd_unit('memcached.service')).to notify('service[memcached]').to(:restart).immediately }
   end
 end

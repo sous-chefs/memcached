@@ -12,14 +12,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Systemd service will be used when systemd is available if not then sysv init is used
+- Switched to using systemd_unit resource
 - migrated to github actions
+- Update and improved ChefSpec tests
 
 ### Removed
 
-- Support / testing for Ubuntu 14.04
+- Support / testing for Ubuntu 14.04, CentOS 6 & Debian 8
 - Testing for fedora
+- Testing for amazonlinux
 - Upstart support
+- SysV init support and memcached_instance_sysv_init resource
 
 ## [v5.1.1] - 2018-07-24
 

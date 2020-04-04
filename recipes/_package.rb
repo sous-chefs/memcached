@@ -3,6 +3,7 @@
 # Recipe:: default
 #
 # Copyright:: 2009-2016, Chef Software, Inc.
+# Copyright:: 2020, Oregon State University
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,17 +18,8 @@
 # limitations under the License.
 #
 
-# Mask the service to prevent it from starting up after install
-if node['init_package'] == 'systemd'
-  service 'memcached' do
-    action :mask
-    not_if { ::File.exist?('/etc/systemd/system/memcached.service') }
-  end
-end
-
 package 'memcached' do
   version node['memcached']['version']
-  action :install
 end
 
 group service_group do

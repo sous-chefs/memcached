@@ -15,13 +15,9 @@ verifier:
   name: inspec
 
 platforms:
-  - name: centos-6
   - name: centos-7
   - name: ubuntu-16.04
   - name: ubuntu-18.04
-  - name: amazonlinux
-    driver_config:
-      box: mvbcoding/awslinux
 
 suites:
   - name: default
