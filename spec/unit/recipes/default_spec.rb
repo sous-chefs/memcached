@@ -65,7 +65,7 @@ describe 'memcached::default' do
         [Service]
         User=memcached
         LimitNOFILE=1024
-        ExecStart=/usr/bin/memcached -m 64 -U 11211 -p 11211 -u memcached -l 0.0.0.0 -c 1024 -I 1m -v
+        ExecStart=/usr/bin/memcached -m 64 -u memcached -c 1024 -I 1m -U 11211 -p 11211 -l 0.0.0.0 -v
         Restart=on-failure
 
         # Various security configurations from:
@@ -143,7 +143,7 @@ describe 'memcached::default' do
         [Service]
         User=memcache
         LimitNOFILE=1024
-        ExecStart=/usr/bin/memcached -m 64 -U 11211 -p 11211 -u memcache -l 0.0.0.0 -c 1024 -I 1m -v
+        ExecStart=/usr/bin/memcached -m 64 -u memcache -c 1024 -I 1m -U 11211 -p 11211 -l 0.0.0.0 -v
         Restart=on-failure
 
         # Various security configurations from:

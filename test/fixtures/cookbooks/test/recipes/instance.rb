@@ -29,3 +29,9 @@ memcached_instance 'painful_cache' do
   user 'memcached_painful_cache'
   action [:start, :enable]
 end
+
+memcached_instance 'socket' do
+  socket '/var/run/memcached/socket'
+  socket_mode '750'
+  action [:start, :enable]
+end

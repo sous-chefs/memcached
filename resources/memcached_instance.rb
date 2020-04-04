@@ -27,6 +27,8 @@ property :memory, [Integer, String], default: 64
 property :port, [Integer, String], default: 11_211
 property :udp_port, [Integer, String], default: 11_211
 property :listen, String, default: '0.0.0.0'
+property :socket, String, default: ''
+property :socket_mode, String, default: ''
 property :maxconn, [Integer, String], default: 1024
 property :user, String, default: lazy { service_user }
 property :binary_path, String
