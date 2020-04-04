@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Switched to using systemd_unit resource
 - migrated to github actions
 - Update and improved ChefSpec tests
+- Move library helper functions into a Memcached::Helpers namespace
 
 ### Removed
 

@@ -18,6 +18,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+include Memcached::Helpers
 
 resource_name :memcached_instance
 
@@ -42,25 +43,25 @@ property :log_level, String, default: 'info'
 action :start do
   create_init
 
-  service memcached_instance_name do
+  service memcached_instance_name(new_resource) do
     action :start
   end
 end
 
 action :stop do
-  service memcached_instance_name do
+  service memcached_instance_name(new_resource) do
     action :stop
   end
 end
 
 action :restart do
-  service memcached_instance_name do
+  service memcached_instance_name(new_resource) do
     action :restart
   end
 end
 
 action :disable do
-  service memcached_instance_name do
+  service memcached_instance_name(new_resource) do
     action :disable
   end
 end
@@ -68,20 +69,21 @@ end
 action :enable do
   create_init
 
-  service memcached_instance_name do
+  service memcached_instance_name(new_resource) do
     action :enable
   end
 end
 
 action_class do
+  include Memcached::Helpers
   def create_init
     include_recipe 'memcached::_package' unless new_resource.binary_path
 
     # Disable the default memcached service to avoid port conflicts + wasted memory
-    disable_default_memcached_instance
+    disable_default_memcached_instance(new_resource)
 
     # cleanup default configs to avoid confusion
-    remove_default_memcached_configs
+    remove_default_memcached_configs(new_resource)
 
     # RHEL7 and Centos 7 do not support those additional security flags
     security_flags_support =
@@ -96,16 +98,16 @@ action_class do
         EOF
       end
 
-    systemd_unit "#{memcached_instance_name}.service" do
+    systemd_unit "#{memcached_instance_name(new_resource)}.service" do
       content <<-EOF.gsub(/^ {6}/, '')
       [Unit]
-      Description=memcached instance #{memcached_instance_name}
+      Description=memcached instance #{memcached_instance_name(new_resource)}
       After=network.target
 
       [Service]
       User=#{new_resource.user}
       LimitNOFILE=#{new_resource.ulimit}
-      ExecStart=#{binary_path} #{cli_options}
+      ExecStart=#{binary_path(new_resource)} #{cli_options(new_resource)}
       Restart=on-failure
 
       # Various security configurations from:
@@ -121,7 +123,7 @@ action_class do
       [Install]
       WantedBy=multi-user.target
       EOF
-      notifies :restart, "service[#{memcached_instance_name}]", :immediately unless new_resource.no_restart
+      notifies :restart, "service[#{memcached_instance_name(new_resource)}]", :immediately unless new_resource.no_restart
       action :create
     end
   end

@@ -22,6 +22,7 @@
 # this recipe simply uses the memcached_instance custom resource
 # for additional customization you can use this resource in your own wrapper cookbook
 memcached_instance 'memcached' do
+  extend Memcached::Helpers
   memory node['memcached']['memory']
   port node['memcached']['port']
   udp_port node['memcached']['udp_port']

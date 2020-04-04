@@ -17,6 +17,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+class ::Chef::Recipe
+  include Memcached::Helpers
+end
+
+class ::Chef::Resource
+  include Memcached::Helpers
+end
 
 package 'memcached' do
   version node['memcached']['version']
