@@ -41,6 +41,7 @@ jobs:
       matrix:
         os:
           - 'debian-9'
+          - 'debian-10'
           - 'centos-7'
           - 'centos-8'
           - 'ubuntu-1604'
