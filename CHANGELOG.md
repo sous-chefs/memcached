@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Adoption by Sous-Chefs, adds CircleCI configuration for supported Os
 - CentOS 8 to test-kitchen platforms and include CentOS to workflow matrix
-- Debian 10 to test-kitchen platforms and workflow matrix
+- Debian 10 & Ubuntu 20.04 to test-kitchen platforms and workflow matrix
 
 ### Changed
 
