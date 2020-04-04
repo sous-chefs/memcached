@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CentOS 8 to test-kitchen platforms and include CentOS to workflow matrix
 - Debian 10 & Ubuntu 20.04 to test-kitchen platforms and workflow matrix
 - 'socket' and 'socket_mode' property to the resource
+- ChefSpec tests for test::instance recipe
 
 ### Changed
 
