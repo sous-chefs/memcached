@@ -42,6 +42,7 @@ jobs:
         os:
           - 'debian-9'
           - 'debian-10'
+          - 'amazonlinux-2'
           - 'centos-7'
           - 'centos-8'
           - 'ubuntu-1604'
