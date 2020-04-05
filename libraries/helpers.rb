@@ -83,14 +83,6 @@ module Memcached
       options
     end
 
-    # choose the right platform init class
-    def platform_sysv_init_class
-      value_for_platform_family(
-        'debian' => Chef::Provider::Service::Init::Debian,
-        'default' => Chef::Provider::Service::Init::Redhat
-      )
-    end
-
     def log_file_name
       File.join(node['memcached']['logfilepath'], "#{memcached_instance_name}.log")
     end
