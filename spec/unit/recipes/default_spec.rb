@@ -1,12 +1,7 @@
 require 'spec_helper'
 
 describe 'memcached::default' do
-  before do
-    stub_command('getent passwd memcached').and_return(false)
-    stub_command('getent passwd nobody').and_return(false)
-    stub_command('getent passwd memcache').and_return(false)
-    stub_command('dpkg -s memcached').and_return(true)
-  end
+  include_context 'memcached_stubs'
 
   context 'on rhel 7' do
     platform 'redhat', '7'
@@ -28,6 +23,13 @@ describe 'memcached::default' do
       )
     end
     it { is_expected.to enable_memcached_instance('memcached') }
+    it { is_expected.to start_service('memcached') }
+    it { is_expected.to enable_service('memcached') }
+    it { is_expected.to_not stop_service('disable default memcached') }
+    it { is_expected.to_not disable_service('disable default memcached') }
+    %w(/etc/memcached.conf /etc/sysconfig/memcached /etc/default/memcached).each do |f|
+      it { is_expected.to delete_file f }
+    end
     it { is_expected.to install_package('memcached').with(version: nil) }
     it { expect(chef_run).to create_group('memcached') }
     it do
@@ -106,6 +108,13 @@ describe 'memcached::default' do
       )
     end
     it { is_expected.to enable_memcached_instance('memcached') }
+    it { is_expected.to start_service('memcached') }
+    it { is_expected.to enable_service('memcached') }
+    it { is_expected.to_not stop_service('disable default memcached') }
+    it { is_expected.to_not disable_service('disable default memcached') }
+    %w(/etc/memcached.conf /etc/sysconfig/memcached /etc/default/memcached).each do |f|
+      it { is_expected.to delete_file f }
+    end
     it { is_expected.to install_package('memcached').with(version: nil) }
     it { expect(chef_run).to create_group('memcache') }
     it do

@@ -1,12 +1,7 @@
 require 'spec_helper'
 
 describe 'test::instance' do
-  before do
-    stub_command('getent passwd memcached').and_return(false)
-    stub_command('getent passwd nobody').and_return(false)
-    stub_command('getent passwd memcache').and_return(false)
-    stub_command('dpkg -s memcached').and_return(true)
-  end
+  include_context 'memcached_stubs'
 
   context 'on rhel 7' do
     platform 'redhat', '7'
@@ -84,6 +79,8 @@ describe 'test::instance' do
     it { is_expected.to enable_memcached_instance('backend_cache') }
     it { is_expected.to enable_memcached_instance('painful_cache') }
     it { is_expected.to enable_memcached_instance('socket') }
+    it { is_expected.to stop_service('disable default memcached') }
+    it { is_expected.to disable_service('disable default memcached') }
     it do
       is_expected.to create_systemd_unit('memcached_web_cache.service').with(
         content:
@@ -184,6 +181,8 @@ describe 'test::instance' do
     it { is_expected.to enable_memcached_instance('backend_cache') }
     it { is_expected.to enable_memcached_instance('painful_cache') }
     it { is_expected.to enable_memcached_instance('socket') }
+    it { is_expected.to stop_service('disable default memcached') }
+    it { is_expected.to disable_service('disable default memcached') }
     it do
       is_expected.to create_systemd_unit('memcached_web_cache.service').with(
         content:
