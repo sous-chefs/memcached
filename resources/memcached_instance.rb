@@ -77,7 +77,6 @@ action :enable do
 end
 
 action_class do
-  include Memcached::Helpers
   def create_init
     include_recipe 'memcached::_package' unless new_resource.binary_path
 

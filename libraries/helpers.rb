@@ -96,3 +96,5 @@ module Memcached
     end
   end
 end
+Chef::DSL::Recipe.send(:include, Memcached::Helpers)
+Chef::Resource.send(:include, Memcached::Helpers)
