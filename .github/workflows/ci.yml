@@ -49,7 +49,7 @@ jobs:
           - 'ubuntu-2004'
         suite:
           - 'default'
-          - 'instances'
+          - 'instance'
       fail-fast: false
 
     steps:
