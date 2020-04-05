@@ -5,7 +5,7 @@ describe 'test::instance' do
 
   context 'on rhel 7' do
     platform 'redhat', '7'
-    step_into :memcached_instance
+    step_into :memcached_instance, :memcached_instance_systemd
 
     it do
       is_expected.to start_memcached_instance('web_cache').with(
@@ -25,7 +25,7 @@ describe 'test::instance' do
       )
     end
     it do
-      is_expected.to start_memcached_instance('backend_cache').with(
+      is_expected.to start_memcached_instance_systemd('backend_cache').with(
         memory: 64,
         port: 11213,
         udp_port: 11213,
@@ -76,7 +76,7 @@ describe 'test::instance' do
       )
     end
     it { is_expected.to enable_memcached_instance('web_cache') }
-    it { is_expected.to enable_memcached_instance('backend_cache') }
+    it { is_expected.to enable_memcached_instance_systemd('backend_cache') }
     it { is_expected.to enable_memcached_instance('painful_cache') }
     it { is_expected.to enable_memcached_instance('socket') }
     it { is_expected.to stop_service('disable default memcached') }
@@ -109,7 +109,7 @@ describe 'test::instance' do
 
   context 'on ubuntu 18.04' do
     platform 'ubuntu', '18.04'
-    step_into :memcached_instance
+    step_into :memcached_instance, :memcached_instance_systemd
 
     it do
       is_expected.to start_memcached_instance('web_cache').with(
@@ -127,7 +127,7 @@ describe 'test::instance' do
       )
     end
     it do
-      is_expected.to start_memcached_instance('backend_cache').with(
+      is_expected.to start_memcached_instance_systemd('backend_cache').with(
         memory: 64,
         port: 11213,
         udp_port: 11213,
@@ -178,7 +178,7 @@ describe 'test::instance' do
       )
     end
     it { is_expected.to enable_memcached_instance('web_cache') }
-    it { is_expected.to enable_memcached_instance('backend_cache') }
+    it { is_expected.to enable_memcached_instance_systemd('backend_cache') }
     it { is_expected.to enable_memcached_instance('painful_cache') }
     it { is_expected.to enable_memcached_instance('socket') }
     it { is_expected.to stop_service('disable default memcached') }

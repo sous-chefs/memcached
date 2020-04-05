@@ -20,7 +20,8 @@
 #
 include Memcached::Helpers
 
-resource_name :memcached_instance
+provides :memcached_instance
+provides :memcached_instance_systemd # legacy name
 
 property :instance_name, String, name_property: true
 property :memory, [Integer, String], default: 64

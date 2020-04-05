@@ -10,7 +10,7 @@ end
 user 'memcached_other_user'
 user 'memcached_painful_cache'
 
-memcached_instance 'backend_cache' do
+memcached_instance_systemd 'backend_cache' do
   port 11_213
   udp_port 11_213
   memory 64
