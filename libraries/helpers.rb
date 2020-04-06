@@ -16,7 +16,7 @@ module Memcached
       )
     end
 
-    def binary_path(new_resource)
+    def binary_path
       new_resource.binary_path || value_for_platform_family(
         'suse' => '/usr/sbin/memcached',
         'default' => '/usr/bin/memcached'
@@ -31,11 +31,11 @@ module Memcached
     end
 
     # if the instance name is memcached don't spit out memcached_memcached
-    def memcached_instance_name(new_resource)
+    def memcached_instance_name
       new_resource.instance_name == 'memcached' ? 'memcached' : "memcached_#{new_resource.instance_name}"
     end
 
-    def disable_default_memcached_instance(new_resource)
+    def disable_default_memcached_instance
       return unless new_resource.disable_default_instance
 
       service 'disable default memcached' do
@@ -45,7 +45,7 @@ module Memcached
       end
     end
 
-    def remove_default_memcached_configs(new_resource)
+    def remove_default_memcached_configs
       return unless new_resource.remove_default_config
 
       %w(/etc/memcached.conf /etc/sysconfig/memcached /etc/default/memcached).each do |f|
@@ -55,7 +55,7 @@ module Memcached
       end
     end
 
-    def cli_options(new_resource)
+    def cli_options
       options = "-m #{new_resource.memory} -u #{new_resource.user} -c #{new_resource.maxconn} \
 -I #{new_resource.max_object_size}"
       # If sockets are used, ports are disabled by default
