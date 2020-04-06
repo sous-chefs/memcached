@@ -24,9 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-- Support / testing for Ubuntu 14.04, CentOS 6 & Debian 8
-- Testing for fedora
-- Testing for amazonlinux
+- Support / testing for Ubuntu 14.04 & CentOS 6
+- Testing for Debian 8, OpenSUSE, Fedora & AmazonLinux
 - Upstart support
 - SysV init support and memcached_instance_sysv_init resource
 
