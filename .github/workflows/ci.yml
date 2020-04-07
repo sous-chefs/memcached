@@ -40,14 +40,17 @@ jobs:
     strategy:
       matrix:
         os:
-          - 'amazonlinux'
-          - 'centos-7'
           - 'debian-9'
+          - 'debian-10'
+          - 'amazonlinux-2'
+          - 'centos-7'
+          - 'centos-8'
           - 'ubuntu-1604'
           - 'ubuntu-1804'
+          - 'ubuntu-2004'
         suite:
           - 'default'
-          - 'instances'
+          - 'instance'
       fail-fast: false
 
     steps:

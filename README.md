@@ -15,7 +15,6 @@ Provides a custom resource for installing instances of memcached. Also ships wit
 - Debian / Ubuntu and derivatives
 - RHEL and derivatives
 - Fedora
-- openSUSE/SLES
 
 ### Chef
 
@@ -64,6 +63,8 @@ Adds or removes an instance of memcached running under the system's native init 
 - :port - the TCP port to listen on. default: 11,211
 - :udp_port - the UDP port to listen on. default: 11,211
 - :listen - the IP to listen on. default: '0.0.0.0'
+- :socket - the file patch to run memcached as a socket (this disables listening on a port by default)
+- :socket_mode - the file mode for the socket (memcached defaults to 0700)
 - :maxconn - the maximum number of connections to accept. default: 1024
 - :user - the user to run as
 - :binary_path - path of memcached binary, when set we assume memcached is already installed

@@ -4,22 +4,30 @@ This file is used to list changes made in each version of the memcached cookbook
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [v6.0.0] - 2020-04-07
 
 ### Added
 
 - Adoption by Sous-Chefs, adds CircleCI configuration for supported Os
+- CentOS 8 to test-kitchen platforms and include CentOS to workflow matrix
+- Debian 10 & Ubuntu 20.04 to test-kitchen platforms and workflow matrix
+- Amazon Linux 2 test-kitchen platforms and workflow matrix
+- 'socket' and 'socket_mode' property to the resource
+- ChefSpec tests for test::instance recipe
 
 ### Changed
 
-- Systemd service will be used when systemd is available if not then sysv init is used
+- Switched to using systemd_unit resource
 - migrated to github actions
+- Update and improved ChefSpec tests
+- Move library helper functions into a Memcached::Helpers namespace
 
 ### Removed
 
-- Support / testing for Ubuntu 14.04
-- Testing for fedora
+- Support / testing for Ubuntu 14.04 & CentOS 6
+- Testing for Debian 8, OpenSUSE, Fedora & AmazonLinux
 - Upstart support
+- SysV init support and memcached_instance_sysv_init resource
 
 ## [v5.1.1] - 2018-07-24
 
