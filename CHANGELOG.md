@@ -4,6 +4,11 @@ This file is used to list changes made in each version of the memcached cookbook
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+- resolved cookstyle error: libraries/helpers.rb:99:19 warning: `Lint/SendWithMixinArgument`
+- resolved cookstyle error: libraries/helpers.rb:100:16 warning: `Lint/SendWithMixinArgument`
+
 ## [v6.0.0] - 2020-04-07
 
 ### Added
