@@ -6,7 +6,7 @@ description       'Installs memcached and includes memcached_instance resource f
 source_url        'https://github.com/sous-chefs/memcached'
 issues_url        'https://github.com/sous-chefs/memcached/issues'
 chef_version      '>= 13.0'
-version           '6.0.0'
+version           '6.0.1'
 
 %w(ubuntu debian redhat centos suse opensuse opensuseleap scientific oracle amazon zlinux).each do |os|
   supports os
