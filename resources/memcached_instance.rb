@@ -3,7 +3,7 @@
 # resource:: memcached_instance
 #
 # Author:: Tim Smith <tsmith@chef.io>
-# Copyright:: 2016, Chef Software, Inc.
+# Copyright:: 2016-2020, Chef Software, Inc.
 # Copyright:: 2020, Oregon State University
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +20,7 @@
 #
 include Memcached::Helpers
 
+resource_name :memcached_instance
 provides :memcached_instance
 provides :memcached_instance_systemd # legacy name
 
