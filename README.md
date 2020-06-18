@@ -16,9 +16,9 @@ Provides a custom resource for installing instances of memcached. Also ships wit
 - RHEL and derivatives
 - Fedora
 
-### Chef
+### Chef Infra Client
 
-- Chef 13+
+- Chef Infra Client 13+
 
 ## Attributes
 
