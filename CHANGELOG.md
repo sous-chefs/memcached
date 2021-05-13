@@ -6,7 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-- resolved cookstyle error: resources/memcached_instance.rb:1:1 refactor: `Chef/Deprecations/ResourceWithoutUnifiedTrue`
+- Chef 17 updates: enable `unified_mode` on all resources
+- Bump required Chef Infra Client to >= 15.3
+- Remove Ubuntu 16.04 testing now that it's EOL
 
 ## 6.1.0 (2020-06-18)
 

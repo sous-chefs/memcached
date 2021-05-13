@@ -20,7 +20,6 @@ platforms:
   - name: amazonlinux-2
   - name: centos-7
   - name: centos-8
-  - name: ubuntu-16.04
   - name: ubuntu-18.04
   - name: ubuntu-20.04
 

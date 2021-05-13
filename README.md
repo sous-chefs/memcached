@@ -18,7 +18,7 @@ Provides a custom resource for installing instances of memcached. Also ships wit
 
 ### Chef Infra Client
 
-- Chef Infra Client 13+
+- Chef Infra Client 15.3+
 
 ## Attributes
 
