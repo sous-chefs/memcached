@@ -6,11 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-Standardise files with files in sous-chefs/repo-management
-
-Standardise files with files in sous-chefs/repo-management
-
-Standardise files with files in sous-chefs/repo-management
+- Remove unused `lock_dir` method
+- Standardise files with files in sous-chefs/repo-management
+- Update test CI platforms
 
 ## 7.0.25 - *2024-05-02*
 
@@ -297,16 +295,16 @@ Standardise files with files in sous-chefs/repo-management
 
 ## [1.6.0] - 2013-10-04
 
-- [COOK-3682](https://tickets.chef.io/browse/COOK-3682) - Set user when using Debian packages
-- [COOK-3336](https://tickets.chef.io/browse/COOK-3336) - Add an option to specify the logfile (fix)
+- [COOK-3682]: Set user when using Debian packages
+- [COOK-3336]: Add an option to specify the logfile (fix)
 
 ## [1.5.0] - 2013-08-28
 
-- [COOK-3336](https://tickets.chef.io/browse/COOK-3336) - Option to specify logfile
-- [COOK-2790](https://tickets.chef.io/browse/COOK-2790) - Support for defining max object size
+- [COOK-3336]: Option to specify logfile
+- [COOK-2790]: Support for defining max object size
 
-- [COOK-3299](https://tickets.chef.io/browse/COOK-3299) - Document that `memcached` is exposed by default
-- [COOK-2990](https://tickets.chef.io/browse/COOK-2990) - Include `listen`, `maxconn`, and `user` in the runit service
+- [COOK-3299]: Document that `memcached` is exposed by default
+- [COOK-2990]: Include `listen`, `maxconn`, and `user` in the runit service
 
 ## [1.4.0] - 2013-05-23
 
