@@ -44,17 +44,17 @@ end
 # Output of ps on RHEL 6/7 seems to exclude the 'm' in '-I 1m'
 commands = if os.family == 'redhat' && os.release.to_i < 8
              [
-              "-m 64 -u #{memcache_user} -c 1024 -I 1  -U 11212 -p 11212 -l 0.0.0.0 -v",
-              '-m 64 -u memcached_other_user -c 1024 -I 1  -U 11213 -p 11213 -l 0.0.0.0 -v -t 10',
-              '-m 64 -u memcached_painful_cache -c 1024 -I 1  -U 11214 -p 11214 -l 0.0.0.0 -v -t 10',
-              "-m 64 -u #{memcache_user} -c 1024 -I 1  -s /var/run/memcached/socket -a 750 -v",
+               "-m 64 -u #{memcache_user} -c 1024 -I 1  -U 11212 -p 11212 -l 0.0.0.0 -v",
+               '-m 64 -u memcached_other_user -c 1024 -I 1  -U 11213 -p 11213 -l 0.0.0.0 -v -t 10',
+               '-m 64 -u memcached_painful_cache -c 1024 -I 1  -U 11214 -p 11214 -l 0.0.0.0 -v -t 10',
+               "-m 64 -u #{memcache_user} -c 1024 -I 1  -s /var/run/memcached/socket -a 750 -v",
              ]
            else
              [
-              "-m 64 -u #{memcache_user} -c 1024 -I 1m -U 11212 -p 11212 -l 0.0.0.0 -v",
-              '-m 64 -u memcached_other_user -c 1024 -I 1m -U 11213 -p 11213 -l 0.0.0.0 -v -t 10',
-              '-m 64 -u memcached_painful_cache -c 1024 -I 1m -U 11214 -p 11214 -l 0.0.0.0 -v -t 10',
-              "-m 64 -u #{memcache_user} -c 1024 -I 1m -s /var/run/memcached/socket -a 750 -v",
+               "-m 64 -u #{memcache_user} -c 1024 -I 1m -U 11212 -p 11212 -l 0.0.0.0 -v",
+               '-m 64 -u memcached_other_user -c 1024 -I 1m -U 11213 -p 11213 -l 0.0.0.0 -v -t 10',
+               '-m 64 -u memcached_painful_cache -c 1024 -I 1m -U 11214 -p 11214 -l 0.0.0.0 -v -t 10',
+               "-m 64 -u #{memcache_user} -c 1024 -I 1m -s /var/run/memcached/socket -a 750 -v",
              ]
            end
 
