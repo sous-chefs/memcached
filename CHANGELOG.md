@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Standardise files with files in sous-chefs/repo-management
 Standardise files with files in sous-chefs/repo-management
 
+## [7.0.29](https://github.com/sous-chefs/memcached/compare/7.0.28...v7.0.29) (2025-10-15)
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#177](https://github.com/sous-chefs/memcached/issues/177)) ([fe35429](https://github.com/sous-chefs/memcached/commit/fe3542906e5ae917f1d543ee3962bf3965ca7ced))
+
 ## 7.0.27 - *2024-11-18*
 
 Standardise files with files in sous-chefs/repo-management
