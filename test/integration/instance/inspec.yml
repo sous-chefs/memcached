@@ -1,0 +1,7 @@
+---
+name: instance
+title: Multiple memcached instance tests
+maintainer: Sous Chefs
+license: Apache-2.0
+summary: Verifies multiple memcached instances
+version: 1.0.0

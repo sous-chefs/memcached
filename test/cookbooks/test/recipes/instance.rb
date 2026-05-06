@@ -1,10 +1,12 @@
-apt_update 'update'
+# frozen_string_literal: true
+
+apt_update 'update' if platform_family?('debian')
 
 memcached_instance 'web_cache' do
   port 11_212
   udp_port 11_212
   memory 64
-  action [:start, :enable]
+  action [:create, :enable, :start]
 end
 
 user 'memcached_other_user'
@@ -17,7 +19,7 @@ memcached_instance_systemd 'backend_cache' do
   ulimit 31_337
   threads 10
   user 'memcached_other_user'
-  action [:start, :enable]
+  action [:create, :enable, :start]
 end
 
 memcached_instance 'painful_cache' do
@@ -27,11 +29,11 @@ memcached_instance 'painful_cache' do
   ulimit 31_337
   threads 10
   user 'memcached_painful_cache'
-  action [:start, :enable]
+  action [:create, :enable, :start]
 end
 
 memcached_instance 'socket' do
   socket '/var/run/memcached/socket'
   socket_mode '750'
-  action [:start, :enable]
+  action [:create, :enable, :start]
 end
