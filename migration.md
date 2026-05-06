@@ -10,19 +10,17 @@ installation is available through `memcached_install`.
 
 ## Attribute Mapping
 
-| Former node attribute | Resource property |
-|-----------------------|-------------------|
-| `node['memcached']['version']` | `package_version` |
-| `node['memcached']['memory']` | `memory` |
-| `node['memcached']['port']` | `port` |
-| `node['memcached']['udp_port']` | `udp_port` |
-| `node['memcached']['listen']` | `listen` |
-| `node['memcached']['maxconn']` | `maxconn` |
-| `node['memcached']['max_object_size']` | `max_object_size` |
-| `node['memcached']['experimental_options']` | `experimental_options` |
-| `node['memcached']['extra_cli_options']` | `extra_cli_options` |
-| `node['memcached']['ulimit']` | `ulimit` |
-| `node['memcached']['logfilepath']` | `log_dir` |
+* `node['memcached']['version']` maps to `package_version`.
+* `node['memcached']['memory']` maps to `memory`.
+* `node['memcached']['port']` maps to `port`.
+* `node['memcached']['udp_port']` maps to `udp_port`.
+* `node['memcached']['listen']` maps to `listen`.
+* `node['memcached']['maxconn']` maps to `maxconn`.
+* `node['memcached']['max_object_size']` maps to `max_object_size`.
+* `node['memcached']['experimental_options']` maps to `experimental_options`.
+* `node['memcached']['extra_cli_options']` maps to `extra_cli_options`.
+* `node['memcached']['ulimit']` maps to `ulimit`.
+* `node['memcached']['logfilepath']` maps to `log_dir`.
 
 ## Before
 

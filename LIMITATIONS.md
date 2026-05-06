@@ -37,10 +37,8 @@ source.
 
 ### Build Dependencies
 
-| Platform Family | Packages |
-|-----------------|----------|
-| Debian          | `build-essential`, `libevent-dev` |
-| RHEL/Fedora     | `gcc`, `make`, `libevent-devel` |
+* Debian: `build-essential`, `libevent-dev`
+* RHEL/Fedora: `gcc`, `make`, `libevent-devel`
 
 ## Known Issues
 

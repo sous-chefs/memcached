@@ -4,23 +4,19 @@ Installs the memcached package and prepares the shared user and runtime director
 
 ## Actions
 
-| Action    | Description |
-|-----------|-------------|
-| `:create` | Installs the package and creates shared local resources. Default. |
-| `:delete` | Removes the package and managed directories. |
+* `:create` - Installs the package and creates shared local resources. Default.
+* `:delete` - Removes the package and managed directories.
 
 ## Properties
 
-| Property             | Type          | Default | Description |
-|----------------------|---------------|---------|-------------|
-| `package_name`       | String        | `'memcached'` | Package to install. |
-| `package_version`    | String        | `nil` | Package version to install. |
-| `user`               | String        | platform default | Service user. |
-| `group`              | String        | platform default | Service group. |
-| `log_dir`            | String        | `'/var/log/memcached'` | Log directory to create. |
-| `run_dir`            | String        | `'/var/run/memcached'` | Runtime directory to create. |
-| `manage_user`        | true, false   | `true` | Whether to manage the service user and group. |
-| `manage_directories` | true, false   | `true` | Whether to manage log and runtime directories. |
+* `package_name` - String, default `'memcached'`. Package to install.
+* `package_version` - String, default `nil`. Package version to install.
+* `user` - String, platform default. Service user.
+* `group` - String, platform default. Service group.
+* `log_dir` - String, default `'/var/log/memcached'`. Log directory to create.
+* `run_dir` - String, default `'/var/run/memcached'`. Runtime directory to create.
+* `manage_user` - true or false, default `true`. Whether to manage the service user and group.
+* `manage_directories` - true or false, default `true`. Whether to manage log and runtime directories.
 
 ## Examples
 
