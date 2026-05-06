@@ -8,7 +8,7 @@ description       'Provides custom resources for installing memcached and managi
 source_url        'https://github.com/sous-chefs/memcached'
 issues_url        'https://github.com/sous-chefs/memcached/issues'
 chef_version      '>= 15.3'
-version           '7.0.29'
+version           '8.0.0'
 
 supports 'almalinux', '>= 8.0'
 supports 'amazon', '>= 2023.0'
