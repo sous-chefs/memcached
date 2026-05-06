@@ -3,7 +3,7 @@
 title 'Default memcached instance'
 
 memcache_user =
-  if os.family == 'redhat'
+  if %w(fedora redhat).include?(os.family)
     'memcached'
   else
     'memcache'
