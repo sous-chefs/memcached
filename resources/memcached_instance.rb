@@ -85,6 +85,7 @@ action_class do
 
   def create_instance
     install_memcached if new_resource.install && !new_resource.binary_path
+    create_instance_user if new_resource.install && !new_resource.binary_path
 
     # Disable the default memcached service to avoid port conflicts + wasted memory
     disable_default_memcached_instance
@@ -142,11 +143,30 @@ action_class do
   def install_memcached
     memcached_install new_resource.package_name do
       package_version new_resource.package_version
-      user new_resource.user
-      group service_group_name
+      user service_user
+      group service_group
       log_dir new_resource.log_dir
       run_dir new_resource.run_dir
       action :create
+    end
+  end
+
+  def create_instance_user
+    return if new_resource.user == service_user && service_group_name == service_group
+
+    group service_group_name do
+      system true
+      only_if { new_resource.group }
+    end
+
+    user new_resource.user do
+      system true
+      manage_home false
+      gid service_group_name
+      home '/nonexistent'
+      comment 'Memcached'
+      shell '/bin/false'
+      action [:create, :lock]
     end
   end
 

@@ -63,6 +63,8 @@ describe 'memcached_instance' do
 
       it { is_expected.to create_group('custom_memcached') }
       it { is_expected.to create_user('custom_memcached').with(gid: 'custom_memcached') }
+      it { is_expected.to create_directory('/var/log/memcached').with(user: 'memcache', group: 'memcache') }
+      it { is_expected.to create_directory('/var/run/memcached').with(user: 'memcache', group: 'memcache') }
       it do
         is_expected.to create_systemd_unit('memcached_socket.service').with(
           content: %r{ExecStart=/usr/bin/memcached -m 64 -u custom_memcached -c 1024 -I 1m -s /var/run/memcached/socket -a 750 -v}

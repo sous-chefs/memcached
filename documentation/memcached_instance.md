@@ -27,7 +27,7 @@ Creates and manages a systemd memcached instance.
 * `socket_mode` - String, default `''`. Unix socket file mode.
 * `maxconn` - Integer or String, default `1024`. Maximum connections.
 * `user` - String, platform default. Service user.
-* `group` - String, platform default. Service group used during install.
+* `group` - String, platform default. Group assigned to the managed instance user.
 * `binary_path` - String, platform default. Memcached binary path. Setting this skips package installation.
 * `threads` - Integer or String, default `nil`. Worker thread count.
 * `max_object_size` - String, default `'1m'`. Maximum object size.

@@ -65,7 +65,7 @@ Adds or removes a memcached instance running under systemd.
 - :socket_mode - the file mode for the socket (memcached defaults to 0700)
 - :maxconn - the maximum number of connections to accept. default: 1024
 - :user - the user to run as
-- :group - group used when installing shared local resources
+- :group - group assigned to the managed instance user
 - :binary_path - path of memcached binary, when set we assume memcached is already installed
 - :threads - the number of threads to use
 - :max_object_size - the largest object size to store
