@@ -15,7 +15,6 @@ jobs:
       checks: write
       pull-requests: write
       statuses: write
-      issues: write
 
   integration:
     needs: "lint-unit"
