@@ -1,31 +1,15 @@
-#
-# Cookbook:: memcached
-# resource:: memcached_instance
-#
-# Author:: Tim Smith <tsmith@chef.io>
-# Copyright:: 2016-2020, Chef Software, Inc.
-# Copyright:: 2020, Oregon State University
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-include Memcached::Helpers
+# frozen_string_literal: true
 
-resource_name :memcached_instance
 provides :memcached_instance
 unified_mode true
 provides :memcached_instance_systemd # legacy name
 
+include Memcached::Helpers
+
 property :instance_name, String, name_property: true
+property :package_name, String, default: 'memcached'
+property :package_version, String
+property :install, [true, false], default: true
 property :memory, [Integer, String], default: 64
 property :port, [Integer, String], default: 11_211
 property :udp_port, [Integer, String], default: 11_211
@@ -34,19 +18,36 @@ property :socket, String, default: ''
 property :socket_mode, String, default: ''
 property :maxconn, [Integer, String], default: 1024
 property :user, String, default: lazy { service_user }
+property :group, String
 property :binary_path, String
 property :threads, [Integer, String]
 property :max_object_size, String, default: '1m'
 property :experimental_options, Array, default: []
 property :extra_cli_options, Array, default: []
 property :ulimit, [Integer, String], default: 1024
+property :log_dir, String, default: '/var/log/memcached'
+property :run_dir, String, default: '/var/run/memcached'
 property :disable_default_instance, [true, false], default: true
 property :remove_default_config, [true, false], default: true
 property :no_restart, [true, false], default: false
-property :log_level, String, default: 'info'
+property :log_level, String, equal_to: %w(info debug trace none), default: 'info'
+
+default_action :create
+
+action :create do
+  create_instance
+end
+
+action :delete do
+  delete_instance
+end
+
+action :remove do
+  delete_instance
+end
 
 action :start do
-  create_init
+  create_instance
 
   service memcached_instance_name do
     action :start
@@ -72,7 +73,7 @@ action :disable do
 end
 
 action :enable do
-  create_init
+  create_instance
 
   service memcached_instance_name do
     action :enable
@@ -80,8 +81,10 @@ action :enable do
 end
 
 action_class do
-  def create_init
-    include_recipe 'memcached::_package' unless new_resource.binary_path
+  include Memcached::Helpers
+
+  def create_instance
+    install_memcached if new_resource.install && !new_resource.binary_path
 
     # Disable the default memcached service to avoid port conflicts + wasted memory
     disable_default_memcached_instance
@@ -101,6 +104,10 @@ action_class do
         MemoryDenyWriteExecute=true
         EOF
       end
+
+    service memcached_instance_name do
+      action :nothing
+    end
 
     systemd_unit "#{memcached_instance_name}.service" do
       content <<-EOF.gsub(/^ {6}/, '')
@@ -129,6 +136,27 @@ action_class do
       EOF
       notifies :restart, "service[#{memcached_instance_name}]", :immediately unless new_resource.no_restart
       action :create
+    end
+  end
+
+  def install_memcached
+    memcached_install new_resource.package_name do
+      package_version new_resource.package_version
+      user new_resource.user
+      group service_group_name
+      log_dir new_resource.log_dir
+      run_dir new_resource.run_dir
+      action :create
+    end
+  end
+
+  def delete_instance
+    service memcached_instance_name do
+      action [:stop, :disable]
+    end
+
+    systemd_unit "#{memcached_instance_name}.service" do
+      action :delete
     end
   end
 end

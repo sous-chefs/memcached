@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Memcached
   module Helpers
     def service_user
@@ -21,6 +23,10 @@ module Memcached
         'suse' => '/usr/sbin/memcached',
         'default' => '/usr/bin/memcached'
       )
+    end
+
+    def service_group_name
+      new_resource.group || service_group
     end
 
     # if the instance name is memcached don't spit out memcached_memcached
@@ -69,25 +75,11 @@ module Memcached
       when 'trace'
         log_arg = 'vvv'
       end
-      options << " -#{log_arg}"
+      options << " -#{log_arg}" unless log_arg.empty?
 
       options << " -t #{new_resource.threads}" if new_resource.threads
       options << " #{new_resource.extra_cli_options.join(' ')}" unless new_resource.extra_cli_options.empty?
       options
     end
-
-    def log_file_name
-      File.join(node['memcached']['logfilepath'], "#{memcached_instance_name}.log")
-    end
-
-    def create_log_file
-      file log_file_name do
-        user service_user
-        group service_group
-        mode '0644'
-      end
-    end
   end
 end
-Chef::DSL::Recipe.include Memcached::Helpers
-Chef::Resource.include Memcached::Helpers

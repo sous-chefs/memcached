@@ -3,33 +3,57 @@ driver:
   name: vagrant
 
 provisioner:
-  name: chef_zero
+  name: chef_infra
   product_name: chef
   product_version: <%= ENV['CHEF_VERSION'] || 'latest' %>
+  channel: stable
   install_strategy: once
-
-client_rb:
-  treat_deprecation_warnings_as_errors: true
+  chef_license: accept
+  enforce_idempotency: <%= ENV['ENFORCE_IDEMPOTENCY'] || true %>
+  multiple_converge: <%= ENV['MULTIPLE_CONVERGE'] || 2 %>
+  deprecations_as_errors: true
+  log_level: <%= ENV['CHEF_LOG_LEVEL'] || 'auto' %>
 
 verifier:
   name: inspec
+  sudo: true
 
 platforms:
   - name: almalinux-8
   - name: almalinux-9
+  - name: almalinux-10
   - name: amazonlinux-2023
-  - name: debian-11
+  - name: centos-stream-9
+  - name: centos-stream-10
   - name: debian-12
+  - name: debian-13
+  - name: fedora-latest
+  - name: oraclelinux-8
+  - name: oraclelinux-9
   - name: rockylinux-8
   - name: rockylinux-9
-  - name: ubuntu-20.04
+  - name: rockylinux-10
   - name: ubuntu-22.04
   - name: ubuntu-24.04
 
+x-run_lists:
+  default: &default_run_list
+    - recipe[test::default]
+  instance: &instance_run_list
+    - recipe[test::instance]
+
+x-verifiers:
+  default: &default_verifier
+    inspec_tests:
+      - path: test/integration/default
+  instance: &instance_verifier
+    inspec_tests:
+      - path: test/integration/instance
+
 suites:
   - name: default
-    run_list:
-      - recipe[test::default]
+    run_list: *default_run_list
+    verifier: *default_verifier
   - name: instance
-    run_list:
-      - recipe[test::instance]
+    run_list: *instance_run_list
+    verifier: *instance_verifier

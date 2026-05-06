@@ -1,13 +1,21 @@
+# frozen_string_literal: true
+
 name              'memcached'
 maintainer        'Sous Chefs'
 maintainer_email  'help@sous-chefs.org'
 license           'Apache-2.0'
-description       'Installs memcached and includes memcached_instance resource for setting up memcached instances'
+description       'Provides custom resources for installing memcached and managing memcached instances'
 source_url        'https://github.com/sous-chefs/memcached'
 issues_url        'https://github.com/sous-chefs/memcached/issues'
 chef_version      '>= 15.3'
 version           '7.0.29'
 
-%w(ubuntu debian redhat centos suse opensuse opensuseleap scientific oracle amazon zlinux).each do |os|
-  supports os
-end
+supports 'almalinux', '>= 8.0'
+supports 'amazon', '>= 2023.0'
+supports 'centos_stream', '>= 9.0'
+supports 'debian', '>= 12.0'
+supports 'fedora'
+supports 'oracle', '>= 8.0'
+supports 'redhat', '>= 8.0'
+supports 'rocky', '>= 8.0'
+supports 'ubuntu', '>= 22.04'

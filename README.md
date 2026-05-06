@@ -6,60 +6,58 @@
 [![OpenCollective](https://opencollective.com/sous-chefs/sponsors/badge.svg)](#sponsors)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Provides a custom resource for installing instances of memcached. Also ships with a default recipe that uses attributes to configure a single memcached instance on a host.
+Provides custom resources for installing memcached and managing systemd memcached instances.
 
 ## Requirements
 
 ### Platforms
 
-- Debian / Ubuntu and derivatives
-- RHEL and derivatives
+- AlmaLinux, Rocky Linux, Oracle Linux, RHEL, CentOS Stream, and Amazon Linux
+- Debian and Ubuntu
 - Fedora
 
 ### Chef Infra Client
 
 - Chef Infra Client 15.3+
 
-## Attributes
-
-The following are node attributes are used to configure the command line options of memcached if using the default.rb recipe. They are not used if using the memcached_instance custom resource.
-
-- `memcached['memory']` - maximum memory for memcached instances.
-- `memcached['user']` - user to run memcached as.
-- `memcached['port']` - TCP port for memcached to listen on.
-- `memcached['udp_port']` - UDP port for memcached to listen on.
-- `memcached['listen']` - IP address for memcache to listen on, defaults to **0.0.0.0** (world accessible).
-- `memcached['maxconn']` - maximum number of connections to accept (defaults to 1024)
-- `memcached['max_object_size']` - maximum size of an object to cache (defaults to 1MB)
-- `memcached['logfilepath']` - path to directory where log file will be written.
-- `memcached['logfilename']` - logfile to which memcached output will be redirected in $logfilepath/$logfilename.
-- `memcached['threads']` - Number of threads to use to process incoming requests. The default is 4.
-- `memcached['experimental_options']` - Comma separated list of extended or experimental options. (array)
-- `memcached['extra_cli_options']` - Array of single item options suchas -L for large pages.
-- `memcached['ulimit']` - maxfile limit to set (needs to be at least maxconn)
-
 ## Usage
 
-This cookbook can be used to to setup a single memcached instance running under the system's init provider by including `memcached::default` on your runlist. The above documented attributes can be used to control the configuration of that service.
+This cookbook no longer ships recipes or attributes. Use the custom resources directly in your
+wrapper cookbook. See [migration.md](migration.md) for the breaking migration from
+`memcached::default` and node attributes.
 
-The cookbook can also within other cookbooks in your infrastructure with the `memcached_instance` custom resource. See the documentation below for the usage and examples of that custom resource.
+See the resource documentation for complete usage and examples:
+
+- [memcached_install](documentation/memcached_install.md)
+- [memcached_instance](documentation/memcached_instance.md)
 
 ## Custom Resources
 
-### instance
+### memcached_install
 
-Adds or removes an instance of memcached running under the system's native init system (sys-v, upstart, or systemd).
+Installs the memcached package and prepares shared local resources.
+
+### memcached_instance
+
+Adds or removes a memcached instance running under systemd.
 
 #### Actions
 
-- :start: Starts (and installs) an instance of memcached
+- :create: Creates the systemd unit and installs memcached by default
+- :delete: Stops, disables, and deletes the systemd unit
+- :remove: Alias for `:delete`
+- :start: Creates and starts an instance of memcached
 - :stop: Stops an instance of memcached
-- :enable: Enabled (and installs) an instance of memcached to run at boot
+- :enable: Creates and enables an instance of memcached to run at boot
+- :disable: Disables an instance of memcached
 - :restart: Restarts an instance of memcached
 
 #### Properties
 
 - :memory - the amount of memory allocated for the cache. default: 64
+- :package_name - package to install. default: memcached
+- :package_version - package version to install. default: nil
+- :install - install package and shared directories before creating the instance. default: true
 - :port - the TCP port to listen on. default: 11,211
 - :udp_port - the UDP port to listen on. default: 11,211
 - :listen - the IP to listen on. default: '0.0.0.0'
@@ -67,15 +65,19 @@ Adds or removes an instance of memcached running under the system's native init 
 - :socket_mode - the file mode for the socket (memcached defaults to 0700)
 - :maxconn - the maximum number of connections to accept. default: 1024
 - :user - the user to run as
+- :group - group used when installing shared local resources
 - :binary_path - path of memcached binary, when set we assume memcached is already installed
 - :threads - the number of threads to use
 - :max_object_size - the largest object size to store
 - :experimental_options - an array of experimental config options, such as: ['maxconns_fast', 'hashpower']
 - :extra_cli_options - an array of additional config options, such as: ['-L']
 - :ulimit - the ulimit setting to use for the service
+- :log_dir - shared log directory to create. default: /var/log/memcached
+- :run_dir - shared runtime directory to create. default: /var/run/memcached
 - :disable_default_instance - disable the default 'memcached' service installed by the package. default: true
+- :remove_default_config - remove package default config files. default: true
 - :no_restart - disable the service restart on configuration change. default: false
-- :log_level - The level at which we log, default to 'info'. Choose from: 'info', 'debug', 'trace' which map to '-v', '-vv' or '-vvv' arguments.
+- :log_level - The level at which we log, default to 'info'. Choose from: 'info', 'debug', 'trace', or 'none'.
 
 #### Examples
 
@@ -85,6 +87,7 @@ Create a new memcached instance named super_custom_memcached:
 memcached_instance 'super_custom_memcached' do
   port 11_212
   memory 128
+  action [:create, :enable, :start]
 end
 ```
 
@@ -92,7 +95,7 @@ Stop and disable the super_custom_memcached instance:
 
 ```ruby
 memcached_instance 'super_custom_memcached'  do
-  action :remove
+  action :delete
 end
 ```
 
