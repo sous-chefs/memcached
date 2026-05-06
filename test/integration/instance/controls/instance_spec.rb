@@ -2,7 +2,7 @@
 
 title 'Multiple memcached instances'
 
-if os.family == 'redhat'
+if %w(fedora redhat).include?(os.family)
   memcache_user = 'memcached'
   memcache_group = 'memcached'
 else
