@@ -1,4 +1,4 @@
-# Limitations
+# Agent Notes
 
 ## Package Availability
 
@@ -44,6 +44,13 @@ source.
 
 * The built-in proxy requires compiling memcached from source with proxy support enabled.
 * The `memcached_instance` resource assumes systemd-managed Linux services.
+
+## Policyfile Migration
+
+* Dependency resolution is managed by `Policyfile.rb`; do not reintroduce Berkshelf files.
+* Kitchen suites use Policyfile named run lists for the `test::default` and `test::instance`
+  recipes.
+* ChefSpec loads `chefspec/policyfile`.
 
 ## Research Sources
 

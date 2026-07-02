@@ -3,7 +3,7 @@ driver:
   name: vagrant
 
 provisioner:
-  name: chef_infra
+  name: policyfile_zero
   product_name: chef
   product_version: <%= ENV['CHEF_VERSION'] || 'latest' %>
   channel: stable
@@ -13,6 +13,7 @@ provisioner:
   multiple_converge: <%= ENV['MULTIPLE_CONVERGE'] || 2 %>
   deprecations_as_errors: true
   log_level: <%= ENV['CHEF_LOG_LEVEL'] || 'auto' %>
+  policyfile: Policyfile.rb
 
 verifier:
   name: inspec
@@ -36,12 +37,6 @@ platforms:
   - name: ubuntu-22.04
   - name: ubuntu-24.04
 
-x-run_lists:
-  default: &default_run_list
-    - recipe[test::default]
-  instance: &instance_run_list
-    - recipe[test::instance]
-
 x-verifiers:
   default: &default_verifier
     inspec_tests:
@@ -52,8 +47,10 @@ x-verifiers:
 
 suites:
   - name: default
-    run_list: *default_run_list
+    provisioner:
+      named_run_list: default
     verifier: *default_verifier
   - name: instance
-    run_list: *instance_run_list
+    provisioner:
+      named_run_list: instance
     verifier: *instance_verifier
