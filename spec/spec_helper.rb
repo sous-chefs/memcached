@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'chefspec'
-require 'chefspec/berkshelf'
+require 'chefspec/policyfile'
 
 shared_context 'memcached_stubs' do
   before do
